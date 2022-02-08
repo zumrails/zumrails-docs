@@ -32,14 +32,14 @@ function variable() {
 }
 
 const config = {
-  title: "QuestDB: the database for time series",
-  tagline: "QuestDB is the fastest open source time series database",
+  title: "Zūm Rails Docs",
+  tagline: "Powering smarter and faster money movement",
   url: `https://${consts.domain}`,
   baseUrl: "/",
   baseUrlIssueBanner: false,
   favicon: "/img/favicon.png",
-  organizationName: "QuestDB",
-  projectName: "questdb",
+  organizationName: "ZūmRails",
+  projectName: "ZūmRailsDocs",
   customFields: customFields,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
