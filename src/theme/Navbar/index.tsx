@@ -4,7 +4,6 @@ import React, { ComponentProps, useCallback, useState, useEffect } from "react"
 
 import Toggle from "@theme/Toggle"
 
-import Button from "@theme/Button"
 import SearchBar from "@theme/SearchBar"
 import useLockBodyScroll from "@theme/hooks/useLockBodyScroll"
 import useWindowSize, { windowSizes } from "@theme/hooks/useWindowSize"
@@ -139,21 +138,6 @@ function Navbar(): JSX.Element {
             handleSearchBarToggle={setIsSearchBarExpanded}
             isSearchBarExpanded={isSearchBarExpanded}
           />
-          <Button
-            className={styles.getQuestdb}
-            size="xsmall"
-            to="/get-questdb/"
-          >
-            Get QuestDB
-          </Button>
-          <Button
-            className={styles.benchmarkButton}
-            size="xsmall"
-            to="/time-series-benchmark-suite/"
-            variant="secondary"
-          >
-            Benchmark
-          </Button>
         </div>
       </div>
       <div

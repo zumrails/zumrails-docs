@@ -4,8 +4,6 @@ import Head from "@docusaurus/Head"
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import useBaseUrl from "@docusaurus/useBaseUrl"
 
-import AnnouncementBar from "@theme/AnnouncementBar"
-import Footer from "@theme/Footer"
 import LayoutProviders from "@theme/LayoutProviders"
 import Navbar from "@theme/Navbar"
 import { MetadataContextProvider } from "@theme/useMetadataContext"
@@ -40,7 +38,6 @@ const Layout = ({
   flex,
   image,
   keywords,
-  noFooter,
   permalink,
   title,
   replaceTitle = false,
@@ -107,7 +104,6 @@ const Layout = ({
             />
           )}
         </Head>
-        <AnnouncementBar />
         <Navbar />
         <div
           className={clsx(styles.wrapper, wrapperClassName, {
@@ -116,7 +112,6 @@ const Layout = ({
         >
           {children}
         </div>
-        {noFooter !== true && <Footer />}
       </LayoutProviders>
     </MetadataContextProvider>
   )
