@@ -3,3 +3,555 @@ title: Transactions
 description:
     How to integrate with trasactions api.
 ---
+
+# Transactions
+
+At Zūm Rails, there are 5 ways to create transactions, when using the portal or via API. When creating a transaction via API, the transaction type “ZumRailsType” must be specified.
+
+There are five transaction types (ZumRailsType):
+
+- FundZumWallet
+- WithdrawZumWallet
+- AccountsPayable
+- AccountsReceivable
+- UserTransfer
+
+:::note
+Zūm Rails allows money to be sent to a user from your virtual wallet or from your funding source.
+Zūm Rails allows money to be collected from a user to your virtual wallet or to your funding source.
+:::
+
+1. If you want to send money from your **Funding Source** to **Zūm Wallet**, use ZumRailsType **FundZumWallet** and inform:
+    - FundingSourceId
+    - WalletId
+2. If you want to withdraw money from **Zūm Wallet** to your **Funding Source**, use ZumRailsType **WithdrawZumWallet** and inform:
+    - FundingSourceId
+    - WalletId
+3. If you want to send money (accounts payable) from your **Zūm Wallet** to a **User**, use ZumRailsType **AccountsPayable** and inform:
+    - UserId
+    - WalletId
+4. If you want to send money (accounts payable) from your **Funding Source** to a **User**, use ZumRailsType **AccountsPayable** and inform:
+    - UserId
+    - FundingSourceId
+5. If you want to withdraw money (accounts receivable) from a **User** to your **Zūm Wallet**, use ZumRailsType **AccountsReceivable** and inform:
+    - UserId
+    - WalletId
+6. If you want to withdraw money (accounts receivable) from a **User** to your **Funding Source**, use ZumRailsType **AccountsReceivable** and inform:
+    - UserId
+    - FundingSourceId
+7. If you want to move money between your **Users**, use ZumRailsType **UserTransfer** and inform:
+    - UserId
+    - TargetUserId
+
+
+:::info
+For accounts payable use-case, Zūm Rails recommend you to first Fund the Zūm Wallet, so that the money can be quickly moved.
+:::
+
+:::info
+For accounts receivable use-case Zūm Rails, recommend you to move funds from the User to the Zūm Wallet, then set up an automatic daily withdrawal at the end of each day to your funding source.
+:::
+
+![Zum Payment Methods](/img/docs/diagrams/payment_methods_v2.png)
+
+## Creating a new transaction
+
+```json
+> Payload example EFT:
+{
+    "ZumRailsType":"AccountsReceivable",
+    "TransactionMethod": "Eft",
+    "Amount":123.45,
+    "Memo":"Memo description",
+    "Comment":"This transaction is just a test from a user to wallet",
+    "UserId":"1d431e8b-...85452adb4eee",
+    "WalletId":"8ebd932b-...b92633e14297"
+}
+
+> Payload example VisaDirect:
+{
+    "ZumRailsType":"AccountsReceivable",
+    "TransactionMethod": "VisaDirect",
+    "Amount":123.45,
+    "Memo":"Memo description",
+    "Comment":"This transaction is just a test from a user to wallet",
+    "UserId":"1d431e8b-...85452adb4eee",
+    "WalletId":"8ebd932b-...b92633e14297"
+}
+
+> Payload example Interac:
+{
+    "ZumRailsType":"AccountsReceivable",
+    "TransactionMethod": "Interac",
+    "Amount":123.45,
+    "Memo":"Memo description",
+    "Comment":"This transaction is just a test from a user to wallet",
+    "User": {
+        "companyName": "Example Company",
+        "email": "example@company.com"
+    },
+    "WalletId":"8ebd932b-...b92633e14297",
+    "InteracHasSecurityQuestionAndAnswer": true,
+    "InteracSecurityQuestion": "Your question",
+    "InteracSecurityAnswer": "Your answer"
+}
+
+> Response example:
+{
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+        "Id": "0bc9894d-...f691024aca19",
+    }
+}
+```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/transaction`
+
+Use this endpoint if you want to add a new transaction.
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+ZumRailsType | string | yes | Transaction type
+TransactionMethod | string | yes | Transaction method
+Amount | decimal | yes | Transaction amount
+Memo | string | *yes if customer transaction description type is "PerTransaction" | Memo description. If customer transaction description type is "PerTransaction", this will be shown at the bank statements. Maximum of 15 characters. Only letters, numbers, dash, space and underscore are allowed
+Comment | string | no | Internal comment you might want to add
+FundingSourceId | guid | no | Funding Source Id
+WalletId | guid | no | Wallet Id
+UserId | guid | no | User Id
+User | [User input](./users.mdx) | no | It's possible to create a transaction without adding a user first. Simply pass the user object (instead of the UserId) into the transaction body. For reference, check the payload example of the user object [here](#creating-a-new-user) and pass this when you create a transaction (check interac transaction payload example). Only available for EFT and interac transaction methods
+InteracHasSecurityQuestionAndAnswer | boolean | no | Indicate if there will be a question and answer for Interac
+InteracSecurityQuestion | string | yes if InteracHasSecurityQuestionAndAnswer is true | The question for the user to process the interac request
+InteracSecurityAnswer | string | yes if InteracHasSecurityQuestionAndAnswer is true | The answer for the user to process the interac request
+ScheduledStartDate | date | no | The date when the transaction will be sent to the financial institution. Must be greater than today
+ClientTransactionId | string | no | This field can be used to store the Transaction id created in your system when the Transaction is initiated
+UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user)
+
+:::info
+* Either a memo or comment is mandatory for Interac transactions. If both are specified, the comment will be presented on the Interac request.
+:::
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | Transaction id
+
+**ZumRailsType**
+
+Type | Description
+--------- | -------
+FundZumWallet | Send money to your Zūm Wallet
+WithdrawZumWallet | Withdraw from your Zūm Wallet
+AccountsPayable | Execute accounts payable AP
+AccountsReceivable | Execute accounts receivable AR
+UserTransfer | Execute transfer between users
+
+**TransactionMethod**
+
+Type |
+--------- |
+Eft |
+Interac |
+VisaDirect |
+CreditCard |
+
+```json
+> Transaction that will succeed example:
+{
+    "ZumRailsType":"FundZumWallet",
+    "TransactionMethod":"Eft",
+    "Amount":123.45,
+    "Memo":"Memo description",
+    "Comment":"This transaction will succeed because there's no keyword",
+    "FundingSourceId":"1d431e8b-...85452adb4eee",
+    "WalletId":"8ebd932b-...b92633e14297"
+}
+> Transaction that will fail example:
+{
+    "ZumRailsType":"FundZumWallet",
+    "a":"Eft",
+    "Amount":123.45,
+    "Memo":"Memo description",
+    "Comment":"This transaction will fail (EftFailedNoDebitAllowed)",
+    "FundingSourceId":"1d431e8b-...85452adb4eee",
+    "WalletId":"8ebd932b-...b92633e14297"
+}
+```
+:::danger
+In a sandbox environment, real bank operations are not performed. However, there is a way to simulate success, failures and review situations.
+:::
+
+:::caution
+To simulate a failure, use one of the keywords in the field COMMENT while creating a transaction. If no keyword is informed, or something else, the transaction will be considered as a success.
+This service is executed every 10 minutes.
+:::
+
+:::caution
+To simulate a review situation (only available for interac for now), create a transaction with the keyword "InReview" in the field COMMENT.
+There is a service which runs every minute that will update the transaction status to InReview in the first execution. The next time the service runs, it will Complete the transaction.
+:::
+
+:::info
+Transaction between users (UserTransfer) is only available for EFT and Visa Direct.
+:::
+
+:::info
+When a transaction is created with a scheduled start date, it won't be dispatched right away. This transaction will be prepared to be sent to the financial institution according to its scheduled start date.
+:::
+
+**Keywords to simulate a transaction failure**
+
+Eft                                     | VisaDirect                                    | Interac                                                       | CreditCard
+---------                               | -------                                       | -----                                                         | ---
+EftFailedValidationRejection            | VisaDirectGenericError                        | InteracFailedRecipientContactInfoMissing                      | CreditCardDeclined
+EftFailedInsufficientFunds              | VisaDirectDoNotHonor                          | InteracFailedInvalidEmailFormat                               | CreditCardError *
+EftFailedCannotLocateAccount            | VisaDirectInsufficientFunds                   | InteracFailedInvalidPhoneNumber                               | CreditCardHeldForReview *
+EftFailedStopPayment                    | VisaDirectNotPermittedToCardHolderInformed    | InteracFailedMultipleTransferLevelErrors                      | CreditCardGenericError *
+EftFailedAccountClosed                  | VisaDirectAmountLimitNotAuthorized            | InteracFailedRevoked                                          |
+EftFailedNoDebitAllowed                 | VisaDirectRejectedAmlOrFraud                  | InteracFailedBulkCancellationRequest                          |
+EftFailedFundsNotFree                   | VisaDirectRejectedAccountLimitExceeded        | InteracFailedRecipientRejected                                |
+EftFailedCurrectAccountMismatch         | VisaDirectReenterTransaction                  | InteracFailedAuthentication                                   |
+EftFailedPayorPayeeDeceased             | VisaDirectInvalidTransaction                  | InteracFailedReachedCancellationCutOff                        |
+EftFailedFrozenAccount                  | VisaDirectInvalidCardNumber                   | InteracFailedNotificationDeliveryFailure                      |
+EftFailedInvalidErrorAccountNumber      | VisaDirectIssuerOrSwitchInoperative           | InteracFailedAmountGreaterThanMax                             |
+EftFailedErrorPayorPayeeName            |                                               | InteracFailedDebtorRejected                                   |
+EftFailedRefusedNoAgreement             |                                               | InteracFailedFundsDepositFailed                               |
+EftFailedNotInAccountAgreementP         |                                               | InteracFailedClientEmailedToRequestCancellation               |
+EftFailedNotInAccountAgreementE         |                                               | InteracFailedGenericError                                     |
+EftFailedAgreementRevoked               |                                               | InteracFailedNameMismatch                                     |
+EftFailedDefaultByAFinancialInstitution |                                               |                                                               |
+
+
+:::caution
+Not available for all credit card customers
+:::
+
+## Get a specific transaction
+
+```json
+> Response example:
+{
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": {
+        "Id": "b7a8a505...364e8836404e",
+        "CreatedAt": "2020-05-13T17:59:47.039462",
+        "Memo": "Memo test",
+        "Comment": "This is a transaction to test",
+        "Amount": 123.45,
+        "User": null,
+        "Wallet": {
+            "Id": "8ebd932b...b92633e14297",
+            "Type": "Unified"
+        },
+        "FundingSource": {
+            "Id": "1d431e8b...85452adb4eee",
+            "Institution": "Institution",
+            "InstitutionNumber": "123",
+            "TransitNumber": "12345",
+            "AccountNumber": "1234567"
+        },
+        "EventHistory": [
+            {
+                "CreatedAt": "2020-05-13T17:59:47.284943",
+                "Event": "EFTFileUploaded",
+                "EventDescription": "EFT file uploaded to Financial Institution",
+            },
+            {
+                "CreatedAt": "2020-05-13T17:59:47.284943",
+                "Event": "Started",
+                "EventDescription": "Transaction with type FundZumWallet started, from Funding Source to Zūm Wallet with amount: $123.45",
+            }
+        ],
+        "ZumRailsType": "FundZumWallet",
+        "TransactionMethod":"Eft",
+        "TransactionStatus": "InProgress",
+        "RecurrentTransactionId": "16d2406f...87d397a8356f",
+        "FailedTransactionEvent": null
+    }
+}
+```
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/transaction/{transaction_id}`
+
+Use this endpoint if you want to get all the information for a specific transaction. The transaction id is informed in the url.
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | Transaction id
+CreatedAt | datetime | When the transaction was created
+Memo | string | Transaction memo
+Comment | string | Transaction comment
+Amount | decimal | Transaction amount
+ZumRailsType | string | Transaction type
+TransactionStatus | string | Indicate the status of the transaction
+RecurrentTransactionId | guid | The id of the recurrent transaction that created this transaction (null if inexistent)
+FailedTransactionEvent | string | If the transaction has failed, the [transaction event](#status-and-events) that caused it (null otherwise)
+ScheduledStartDate | date | The date transaction will be sent to the financial institution
+ClientTransactionId | string | The Transaction id you informed in the creation of this transaction
+InteracUrl | string | The interac URL to complete the transaction, if available
+InteracDebtorInstitutionNumber | string | The Financial Institution used to complete the Interac Request money.
+InteracDebtorFullName | string | The Full Name used to complete the Interac Request money. This information not yet 100% accurate, often is the same name sent. Gradually each Institution is improving and sending this information for Zum Rails.
+UseInteracANR | boolean | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user)
+**User** | | If transaction has a user - * Not all information from a user is returned in this endpoint
+Id | guid | The user id
+First Name | string | User first name
+Last Name | string | User last name
+Company Name | string | User company name
+**Wallet** | | If transaction has a wallet * Not all information from a user is returned in this endpoint
+Id | guid | The wallet id
+Type | string | The wallet type
+**FundingSource** | | If transaction has a funding source * Not all information from a user is returned in this endpoint
+Id | guid | The funding source id
+Institution | string | The institution name
+InstitutionNumber | string | The institution number
+TransitNumber | string | The transit number
+AccountNumber | string | The account number
+**TargetWallet** | | If transaction has a target wallet
+Id | guid | The target wallet id
+Type | string | The target wallet type
+**EventHistory** | | The transaction history events
+CreatedAt | datetime | When the transaction event happened
+Event | string | The event happened
+EventDescription | string | The event description
+
+## Status and events
+
+Zūm Rails offers 6 main states for transactions:
+
+**Transaction Status**
+
+Type | Description
+--------- | -------
+InProgress | Indicates the transaction is being processed
+Completed | Indicates the transaction is completed, this is a permanent status for Interac, Visa Direct and Credit Card. For EFT, a completed transaction might still fail up to 90 days after it's completion.
+Failed | Indicates the transaction has failed, this is a permanent status.
+Cancelled | Indicates the transaction has canceled, this is a permanent status.
+Scheduled | Indicates the transaction is scheduled.
+InReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. A transaction might be under review up to 7 days, after that our system will automatically cancel it.
+
+**Transaction Events**
+
+Zūm Rails also offers a more detailed transaction event, to indicate every step the transaction passed. Depending on the transaction methods, the events will change.
+
+Method          | Event                                     | Description
+-------         | -----                                     | ---
+All             | Started                                   | When the transaction started
+All             | Succeeded                                 | When the transaction succeeds, when it finishes without any error
+All             | WalletFunded                              | When the transaction funds a wallet
+All             | WalletWithdrawn                           | When the transaction withdrawn a wallet
+-------         | -------                                   | -------
+Eft             | EFTFileCreated                            | When an EFT file is created. One transaction might have up to 2 files
+Eft             | EFTFileUploaded                           | When an EFT file is uploaded
+Eft             | EFTAnswerReceived                         | When an EFT file response is received
+Eft             | EFTAnswerProcessed                        | When an EFT file is processed
+Eft             | EftFailedValidationRejection              | When EFT could not be created, due an invalid information provided
+Eft             | EftFailedInsufficientFunds                | When transaction is rejected, due non sufficient funds available
+Eft             | EftFailedCannotLocateAccount              | When account is not located, account, transit or institution numbers are invalid
+Eft             | EftFailedStopPayment                      | Account do not allow EFT
+Eft             | EftFailedAccountClosed                    | When account is closed
+Eft             | EftFailedNoDebitAllowed                   | Account do not allow EFT
+Eft             | EftFailedFundsNotFree                     | When transaction is rejected, due non sufficient funds available
+Eft             | EftFailedCurrectAccountMismatch           | When account is not located, account, transit or institution numbers are invalid
+Eft             | EftFailedPayorPayeeDeceased               | Account do not allow EFT
+Eft             | EftFailedFrozenAccount                    | Account do not allow EFT
+Eft             | EftFailedInvalidErrorAccountNumber        | When account is not located, account numbers are invalid
+Eft             | EftFailedErrorPayorPayeeName              | When account is not located, first, last or company name (business) mismatch
+Eft             | EftFailedRefusedNoAgreement               | Account do not allow EFT
+Eft             | EftFailedNotInAccountAgreementP           | Account do not allow EFT
+Eft             | EftFailedNotInAccountAgreementE           | Account do not allow EFT
+Eft             | EftFailedAgreementRevoked                 | Account do not allow EFT
+Eft             | EftFailedDefaultByAFinancialInstitution   | Generic error provided by the financial institution
+-------         | -------                                   | -------
+VisaDirect      | VisaDirectGenericError                    | When a generic error happened in the network
+VisaDirect      | VisaDirectDoNotHonor                      | When the information provided was inconsistent, such as address or name on card
+VisaDirect      | VisaDirectInsufficientFunds               | When not sufficient funds available in the card
+VisaDirect      | VisaDirectNotPermittedToCardHolderInformed| When the card holder did not authorize the transaction or the card is restricted for this usage
+VisaDirect      | VisaDirectAmountLimitNotAuthorized        | When the limit informed invalid, too high or exceeds the withdrawal frequency limit, too many transactions for this card in the current period
+VisaDirect      | VisaDirectRejectedAmlOrFraud              | When visa identified this transaction as AML or potential fraud
+VisaDirect      | VisaDirectWaitingSettlementIntoClientsAccounts    | When visa funds are waiting to settle into client's account
+VisaDirect      | VisaDirectSettledIntoClientsAccount       | When visa funds are settled into client's account
+VisaDirect      | VisaDirectInvalidCardNumber               | When the card number is invalid
+VisaDirect      | VisaDirectReenterTransaction              | When an error happened while creating the transaction. Try again
+VisaDirect      | VisaDirectInvalidTransaction              | When the transaction was considered invalid by visa direct
+VisaDirect      | VisaDirectIssuerOrSwitchInoperative       | When the issuer or switch is inoperative
+-------         | -------                                   | -------
+Interac         | InteracSent                               | When the transaction is sent to interac
+Interac         | InteracAcknowledgedCredit                 | When a credit transaction is received by interac
+Interac         | InteracAcknowledgedDebit                  | When a debit transaction is received by interac
+Interac         | InteracFailedRecipientContactInfoMissing  | Need to add recipient email or mobile phone number
+Interac         | InteracFailedInvalidEmailFormat           | If the email provided is not valid. * We minimize this error by validating it before
+Interac         | InteracFailedInvalidPhoneNumber           | If the phone number provided is not valid
+Interac         | InteracFailedMultipleTransferLevelErrors  | If there is more than one error in the file
+Interac         | InteracFailedRevoked                      | When the transaction is revoked
+Interac         | InteracFailedBulkCancellationRequest      | When the transaction was cancelled by request
+Interac         | InteracFailedRecipientRejected            | When the transaction was cancelled due to recipient having declined receipt of funds
+Interac         | InteracFailedAuthentication               | Transfer cancelled due to maximum number of unsuccessful attempts to answer the security question by the recipient
+Interac         | InteracFailedReachedCancellationCutOff    | Transfer cancelled due to expiry
+Interac         | InteracFailedNotificationDeliveryFailure  | Transfer cancelled due to maximum number of failed email notification attempts reached
+Interac         | InteracFailedAmountGreaterThanMax         | If the transaction amount exceeds the maximum allowed
+Interac         | InteracFailedDebtorRejected               | The debtor rejected the request
+Interac         | InteracFailedFundsDepositFailed           | The funds deposit failed
+Interac         | InteracFailedClientEmailedToRequestCancellation    | Client emailed to request cancellation
+Interac         | InteracFailedGenericError                 | When Interac Network is unavailable - * We have never seen this
+Interac         | InteracWaitingSettlementIntoWallet        | When Interac funds are waiting to settle into wallet
+Interac         | InteracSettledIntoWallet                  | When Interac funds are settled into wallet
+Interac         | InteracFailedNameMismatch                 | When the debtor name used to fulfill the Interac is different than the name on file
+-------         | -------                                   | -------
+CreditCard      | CreditCardDeclined                        | Not available balance in the card
+CreditCard      | CreditCardError                           | The card information, address, CVV is not correct
+CreditCard      | CreditCardHeldForReview                   | When the transaction is pre-approved, it might take a few hours to approve completely. This is rare
+CreditCard      | CreditCardGenericError                    | When the credit card network is unavailable
+CreditCard      | CreditCardUnknownResponse                 | No clear response from the issuing bank
+CreditCard      | CreditCardHoldCallOrPickUpCard            | Credit card is considered lost or stolen by the issuing bank
+CreditCard      | CreditCardSecViolation                    | Restrictions were placed on the credit card by the issuing bank
+CreditCard      | CreditCardServNotAllowed                  | The merchant account or credit card processor is not set up for this operation
+CreditCard      | CreditCardCvvMismatch                     | CVV mismatch
+CreditCard      | CreditCardInvalidMerchantId               | Your account is not approved for credit card transactions
+CreditCard      | CreditCardAmountExceeded                  | The amount exceeds the maximum allowed by the credit card provider
+
+## Search a transaction
+
+This endpoint will return transactions based on the filter informed. Transactions are returned with pagination, which means that if you need to retrieve all transactions you need to call the same endpoint incrementing the CurrentPage.
+
+```json
+> Payload example:
+{
+    "Id": "c7a8a909...364e8836409d",
+    "CreatedAtFrom":"2020-05-13T04:00:00.000Z",
+    "CreatedAtTo":"2020-05-13T04:00:00.000Z",
+    "CreatedAtOperator":  "isBetween",
+    "UserId":"4085e4dc...20522aab5e1b",
+    "ZumRailsType":"FundZumWallet",
+    "TransactionMethod":"Eft",
+    "TransactionStatus":"Completed",
+    "FailedTransactionEvent" : "EftFailedValidationRejection",
+    "Pagination": {
+        "PageNumber": 1
+    }
+}
+> Response example:
+{
+    "statusCode":200,
+    "message":"POST Request successful.",
+    "isError":false,
+    "result": {
+        "CurrentPage": 1,
+        "PageSize": 1,
+        "TotalCount": 2,
+        "Items": [
+            {
+                "Id": "b7a8a505...364e8836404e",
+                "CreatedAt": "2020-05-13T17:59:47.039462",
+                "Memo": "Memo test",
+                "Comment": "This is a transaction to test the platform",
+                "Amount": 123.45,
+                "ZumRailsType": "FundZumWallet",
+                "TransactionMethod":"Eft",
+                "TransactionStatus": "InProgress",
+                "RecurrentTransactionId": "16d2406f...87d397a8356g",
+                "FailedTransactionEvent" : null
+            },
+            {
+                "Id": "c8a8a505...364e8836405f",
+                "CreatedAt": "2020-05-13T17:59:47.039462",
+                "Memo": "Memo test",
+                "Comment": "This is a transaction to test the platform",
+                "Amount": 123.45,
+                "ZumRailsType": "FundZumWallet",
+                "TransactionMethod":"Eft",
+                "TransactionStatus": "Failed",
+                "RecurrentTransactionId": null,
+                "FailedTransactionEvent" : "EftFailedValidationRejection"
+            }
+        ]
+    }
+}
+```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/transaction/filter`
+
+Use this endpoint if you want the search for a specific transaction
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+Id | guid | no | Transaction id
+GenericSearch | string | no | Filter transactions by user name, user email, client transaction id, transaction id and memo
+ZumRailsType | string | no | Transaction type
+TransactionMethod | string | no | The transaction method
+TransactionStatus | string | no | Transaction status
+FailedTransactionEvent | string | no | [Transaction event](#status-and-events) (column Event from the "Transaction Events" table)
+CreatedAtFrom | datetime | no | Start date (This field is only used when the operator is between)
+CreatedAtTo | datetime | no | End date (This field is only used when the operator is between)
+CreatedAt | datetime | no | Create date
+CreatedAtOperator | string | no | Operator to filter with CreatedAt properties 
+UserId | string | no | User id
+ClientTransactionId | string | no | The Transaction id you informed in the creation of the transaction
+**Pagination** | | no |
+PageNumber | number | no | The respective page, starting at 1
+
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+CurrentPage | number | The current page
+PageSize | number | The amount of rows returned in the current page
+TotalCount | number | The total rows the filter returns
+**Items** | | | List of transactions
+Id | guid | Transaction id
+CreatedAt | datetime | When the transaction was created
+Memo | string | Transaction memo
+Comment | string | Transaction comment
+Amount | decimal | Transaction amount
+ZumRailsType | string | Transaction type
+TransactionMethod | string | Transaction method
+TransactionStatus | string | Indicate the status of the transaction
+RecurrentTransactionId | guid | The id of the recurrent transaction that created this transaction (null if inexistent)
+FailedTransactionEvent | string | If the transaction has failed, the [transaction event](#status-and-events) that caused it (null otherwise)
+ScheduledStartDate | date | The date transaction will be sent to the financial institution
+ClientTransactionId | string | The Transaction id you informed in the creation of the transaction
+
+:::tip
+If you need to search for a specific transaction, we recommend for you to retrieve the transaction id and then use the GET specific transaction endpoint to retrieve the detailed information about the transaction.
+:::
+
+## Delete a transaction
+
+```json
+> Response example:
+{
+    "statusCode": 200,
+    "message": "DELETE Request successful.",
+    "isError": false,
+    "result": "Request completed"
+}
+```
+
+`Method: DELETE`
+
+`Endpoint: {{env}}/api/transaction/{transaction_id}`
+
+Use this endpoint if you want to delete or cancel a specific transaction
+
+:::info
+- For EFT, transactions can only be deleted and cancelled if it's not transmitted to the financial institution. We send transactions to the financial institution multiple times a day.
+- For Interac, transactions can only be deleted and cancelled if the end-user has not yet initiated the payment by opening the email/sms.
+- For Visa Direct / Credit card, transactions cannot be deleted/cancelled. If needed you can call the endpoint to Reverse a Transaction
+:::

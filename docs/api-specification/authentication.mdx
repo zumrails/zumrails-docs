@@ -3,3 +3,55 @@ title: Authentication
 description:
   How to integrate with authentication API
 ---
+
+# Authentication
+
+```json
+> Payload example:
+{
+  "Username": "abc...123",
+  "Password": "xyz...321"
+}
+> Response example:
+{
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+        "Role": "API",
+        "Token": "eyJhbG...tOTuvNvJc",
+        "CustomerId": "3012...042f2",
+        "CompanyName": "Test Company Inc."
+    }
+}
+```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/authorize`
+
+All API requests are using the Bearer Token Authorization. A Bearer Token will last up to an hour from the time it is generated, allowing multiple API calls to be made securely without authorizing each time.
+
+To be able to get your token access, open the Settings page in the Portal, then navigate to the section API settings. You will need the username and password.
+
+**Input parameters**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Username | string | Your API username
+Password | string | Your API password
+
+**Responses**
+
+Parameter | Description
+--------- | ----------
+Role | The role this login belongs to
+Token | The authorization token that needs to be used in any other API request
+CustomerId | The customer id this login belongs to
+CompanyName | The company name this login belongs to
+
+:::info
+
+You have to inform the Token field received in this endpoint in any other request you want to execute. Once the token expires, you have to authenticate again to be able to retrieve a new token.
+
+:::

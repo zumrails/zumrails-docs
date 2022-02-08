@@ -3,3 +3,13 @@ title: Idempotency
 description:
   What's sdempotency and how it works on Zum.
 ---
+
+# Idempotency
+
+In Zūm APIs, idempotency means that requests that have been previously processed successfully are not reprocessed again. The response for the completed processing is reported instead.
+
+All `POST` requests accept idempotency keys. Sending idempotency keys in `GET` and `DELETE` requests will have no effect, as these type of requests are idempotent by definition.
+
+To submit a request with idempotent processing, add the key `idempotency-key` in the header. The value for this key should be a unique identifier for the message with a maximum of 36 characters (we recommend a UUID). If you don't receive a response (for example, in case of a timeout), you can safely retry the request with the same header. If we have already processed the request, the response to the first attempt will be returned without duplicating the request in our database.
+
+Idempotency keys are persisted in Zūm Rails side for 1 hour, which means if you send the same key after 1 hour, the request will be handled as a new request.

@@ -3,3 +3,102 @@ title: Webhooks
 description:
   How to configure and integrate with webhooks.
 ---
+
+# Webhooks
+
+The goal of the webhooks is to give your organization a real time update on the status of users and transactions so you can automate your next call to action depending of the status of the payments.
+
+To enable webhooks you have to open the settings page using the portal. When a URL is defined, Zūm will send a POST request each time there is a status change for:
+
+- Users (only available for customers)
+- Transactions (only available for customers)
+- Customers (only available for partners)
+- Recurrent Transaction (only available for customers)
+
+
+```json
+> Response example:
+{
+    "Type": "User",
+    "Data": {
+        ...
+    }
+}
+```
+
+The payload has a property Type to indicate to each entity the webhook status change is coming from.
+
+**Type**
+
+Type | Description
+--------- | -------
+User | Indicates the webhook call is for a user status change
+Transaction | Indicates the webhook call is for a transaction status change
+Customer | Indicates the webhook call is for a customer account status change
+Recurrent Transaction |  Indicates the webhook call is for a recurrent transaction creation
+
+
+The payload sent by the webhook has the same JSON format for the get [User](./users/#get-a-specific-user) and [Transaction](./transactions/#get-a-specific-transaction).
+
+:::info
+If you don't want to receive webhook for a specific status, then you can specify the status in the portal settings.
+:::
+
+## Verifying authenticity
+
+When Zūm Rails sends data to external services (e.g. when triggering a webhook to a service owned by you), the payload will be authenticated with a [hash-based message authentication code (HMAC)](https://en.wikipedia.org/wiki/HMAC).
+
+The key used to create the HMAC is your Webhook Secret, and you verify it by running the algorithm yourself with the payload and the key to re-create the HMAC. Your Webhook Secret can be found in the portal under your settings.
+
+The signature is always sent with the webhook in a header named *zumrails-signature*
+
+You can verify the authenticity of the webhook response by using HMAC. The HMAC verification process is as follows:
+
+1. You receive a POST request via the webhook
+2. Your app computes a signature based on payload received, using your Webhook Secret
+3. You verify that your signature matches the zumrails-signature in the request
+
+Here are the steps to validate a request coming from Zum Rails You’ll need the zumrails-signature sent by the webhook and your key (which is your Webhook Secret):
+
+1. Retrieve the zumrails-signature header
+2. Retrieve json body of the request. Make sure you are not adding any new spaces or formats.
+3. Using HMAC SHA256 implemented in your programming language, calculate the signature in your side. The body is the payload and the secret is your Webhook Secret.
+4. Compare your hash with the value provided under the zumrails-signature in the request, they should match.
+
+A few examples on how to calculate HMAC in different languages: https://github.com/danharper/hmac-examples
+
+:::info
+When generating the signature, make sure you are using the body received in the payload, as it is. Some languages might add spaces or tabs.
+:::
+:::info
+We calculate the signature making sure the payload is in UTF-8 charset, so you have make the same in your side, or else it won't match.
+:::
+
+## Retry in case of failure
+
+In the event of a failure to deliver the webhook (!= 200) we will try again 3 times every 5 minutes in sandbox. In production we will retry 5 times every 60 minutes.
+
+If you have anything specific in our retry policy, don't hesitate to talk with us, changes can be made.
+
+## Receiving users' financial institution details
+
+```json
+> Response example:
+{
+    "Type": "Transaction",
+    "Data": {
+        ...
+        "InteracDebtorInstitutionNumber": "999",
+        "InteracDebtorInstitutionName": "Testing Financial Institution",
+        "InteracDebtorFullName": "Debtor Full Name",
+        ...
+    }
+}
+```
+
+For Interac transactions, you can now receive the end users' financial institution name and financial institution number which was used to complete the Interac requests. To receive this information, make sure you have configured the InteracSettledIntoWallet webhook event. (You can set this event by going to settings > webhook and API settings > Interac status change).
+
+:::info
+This information might not be available for all accounts. For any questions contact our support team
+:::
+

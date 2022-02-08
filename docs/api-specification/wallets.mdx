@@ -3,3 +3,121 @@ title: Wallets
 description:
   How to integrate with wallets api.
 ---
+
+# Wallets
+
+## List all wallets
+
+```json
+> Response example:
+{
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": [
+        {
+            "Id": "30126b59-...-008376504211",
+            "Type": "AccountsPayable",
+            "Balance": 50000.88
+        },
+        {
+            "Id": "30126b59-...-008376504210",
+            "Type": "Unified",
+            "Balance": 1000.50
+        }
+    ]
+}
+```
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/wallet`
+
+All the information from the Zūm Wallets can be pulled with one API call. The information includes the wallet type, the wallet ID and the balance. A useful example for this endpoint is when using a Zūm wallet for AP or AR, the Wallet ID is mandatory.
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | Wallet id
+Type | string | Wallet type
+Balance | decimal | Current balance in the wallet
+
+## Filter wallet transactions
+
+```json
+> Payload example:
+{
+    "WalletId": "30126b59-...-008376504210",
+    "Pagination": {
+        "PageNumber": 1
+    }
+}
+> Response example:
+{
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": [
+        {
+            "CurrentPage": 1,
+            "PageSize": 8,
+            "TotalCount": 1,
+            "Items": [
+                {
+                    "Id": "faa32009-...-a52cc8996b61",
+                    "Description": "Funds received by Funding Source (RBC-01234-1234567)",
+                    "Debit": 0,
+                    "Credit": 0.01,
+                    "Balance": 0.01,
+                    "Type": "Credit",
+                    "Authorized": true,
+                    "CreatedAt": "2020-04-28T15:15:09.208515"
+                }
+            ]
+        }
+    ]
+}
+```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/wallet/transactions/filter`
+
+Use this endpoint if you want to list the transactions from a specific wallet. These are the debits and credits that happened in the respective wallet.
+
+:::info
+This endpoint is also available in `{{env}}/api/wallet/transactions`, but it may be removed eventually.
+:::
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+WalletId | guid | yes | Wallet id
+TransactionMethod | string | no | Transaction method 
+ZumRailsType | string | no | Transaction Type
+GenericSearch | string | no | Filter wallets by description
+CreatedAtFrom | datetime | no | Start date (This field is only used when the operator is between)
+CreatedAtTo | datetime | no | End date (This field is only used when the operator is between)
+CreatedAt | datetime | no | Create date
+CreatedAtOperator | string | no | Operator to filter with CreatedAt properties
+**Pagination** | | no | 
+PageNumber | number | no | The respective page, starting at 1
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+CurrentPage	| number | The current page
+PageSize | number | The amount of rows returned in the current page
+TotalCount | number | The total rows the filter returns
+**Items** | | | List of wallet transactions
+Id | guid | Transaction id
+CreatedAt | datetime | When the transaction was created
+Description | string | Transaction description
+Debit | decimal | Debit amount
+Credit | decimal | Credit amount
+Balance | decimal | Balance at that moment
+Type | string | Credit or Debit
+Authorized | bool | If the transaction is completed and authorized
