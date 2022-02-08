@@ -30,5 +30,3 @@ Use Notes to call out important bits of information.
 ## More links
 
 include links to other relevant documentation.
-
-- with [DOCKER](/docs/get-started/docker/)
