@@ -82,6 +82,8 @@ module.exports = {
         "api-specification/transactions-batch-csv",
         "api-specification/wallets",
         "api-specification/aggregation",
+        "api-specification/products",
+        "api-specification/product-prices",
         "api-specification/invoices",
         "api-specification/subscriptions",
         "api-specification/webhooks",
