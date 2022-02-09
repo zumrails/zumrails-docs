@@ -3,3 +3,67 @@ title: API Introduction
 description:
   How the Zum API integration works.
 ---
+
+# Api Introduction
+
+## Environments
+
+Production:
+
+- Live Portal: <https://app.zumrails.com>
+- Live API base Url: <https://api-app.zumrails.com>
+
+Sandbox:
+
+- Sandbox Portal: <https://sandbox.zumrails.com>
+- Sandbox API base Url: <https://api-sandbox.zumrails.com>
+
+## API Specifics
+
+- All datetime fields are stored and returned as UTC format;
+- All API requests must pass the header Content-type: application/json;
+
+**API Structure**
+
+```json
+{
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {}
+}
+```
+
+All API endpoints return the same response, containing 4 important pieces of information:
+
+Field | Description
+-------------- | --------------
+statusCode | The http [status code](./errors)
+message | A message describing if the response was successful
+isError | true/false to indicate if the request was successfullly processed
+result | The json response for your API call
+responseException | In case the isError is true, the exception indicating the problem
+
+<aside class="notice">
+For most uses-cases, our customers check if the response isError is true, if not, then checking the statusCode will help you identify the next step.
+</aside>
+
+## Postman Collection
+
+Follow these steps to quickly get started with the Zũm Rails API:
+
+Once you have access to your sandbox portal:
+
+1) Login in your sandbox portal, navigate to Settings -> Technical Information -> API Settings. Grab your api username and password
+
+2) Download and install the Postman app
+
+3) Install the Zũm Rails Postman Collection. Click the "Run in Postman" button below to install
+
+4) In Postman find the endpoint /Authorize, paste your api username and password and it's all set.
+
+
+
+:::note
+This Postman Collection is already prepared to set the authorization token as an environment variable, so that you don't need to copy and paste the authorization token every time. If you need to change this configuration, go to Authorize endpoint in the Postman Collection, and open the Tests tab to view how this tweak is done.
+:::

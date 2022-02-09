@@ -73,6 +73,7 @@ module.exports = {
     {
       label: "API Specification",
       type: "category",
+      collapsed: false,
       items: [
         "api-specification/api-introduction",
         "api-specification/authentication",
