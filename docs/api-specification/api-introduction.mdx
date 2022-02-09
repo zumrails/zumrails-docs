@@ -44,9 +44,9 @@ isError | true/false to indicate if the request was successfullly processed
 result | The json response for your API call
 responseException | In case the isError is true, the exception indicating the problem
 
-<aside class="notice">
+:::info
 For most uses-cases, our customers check if the response isError is true, if not, then checking the statusCode will help you identify the next step.
-</aside>
+:::
 
 ## Postman Collection
 
@@ -62,7 +62,7 @@ Once you have access to your sandbox portal:
 
 4) In Postman find the endpoint /Authorize, paste your api username and password and it's all set.
 
-
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/3a1850de513d52ae79ec?action=collection%2Fimport)
 
 :::note
 This Postman Collection is already prepared to set the authorization token as an environment variable, so that you don't need to copy and paste the authorization token every time. If you need to change this configuration, go to Authorize endpoint in the Postman Collection, and open the Tests tab to view how this tweak is done.
