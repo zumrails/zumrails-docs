@@ -91,7 +91,7 @@ const config = {
       id: "github-star",
     },
     colorMode: {
-      defaultMode: "dark",
+      defaultMode: "light",
       disableSwitch: false,
       respectPrefersColorScheme: false,
     },
@@ -113,7 +113,7 @@ const config = {
     navbar: {
       title: " ",
       logo: {
-        alt: "QuestDB",
+        alt: "Zūm Rails",
         src: "/img/navbar/questdb.svg",
       },
       items: [
@@ -125,79 +125,7 @@ const config = {
       ],
     },
     footer: {
-      links: [
-        {
-          title: "QuestDB",
-          items: [
-            {
-              label: "Enterprise",
-              to: "/enterprise/",
-            },
-            {
-              label: "Cloud",
-              to: "/cloud",
-            },
-            {
-              label: "Customers",
-              to: "/customers/",
-            },
-            {
-              label: "Careers",
-              to: "/careers/",
-            },
-            {
-              label: "About us",
-              to: "/about-us/",
-            },
-          ],
-        },
-        {
-          title: "Community",
-          items: [
-            {
-              label: "GitHub",
-              href: customFields.githubUrl,
-            },
-            {
-              label: "Slack",
-              href: customFields.slackUrl,
-            },
-            {
-              label: "Stack Overflow",
-              to: customFields.stackoverflowUrl,
-            },
-            {
-              label: "Twitter",
-              href: customFields.twitterUrl,
-            },
-          ],
-        },
-        {
-          title: "More",
-          items: [
-            {
-              label: "Documentation",
-              to: "/docs/introduction/",
-            },
-            {
-              label: "Tutorials",
-              to: "/tutorial/",
-            },
-            {
-              label: "Blog",
-              to: "/blog/",
-            },
-            {
-              label: "Roadmap",
-              href: `https://github.com/orgs/questdb/projects/1/views/5`,
-            },
-            {
-              label: "Videos",
-              to: customFields.videosUrl,
-            },
-          ],
-        },
-      ],
+
     },
   },
   presets: [

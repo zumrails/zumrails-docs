@@ -721,7 +721,7 @@ const QueryScroller = () => {
 }
 
 const Home = () => {
-  const title = "QuestDB | Time series data, faster"
+  const title = "Zūm Rails Docs | Powering smarter and faster money movement"
 
   return (
     <Layout
