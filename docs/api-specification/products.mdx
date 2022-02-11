@@ -80,6 +80,13 @@ Recurring | If this is a product which is available as a recurring subscription,
 }
 
 ```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/product`
+
+Use this endpoint if you want to add a new product to your account.
+
 **Input parameters**
 
 Parameter | Type | Mandatory | Description
@@ -112,8 +119,356 @@ Biweekly | string | Sets a biweeky recurrence
 Annually | string | Sets an annual  recurrence
 
 ## Uploading a product picture
+
+```json
+> Payload example for uploading  picture:
+{
+  "Bytes": "/9j/4AAQSkZJRgABAQAAAQABAAD//gAfQ29tcHJlc3NlZCBieSBqcGVnLXJlY29tcHJlc3P/2wCEAAUFBQUGBQYHBwYJCQgJCQ0MCwsMDRMODw4PDhMdEhUSEhUSHRofGRcZHxouJCAgJC41LSotNUA5OUBRTVFqao4BBQUFBQYFBgcHBgkJCAkJDQwLCwwNEw4PDg8OEx0SFRISFRIdGh8ZFxkfGi4kICAkLjUtKi01QDk5QFFNUWpqjv/CABEIBd0F3AMBIgACEQEDEQH/xAAdA...",
+  "Filename": "marketing-kit-launch-binders-com-open-49901SD.jpg",
+  "SecurityPassword": "your_password"
+}
+```
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/product/{{producId}}/uploadproductimage`
+
+Use this endpoint if you want to upload a new image to a product.
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+Filename | string | yes | Files name
+SecurityPassword | string | yes | Your password
+Bytes | string | yes | The file's blob
+
+:::info
+To remove a image send a request with Filename and Bytes values has `null`
+:::
+
 ## Update a product
+
+```json
+{
+  "Name": "Test",
+  "Description": "Teste",
+  "SecurityPassword": "!@#Change",
+  "ProductPrices": [
+    {
+      "Id": "68fe5724-7a8b-41d7-9e9c-350f15953d00",
+      "ProductPriceType": "Standard",
+      "Price": 123.25,
+      "PerUnit": 0,
+      "Frequency": "Recurring",
+      "PlanName": "Test Recurring",
+      "PlanDescription": "Test Description",
+      "BillingPeriod": "Annually",
+      "EnableSubscriptionEndDate": true,
+      "SubscriptionEndDate": "2022-02-26",
+      "EnableFreeTrial": false,
+      "FreeTrialInDays": 0,
+      "EnableSetupFee": false,
+      "SetupFee": 0,
+      "SetToRemove": true
+    },
+    {
+      "ProductPriceType": "Standard",
+      "Price": 25.67,
+      "PerUnit": 0,
+      "Frequency": "Recurring",
+      "PlanName": "Test Recurring",
+      "PlanDescription": "Test Description",
+      "BillingPeriod": "Annually",
+      "EnableSubscriptionEndDate": true,
+      "SubscriptionEndDate": "2022-02-26",
+      "EnableFreeTrial": false,
+      "FreeTrialInDays": 0,
+      "EnableSetupFee": false,
+      "SetupFee": 0
+    }
+  ]
+}
+```
+
+`Method: PUT`
+
+`Endpoint: {{env}}/api/product/{{product_id}}`
+
+Use this endpoint if you want to update a new product on your account.
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+Name | string | yes | Product Name
+Description | string | no | Product Description
+SecurityPassword | string | yes | Your current password
+**Prices** | | yes |
+Id | guid | yes (only if you are editing) | The Id for the product price
+ProductPriceType | string | yes | Price Model
+Price | decimal | yes | Price value
+PerUnit | int | yes (if ProductPriceType is Package) | Package size
+Frequency | decimal | yes | Price frequency
+PlanName | string | yes (if Frequency is recurring) | Recurring plan name
+PlanDescription | string | no | Price frequency
+BillingPeriod | string | yes (if Frequency is recurring) | Billing Period Type
+EnableSubscriptionEndDate | bool | no | Enable subscription end date
+SubscriptionEndDate | date | yes (if EnableSubscriptionEndDate is true) | End date that makes subscription available
+EnableFreeTrial | bool | no | Enable free trial feature
+FreeTrialInDays | int | yes (if EnableFreeTrial is true) | Number of days for free trial
+EnableSetupFee | bool | no | Enable setup fee
+SetupFee | decimal | yes (if EnableSetupFee is true) | Number of days for free trial
+SetToRemove | bool | yes (only if you are editing) | This will remove the product price of the product if set to true 
+
 ## Get a specific product
+
+```json
+> Response example:
+{
+  "statusCode": 200,
+  "message": "GET Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+    "Name": "Test",
+    "Description": "Test",
+    "ProductStatus": "Active",
+    "ProductPrices": [
+      {
+        "Id": "037b8b2e-9cc0-4059-a246-f4c02e3564d4",
+        "product_id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+        "CreatedAt": "2022-02-11T17:25:26.970291",
+        "ProductPriceType": "Standard",
+        "ProductPriceStatus": "Active",
+        "Price": 25.67,
+        "PerUnit": 0,
+        "Frequency": "Recurring",
+        "PlanName": "Test Recurring",
+        "PlanDescription": "Test Description",
+        "BillingPeriod": "Annually",
+        "EnableSubscriptionEndDate": true,
+        "SubscriptionEndDate": "2022-02-26T03:00:00",
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": false,
+        "SetupFee": 0,
+        "Currency": "CAD",
+        "Product": {
+          "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+          "Name": "Test",
+          "Description": "Test",
+          "ProductStatus": "Active",
+          "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+        }
+      }
+    ],
+    "ConnectUrl": "connect_url",
+    "CreatedAt": "2022-02-11T15:22:29.58586"
+  }
+}
+```
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/product/{product_id}`
+
+Use this endpoint if you want to get all the information for a specific product.
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | Product id
+Name | string | Product Name
+Description | string | Product Description
+ProductStatus | string | Status for the product
+ConnectUrl | string | Public url for access to this product
+CreatedAt | date | Creation date
+**ProductPrices** | |  |
+Id | string | The Id for the product price
+ProductId | string | The Id for the product on witch is related
+CreatedAt | date | Creation date
+ProductPriceType | string | Price Model
+ProductPriceStatus | string |  Status for the product price
+Price | decimal | Price
+PerUnit | string | Package size
+Frequency | string | Price frequency
+PlanName | string | Plan name
+PlanDescription | string | Plan description
+BillingPeriod | string | Billing Period Type
+EnableSubscriptionEndDate | bool | Enable subscription end date
+SubscriptionEndDate | date | End date that makes subscription available
+EnableFreeTrial | bool | Enable free trial feature
+FreeTrialInDays | int | Number of days for free trial
+EnableSetupFee | bool | Enable setup fee
+SetupFee | decimal | Number of days for free trial
+Currency | string | Currency set for the product price
+SetToRemove | bool | This will remove the product price of the product if set to true 
+
+
 ## Search a product
+This endpoint will return products based on the filter informed. Products are returned with pagination, which means that if you need to retrieve all products you need to call the same endpoint incrementing the CurrentPage.
+
+```json
+> Payload example:
+{
+  "CreatedAt": "2022-02-07T03:00:00.000Z",
+  "CreatedAtOperator": "isInTheLast",
+  "ProductStatus": 0,
+  "GenericSearch": "Product",
+  "Pagination": {
+    "PageNumber": 1,
+    "ItemsPerPage": 7
+  }
+}
+
+> Response example:
+{
+  "statusCode": 200,
+  "message": "POST Request successful.",
+  "isError": false,
+  "result": {
+    "CurrentPage": 1,
+    "PageSize": 7,
+    "TotalCount": 2,
+    "Items": [
+      {
+        "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
+        "Name": "Test Product",
+        "Description": "Product Description",
+        "ProductStatus": "Active",
+        "ProductPrices": [
+          {
+            "Id": "9f80a875-a1d3-4202-a859-4eafa669ff08",
+            "ProductId": "48711cce-c191-4491-8e22-11b9c0b8a967",
+            "CreatedAt": "2022-02-11T15:17:32.185776",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 22.55,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
+              "Name": "Test Product",
+              "Description": "Product Description",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          },
+          {
+            "Id": "e70eb52e-4938-4b0b-97a0-12f366febf04",
+            "ProductId": "48711cce-c191-4491-8e22-11b9c0b8a967",
+            "CreatedAt": "2022-02-11T15:17:32.185777",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 35.68,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
+              "Name": "Test Product",
+              "Description": "Product Description",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          }
+        ],
+        "CreatedAt": "2022-02-11T15:17:32.300689"
+      },
+      {
+        "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+        "Name": "Test Product",
+        "Description": "Product Description",
+        "ProductStatus": "Active",
+        "ProductPrices": [
+          {
+            "Id": "9a7bb825-361d-4258-9c70-9fbe10119eba",
+            "ProductId": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+            "CreatedAt": "2022-02-11T15:16:59.488244",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 22.55,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+              "Name": "Test Product",
+              "Description": "Product Description",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          },
+          {
+            "Id": "fe07c018-beaa-42be-9a8c-0b75944bc70e",
+            "ProductId": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+            "CreatedAt": "2022-02-11T15:16:59.488246",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 35.68,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+              "Name": "Test Product",
+              "Description": "Product Description",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          }
+        ],
+        "CreatedAt": "2022-02-11T15:16:59.67639"
+      },
+    ]
+  }
+}
+```
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+GenericSearch | string | no | Filter products by product name or product id
+ProductStatus | string | no | Product status
+CreatedAt | datetime | no | Create date
+CreatedAtOperator | string | no | Operator to filter with CreatedAt properties 
+**Pagination** | | no |
+PageNumber | number | no | The respective page, starting at 1
+
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+CurrentPage | number | The current page
+PageSize | number | The amount of rows returned in the current page
+TotalCount | number | The total rows the filter returns
+**Items** | | | List of products
+
+
+:::tip
+If you need to search for a specific product, we recommend that you retrieve the product id and then use the GET specific product endpoint to retrieve the detailed information about the product.
+:::
+
 ## Archive a product
 ## Unarchive a product
