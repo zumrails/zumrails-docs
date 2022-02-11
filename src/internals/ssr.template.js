@@ -8,7 +8,6 @@ module.exports = ({ customFields, favicon, organizationName, url }) => `
     <meta property="og:type" content="website" />
     <meta name="author" content="${organizationName}" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@questdb" />
     <meta name="generator" content="Docusaurus v<%= it.version %>" />
     <link href="https://www.googletagmanager.com" rel="dns-prefetch" />
     <link href="https://www.google-analytics.com" rel="dns-prefetch" />
