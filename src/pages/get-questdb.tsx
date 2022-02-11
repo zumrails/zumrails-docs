@@ -301,7 +301,7 @@ brew install questdb`}
             </a>
             <a
               className={chCss.changelog__link}
-              href={`${customFields.githubUrl}/tags`}
+              href=""
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -351,11 +351,7 @@ brew install questdb`}
 helm install my-questdb questdb/questdb --version ${customFields.helmVersion}`}
           </CodeBlock>
           <p className={biCss.binary__docs}>
-            <a
-              href={customFields.artifactHubUrl}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
+            <a rel="noopener noreferrer" target="_blank">
               Docs
             </a>
           </p>

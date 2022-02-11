@@ -2,8 +2,6 @@ import React from "react"
 
 import useUserPreferencesContext from "@theme/hooks/useUserPreferencesContext"
 
-import customFields from "../../config/customFields"
-
 import styles from "./styles.module.css"
 
 const AnnouncementBar = () => {
@@ -22,7 +20,7 @@ const AnnouncementBar = () => {
         If you like QuestDB,&nbsp;
         <a
           className={styles.announcement__link}
-          href={customFields.githubUrl}
+          href=""
           rel="noopener noreferrer"
           target="_blank"
         >

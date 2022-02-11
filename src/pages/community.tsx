@@ -5,7 +5,6 @@ import Button from "@theme/Button"
 import seCss from "../css/section.module.css"
 import paCss from "../css/community/page.module.css"
 import MailchimpSubscribe from "react-mailchimp-subscribe"
-import customFields from "../config/customFields"
 
 type FormProps = {
   status: string
@@ -136,11 +135,9 @@ const Community = () => {
                 className={`${paCss.default_text} ${paCss.join_slack_description}`}
               >
                 Join our growing community on &nbsp;
-                <a className={paCss.link_item} href={customFields.slackUrl}>
-                  QuestDB’s Slack
-                </a>
+                <a className={paCss.link_item}>QuestDB’s Slack</a>
               </p>
-              <a className={paCss.link_item} href={customFields.slackUrl}>
+              <a className={paCss.link_item}>
                 <img
                   src="/img/pages/community/slack-logo.svg"
                   alt="slack logo"
@@ -185,24 +182,17 @@ const Community = () => {
               </p>
               <p className={paCss.property}>
                 You have{" "}
-                <a className={paCss.link_item} href={customFields.githubUrl}>
-                  starred our GitHub repository
-                </a>
+                <a className={paCss.link_item}>starred our GitHub repository</a>
               </p>
               <p className={paCss.property}>
                 You have{" "}
-                <a
-                  className={paCss.link_item}
-                  href={customFields.stackoverflowUrl}
-                >
+                <a className={paCss.link_item}>
                   watched our Stack Overflow tag
                 </a>
               </p>
               <p className={paCss.property}>
                 You have{" "}
-                <a className={paCss.link_item} href={customFields.slackUrl}>
-                  joined our Community Slack
-                </a>
+                <a className={paCss.link_item}> joined our Community Slack</a>
               </p>
               <div className={paCss.custom_box}>
                 <p className={`${paCss.default_text} ${paCss.mb5}`}>
@@ -227,12 +217,7 @@ const Community = () => {
             </p>
             <p className={paCss.property}>
               You have asked or answered a question on Stack Overflow{" "}
-              <a
-                className={paCss.link_item}
-                href={customFields.stackoverflowUrl}
-              >
-                with the QuestDB tag
-              </a>
+              <a className={paCss.link_item}>with the QuestDB tag</a>
             </p>
             <p className={paCss.property}>
               You have opened a valid{" "}

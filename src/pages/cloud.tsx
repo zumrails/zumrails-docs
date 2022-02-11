@@ -22,7 +22,6 @@ import flCss from "../css/cloud/flashy.module.css"
 import slCss from "../css/cloud/slack.module.css"
 
 import SlackLogo from "../assets/img/slack.svg"
-import customFields from "../config/customFields"
 
 type HighlightItem = {
   title: string
@@ -201,7 +200,7 @@ const Slack = () => {
           community with 1000+ developers on Slack!
         </div>
         <div className={slCss.slack__cta}>
-          <Button variant="primary" href={customFields.slackUrl}>
+          <Button variant="primary" href="">
             Go to Slack
           </Button>
         </div>

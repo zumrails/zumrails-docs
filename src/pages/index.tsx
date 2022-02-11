@@ -238,7 +238,6 @@ const Top = () => {
               juCss.jumbotron__link,
               juCss["jumbotron__cta--github"],
             )}
-            href={customFields.githubUrl}
             icon={<SvgImage image={<GithubLogo />} title="GitHub" />}
             variant="secondary"
           >
@@ -256,11 +255,7 @@ const Top = () => {
             {`docker pull questdb/questdb
 docker run -p 9000:9000 questdb/questdb`}
           </code>
-          <a
-            href={customFields.dockerUrl}
-            rel="noopener noreferrer"
-            target="_blank"
-          >
+          <a rel="noopener noreferrer" target="_blank">
             <SvgImage
               image={<DockerLogo className={doCss.docker__icon} />}
               title="Docker"
@@ -487,15 +482,12 @@ const Console = () => {
           <div className={flCss.flashy__links}>
             <a
               className={flCss.flashy__link}
-              href={customFields.githubUrl}
               rel="noopener noreferrer"
               target="_blank"
             >
               Go to GitHub&nbsp;&nbsp;&gt;
             </a>
-            <a className={flCss.flashy__link} href={customFields.slackUrl}>
-              Join Slack&nbsp;&nbsp;&gt;
-            </a>
+            <a className={flCss.flashy__link}>Join Slack&nbsp;&nbsp;&gt;</a>
           </div>
         </div>
       </div>

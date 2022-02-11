@@ -22,23 +22,15 @@ declare module "@docusaurus/useDocusaurusContext" {
   type Ctx = {
     siteConfig: Omit<DocusaurusConfig, "customFields" | "themeConfig"> & {
       customFields: {
-        artifactHubUrl: string
         copyright: string
         crunchbaseUrl: string
         demoUrl: string
         description: string
-        dockerUrl: string
         domain: string
-        githubOrgUrl: string
-        githubUrl: string
         helmVersion: string
         linkedInUrl: string
         oneLiner: string
-        slackUrl: string
-        stackoverflowUrl: string
-        twitterUrl: string
         version: string
-        videosUrl: string
       }
       themeConfig: {
         colorMode: { disableSwitch: boolean }

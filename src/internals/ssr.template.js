@@ -30,10 +30,6 @@ module.exports = ({ customFields, favicon, organizationName, url }) => `
     <meta itemprop="description" content="${customFields.description}" />
     <meta itemprop="url" content="${url}" />
     <meta itemprop="logo" content="${url}${favicon}" />
-    <meta itemprop="sameAs" content="${customFields.twitterUrl}" />
-    <meta itemprop="sameAs" content="${customFields.linkedInUrl}" />
-    <meta itemprop="sameAs" content="${customFields.crunchbaseUrl}" />
-    <meta itemprop="sameAs" content="${customFields.githubOrgUrl}" />
     <%~ it.preBodyTags %>
     <div id="__docusaurus">
       <%~ it.appHtml %>

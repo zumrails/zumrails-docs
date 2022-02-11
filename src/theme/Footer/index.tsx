@@ -76,7 +76,7 @@ const Footer = () => {
 
           <Button
             className={footerStyles.footer__github}
-            href={customFields.githubUrl}
+            href=""
             icon={
               <img
                 alt="GitHub logo"
