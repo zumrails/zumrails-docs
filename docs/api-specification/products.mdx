@@ -5,8 +5,113 @@ description:
 ---
 
 #Products
+At Zum Rails one product can have one or more prices, these are called product prices and need to be informed at the moment of creating a product. Product prices can have different types of configurations such as Pricing Model and Frequency.
+
+**Pricing Models Types**
+
+Type | Behavior 
+--------- | ------- 
+Standard | You should select standard pricing if you want to charge your users a fixed price per unit.
+Package | You should select package pricing if you want to charge your users for a group of units. Say you charge $50 for every 10 units. If the user buys 15 units, he will be charged $100 by default.
+
+**Frequency Types**
+
+Type | Behavior 
+--------- | ------- 
+OneTime | If this is a product which is available as a one time purchase by paying the full price right now, choose frequency “OneTime”.
+Recurring | If this is a product which is available as a recurring subscription, choose frequency “Recurring".
 
 ## Creating a new product
+
+```json
+> Payload example for product with one OneTime price:
+{
+  "Name": "Test Product",
+  "Description": "Product Description",
+  "SecurityPassword": "your_password",
+  "ProductPrices": [
+    {
+      "Name": "Test Product",
+      "Description": "Product Description",
+      "SecurityPassword": "your_password",
+      "ProductPrices": [
+        {
+          "ProductPriceType": "Standard",
+          "Price": 22.55,
+          "PerUnit": 0,
+          "Frequency": "OneTime",
+          "PlanName": null,
+          "PlanDescription": null,
+          "BillingPeriod": null,
+          "EnableSubscriptionEndDate": null,
+          "SubscriptionEndDate": null,
+          "EnableFreeTrial": false,
+          "FreeTrialInDays": 0,
+          "EnableSetupFee": false,
+          "SetupFee": 0
+        }
+      ]
+    }
+  ]
+}
+
+> Payload example for product with one Recurring price:
+{
+  "Name": "Test Product",
+  "Description": "Product Description",
+  "SecurityPassword": "your_password",
+  "ProductPrices": [
+    {
+      "ProductPriceType": "Standard",
+      "Price": 123.25,
+      "PerUnit": 0,
+      "Frequency": "Recurring",
+      "PlanName": "Platinum Plan",
+      "PlanDescription": "Platinum plan description",
+      "BillingPeriod": "Annually",
+      "EnableSubscriptionEndDate": true,
+      "SubscriptionEndDate": "2022-02-26",
+      "EnableFreeTrial": false,
+      "FreeTrialInDays": 0,
+      "EnableSetupFee": false,
+      "SetupFee": 0
+    }
+  ]
+}
+
+```
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+Name | string | yes | Product Name
+Description | string | no | Product Description
+SecurityPassword | string | yes | Your current password
+**Prices** | | yes |
+ProductPriceType | string | yes | Price Model
+Price | decimal | yes | Price value
+PerUnit | int | yes (if ProductPriceType is Package) | Package size
+Frequency | decimal | yes | Price frequency
+PlanName | string | yes (if Frequency is recurring) | Recurring plan name
+PlanDescription | string | no | Price frequency
+BillingPeriod | string | yes (if Frequency is recurring) | Billing Period Type
+EnableSubscriptionEndDate | bool | no | Enable subscription end date
+SubscriptionEndDate | date | yes (if EnableSubscriptionEndDate is true) | End date that makes subscription available
+EnableFreeTrial | bool | no | Enable free trial feature
+FreeTrialInDays | int | yes (if EnableFreeTrial is true) | Number of days for free trial
+EnableSetupFee | bool | no | Enable setup fee
+SetupFee | decimal | yes (if EnableSetupFee is true) | Number of days for free trial
+
+**Billing Period Type**
+
+Parameter | Type | Description
+--------- | ------- | ----------- 
+Monthly | string | Sets a monthly recurrence
+Weekly | string | Sets a weekly recurrence
+Biweekly | string | Sets a biweeky recurrence
+Annually | string | Sets an annual  recurrence
+
+## Uploading a product picture
 ## Update a product
 ## Get a specific product
 ## Search a product
