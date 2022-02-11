@@ -3,3 +3,15 @@ title: Subscription
 description:
   How to subscriptions works.
 ---
+
+Subscriptions allow you to charge a user on a recurring basis. Subscription creation requires items which are product prices that have a “recurring plan” frequency. Subscription will generate invoices according to the billing cycle (monthly, weekly, biweekly, annually). Whenever a subscription is first created, the user will receive an email with the subscription details.
+
+If your subscription is configured to be charged automatically to the user on the available payment method, Zum Rails will automatically finalize your invoice and attempt payment according to the billing cycle. Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same.
+
+If your subscription is configured to be billed by sending an email to the user with a link to pay, then Zum Rails will email the invoice to your user and await payment according to the billing cycle. These emails will contain a link to a hosted page to pay the invoice.
+
+Subscriptions can also be created using the checkout URL/SDK if you do not have your user information. For subscriptions generated through checkout links the user will be charged automatically on the payment details provided according to the billing cycle. See how to get started with checkout URL/SDK here.
+
+:::note
+At this point, we do not pro-rate subscriptions. 
+:::

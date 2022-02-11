@@ -1,5 +1,29 @@
 ---
-title: Product
+title: Products and Prices
 description:
   How products works.
 ---
+
+# Products and Prices
+
+## What is a product?
+
+Products represent the goods or services you offer to your users. You might also offer versions of your products. 
+Each product has a unique ID which is automatically generated when you create a product. When you create a product in Zum Rails, you have to provide a name. You can optionally add other attributes, like a description or image. 
+
+Because you can have multiple products, you’ll need to specify which product to use when creating Checkout links, Invoices or Subscriptions if you want to sell a specific product to the user. 
+
+## What is a price?
+
+Prices define how much and how often to charge for products. Prices can either be a one-time or recurring plan. Subscriptions use recurring prices to charge the customer at an interval, such as “monthly.” If you sell the same service at several different subscription intervals, it’s best to create multiple recurring prices for the same product.
+
+Because a product can have multiple prices associated with it, you’ll need to specify which price to use when creating Checkout links, Invoices or Subscriptions if you want to sell a specific product price to the user. 
+
+:::note
+ At Least one price is necessary to create a product. 
+:::
+
+Pricing models reflect your business revenue model. We currently offer the below models for pricing:
+
+- Standard pricing: Charge the same price for each unit. 
+- Package pricing: Charge by the package, or group of units, like charging $15.00 CAD for every 5 units. Purchases are rounded up by default, so a customer buying 8 units would pay  $30.00 CAD.
