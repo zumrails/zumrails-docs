@@ -7,6 +7,220 @@ description:
 #Invoices
 
 ## Creating a new invoice
+```json
+> Payload example for creating a invoice:
+{
+  "DaysToDueDate": 30,
+  "Items": [
+    {
+      "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+      "Quantity": 1,
+      "OneOffProductAmount": null,
+      "OneOffProductName": null
+    },
+    {
+      "ProductPriceId": null,
+      "Quantity": 1,
+      "OneOffProductAmount": 6.75,
+      "OneOffProductName": "Test"
+    }
+  ],
+  "Memo": "",
+  "PaymentType": "NotifyUser",
+  "PaymentGateways": [
+    "Eft",
+    "VisaDirect",
+    "CreditCard"
+  ],
+  "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f"
+}
+
+Response example
+{
+  "statusCode": 200,
+  "message": "POST Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "a04012f1-bd54-4ebc-ae03-25236fd6b7e0",
+    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+    "User": {
+      "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+      "FirstName": " p17dyyno5390h97yt798pwe",
+      "LastName": "Doe",
+      "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
+      "IsActive": true
+    },
+    "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+    "Customer": {
+      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "CompanyName": "Sam's Gym"
+    },
+    "CreatedAt": "2022-02-14T18:16:50.9248218Z",
+    "Amount": 156.75,
+    "InvoiceStatus": "Open",
+    "Memo": "Thank you",
+    "DaysToDueDate": 30,
+    "DueDate": "2022-03-16T00:00:00",
+    "PaymentType": "NotifyUser",
+    "PaymentGateways": [
+      "Eft",
+      "VisaDirect",
+      "CreditCard"
+    ],
+    "Items": [
+      {
+        "ProductPrice": {
+          "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+          "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+          "CreatedAt": "2021-10-27T19:18:12.95601",
+          "ProductPriceType": "Standard",
+          "ProductPriceStatus": "Active",
+          "Price": 150,
+          "PerUnit": 0,
+          "Frequency": "OneTime",
+          "EnableFreeTrial": false,
+          "FreeTrialInDays": 0,
+          "EnableSetupFee": false,
+          "SetupFee": 0,
+          "Currency": "CAD",
+          "Product": {
+            "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+            "Name": "gym",
+            "ProductStatus": "Active",
+            "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+          }
+        },
+        "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+        "Quantity": 1,
+        "Currency": "CAD",
+        "Price": 150
+      },
+      {
+        "Quantity": 1,
+        "Currency": "CAD",
+        "OneOffProductName": "Test",
+        "OneOffProductAmount": 6.75
+      }
+    ],
+    "Transactions": [],
+  }
+}
+```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/invoice`
+
+Use this endpoint if you want to add a new invoice.
+
+**Input parameters**
+
+Parameter               | Type      | Mandatory                         | Description
+---------               | -------   | --------------------------------  | --------------------
+DaysToDueDate           | int       | yes                               | Days until due date
+GenerateAsDraft         | boolean   | no                                | Set to true if you want this invoice to be generated has a draft
+Memo                    | string    | no                                | Memo that will be reflected on the transactions
+PaymentType             | string    | yes                               | Payment type operator
+UserId                  | guid      | yes                               | Id for the user that will be charged for the invoice
+PaymentGateways         | string[]  | yes                               | Payment gateways through witch the invoice will be processed
+**Items**               |           |                                   | ProductPrices that will be included on the invoice
+OneOffProductAmount     | decimal   | yes (if product price is One-Off) | Amount for each unit or package
+OneOffProductName       | string    | yes (if product price is One-Off) | Name for the one-off product
+ProductPriceId          | guid      | yes (if is a normal product)      | Id for the product price
+Quantity                | int       | yes                               | Desired quantity for the product
+
+**PaymentType**
+
+Type                | Behavior 
+------------------- | ------- 
+AutomaticallyCharge | Automatically charge the user by initiating a transaction has soon as possible on the selected Rails
+NotifyUser          | Email invoice to the user to pay manually
+
+**PaymentGateway**
+
+Type                | Behavior 
+------------------- | ------- 
+Eft                 | Process through Eft
+Interac             | Process through Interac
+VisaDirect          | Process through VisaDirect
+CreditCard          | Process through CreditCard
+
+:::info
+If you are creating a invoice with the `AutomaticallyCharge` Payment Type you should inform only one Payment Gateway
+:::
+
+**Response**
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------  
+Id                      | guid          | Id for the invoice
+Amount                  | decimal       | Total amount for the invoice 
+CreatedAt               | date          | Cration date for the invoice
+CustomerId              | guid          | Id for the related customer
+DaysToDueDate           | int           | Days until due date from the creation date
+DueDate                 | date          | Due date
+InvoiceStatus           | string        | Invoice status
+Memo                    | string        | Memo that will be reflected on the transactions
+PaymentType             | string        | PaymentType Operator
+PaymentGateways         | string[]      | PaymentGateways Operator
+UserId                  | guid          | Id for the user that is related to the invoice
+**Customer**            |               | Basic Customer data
+CompanyName             | string        | Company Name
+Id                      | guid          | Id for the related customer
+**User**                |               | Basic User data
+FirstName               | string        | User first name
+LastName                | string        | User Last name
+IsActive                | boolean       | Indicates if the user is active or not
+Email                   | string        | User email
+Id                      | guid          | Id for the user that is related to the invoice
+**Items**               |               |
+OneOffProductName       | string        | Name for the one-off product
+OneOffProductAmount     | decimal       | Amount for each unit or package
+Quantity                | int           | Quantity for the product price
+Currency                | string        | Currency set for the product price
+Price                   | decimal       | Price amount for each unit or package
+ProductPriceId          | guid          | Id for the related product price
+**ProductPrice**        |               | Product price related to product
+Id                      | string        | The Id for the product price
+ProductId               | string        | The Id for the product on witch is related
+CreatedAt               | date          | Creation date
+ProductPriceType        | string        | Price Model
+ProductPriceStatus      | string        |  Status for the product price
+Price                   | decimal       | Price
+PerUnit                 | string        | Package size
+Frequency               | string        | Price frequency
+EnableFreeTrial         | bool          | Enable free trial feature
+FreeTrialInDays         | int           | Number of days for free trial
+EnableSetupFee          | bool          | Enable setup fee
+SetupFee                | decimal       | Number of days for free trial
+Currency                | string        | Currency set for the product price
+**Product**             |               | Product related to product price
+Id                      | guid          | Id for the Product
+Name                    | string        | Product name
+Description             | string        | Product Description
+ProductStatus           | string        | Product status
+CustomerId              | guid          | Id for the related customer
+**Transactions**        |               | Transactions related to the invoice
+Id                      | guid          | Id for the transaction
+Amount                  | decimal       | Total amount for the transaction
+Comment                 | string        | Comment fo the transaction
+CreatedAt               | date          | Creation date for the transaction
+FastEft                 | boolean       | Indicates if this was a fast eft or not
+From                    | string        | From description for the transaction
+InvoiceId               | guid          | Id for the related Invoice
+IsRefundable            | boolean       | Indicates if the transaction is IsRefundable
+Memo                    | string        | Memo for the transaction
+To                      | string        | To description for the transaction
+TransactionMethod       | string        | Transaction method for the transaction
+TransactionStatus       | string        | Status for the transaction
+ZumRailsType            | string        | ZumRailsType Operator for the trasaction
+
+:::info
+More info about transactions can be found here
+:::
+
+
+
 ## Update a invoice
 ## Get a specific invoice
 ## Search a invoice
