@@ -463,7 +463,37 @@ Parameter | Type | Description
 CurrentPage | number | The current page
 PageSize | number | The amount of rows returned in the current page
 TotalCount | number | The total rows the filter returns
-**Items** | | | List of products
+**Items** | | List of products
+Id | guid | The product Id
+Name | string | The product name
+Description | string | The product description
+ProductStatus | string | The status for the product
+CreatedAt | date | The creation date for the product
+**ProductPrices** | | List of Product Prices
+Id | guid | The product price Id
+ProductId | guid | The Id for the product where this product price is used
+CreatedAt | date | The creation date for the product price
+ProductPriceType | string | The pricing model for the price
+ProductPriceStatus | string | The status for the product price
+Price | decimal | Price
+PerUnit | string | Package size
+Frequency | string | Price frequency
+PlanName | string | yes (if Frequency is recurring) | Recurring plan name
+PlanDescription | string | no | Price frequency
+BillingPeriod | string | yes (if Frequency is recurring) | Billing Period Type
+EnableSubscriptionEndDate | bool | no | Enable subscription end date
+SubscriptionEndDate | date | yes (if EnableSubscriptionEndDate is true) | End date that makes subscription available
+EnableFreeTrial | bool | no | Enable free trial feature
+FreeTrialInDays | int | yes (if EnableFreeTrial is true) | Number of days for free trial
+EnableSetupFee | bool | no | Enable setup fee
+SetupFee | decimal | yes (if EnableSetupFee is true) | Number of days for free trial
+Currency | string | Currency selected for the product price
+**Product** | | Related product
+Id | guid | Id for the Product
+Name | string | Product name
+Description | string | Product Description
+ProductStatus | string | Product status
+CustomerId | guid | Id for the related customer
 
 
 :::tip
@@ -471,4 +501,69 @@ If you need to search for a specific product, we recommend that you retrieve the
 :::
 
 ## Archive a product
+
+```json
+>Response
+{
+  "statusCode": 200,
+  "message": "PATCH Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+    "Name": "Product",
+    "Description": "",
+    "ProductStatus": "Archived",
+    "CreatedAt": "2022-02-11T15:22:29.58586"
+  }
+}
+```
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/product/{{product_id}}/archive`
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | The product Id
+Name | string | The product name
+Description | string | The product description
+ProducStatus | string | The status for the product
+CreatedAt | date | The creation date for the product
+
+Use this endpoint if you want to archive a product.
+
 ## Unarchive a product
+
+```json
+>Response
+{
+  "statusCode": 200,
+  "message": "PATCH Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+    "Name": "Product",
+    "Description": "",
+    "ProductStatus": "Active",
+    "CreatedAt": "2022-02-11T15:22:29.58586"
+  }
+}
+```
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/product/{{product_id}}/unarchive`
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | The product Id
+Name | string | The product name
+Description | string | The product description
+ProducStatus | string | The status for the product
+CreatedAt | date | The creation date for the product
+
+Use this endpoint if you want to unarchive a product.
