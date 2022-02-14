@@ -7,6 +7,222 @@ description:
 #Product Prices
 
 ## Get a product price
+```json
+> Response example:
+{
+  "statusCode": 200,
+  "message": "GET Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+    "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+    "CreatedAt": "2021-10-27T19:18:12.95601",
+    "ProductPriceType": "Standard",
+    "ProductPriceStatus": "Active",
+    "Price": 150,
+    "PerUnit": 0,
+    "Frequency": "OneTime",
+    "EnableFreeTrial": false,
+    "FreeTrialInDays": 0,
+    "EnableSetupFee": false,
+    "SetupFee": 0,
+    "Currency": "CAD",
+    "Product": {
+      "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+      "Name": "gym",
+      "ProductStatus": "Active",
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+    }
+  }
+}
+```
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/productprice/{product_price_id}`
+
+Use this endpoint if you want to get all the information for a specific product price.
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | string | The Id for the product price
+ProductId | string | The Id for the product on witch is related
+CreatedAt | date | Creation date
+ProductPriceType | string | Price Model
+ProductPriceStatus | string |  Status for the product price
+Price | decimal | Price
+PerUnit | string | Package size
+Frequency | string | Price frequency
+PlanName | string | Plan name
+PlanDescription | string | Plan description
+BillingPeriod | string | Billing Period Type
+EnableSubscriptionEndDate | bool | Enable subscription end date
+SubscriptionEndDate | date | End date that makes subscription available
+EnableFreeTrial | bool | Enable free trial feature
+FreeTrialInDays | int | Number of days for free trial
+EnableSetupFee | bool | Enable setup fee
+SetupFee | decimal | Number of days for free trial
+Currency | string | Currency set for the product price
+**Product** | | Related product
+Id | guid | Id for the Product
+Name | string | Product name
+Description | string | Product Description
+ProductStatus | string | Product status
+CustomerId | guid | Id for the related customer
+
 ## Delete a product price
+
+```json
+> Response example:
+{
+  "statusCode": 200,
+  "message": "DELETE Request successful.",
+  "isError": false,
+  "result": ""
+}
+```
+
+`Method: DELETE`
+
+`Endpoint: {{env}}/api/productprice/{product_price_id}`
+
+Use this endpoint if you want to delete a specific product price.
+
+:::info
+ You can only delete prices that are not being used on any active invoices or subscriptions
+:::
+
+
 ## Archive a product price
+
+```json
+> Response example:
+{
+  "statusCode": 200,
+  "message": "PATCH Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "40c6679f-454d-41fc-9f54-96d838063615",
+    "ProductId": "ddf4d159-b524-4f6f-bd86-c47f6e7764f6",
+    "CreatedAt": "2022-02-14T15:24:59.865516",
+    "ProductPriceType": "Standard",
+    "ProductPriceStatus": "Archived",
+    "Price": 2.34,
+    "PerUnit": 0,
+    "Frequency": "OneTime",
+    "EnableFreeTrial": false,
+    "FreeTrialInDays": 0,
+    "EnableSetupFee": false,
+    "SetupFee": 0,
+    "Currency": "CAD",
+    "Product": {
+      "Id": "ddf4d159-b524-4f6f-bd86-c47f6e7764f6",
+      "Name": "Test",
+      "Description": "Test",
+      "ProductStatus": "Active",
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+    }
+  }
+}
+```
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/productprice/{product_price_id}/archive`
+
+Use this endpoint if you want to archive a specific product price.
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | string | The Id for the product price
+ProductId | string | The Id for the product on witch is related
+CreatedAt | date | Creation date
+ProductPriceType | string | Price Model
+ProductPriceStatus | string |  Status for the product price
+Price | decimal | Price
+PerUnit | string | Package size
+Frequency | string | Price frequency
+PlanName | string | Plan name
+PlanDescription | string | Plan description
+BillingPeriod | string | Billing Period Type
+EnableSubscriptionEndDate | bool | Enable subscription end date
+SubscriptionEndDate | date | End date that makes subscription available
+EnableFreeTrial | bool | Enable free trial feature
+FreeTrialInDays | int | Number of days for free trial
+EnableSetupFee | bool | Enable setup fee
+SetupFee | decimal | Number of days for free trial
+Currency | string | Currency set for the product price
+**Product** | | Related product
+Id | guid | Id for the Product
+Name | string | Product name
+Description | string | Product Description
+ProductStatus | string | Product status
+CustomerId | guid | Id for the related customer
+
 ## Unarchive a product price
+
+```json
+> Response example:
+{
+  "statusCode": 200,
+  "message": "PATCH Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "40c6679f-454d-41fc-9f54-96d838063615",
+    "ProductId": "ddf4d159-b524-4f6f-bd86-c47f6e7764f6",
+    "CreatedAt": "2022-02-14T15:24:59.865516",
+    "ProductPriceType": "Standard",
+    "ProductPriceStatus": "Active",
+    "Price": 2.34,
+    "PerUnit": 0,
+    "Frequency": "OneTime",
+    "EnableFreeTrial": false,
+    "FreeTrialInDays": 0,
+    "EnableSetupFee": false,
+    "SetupFee": 0,
+    "Currency": "CAD",
+    "Product": {
+      "Id": "ddf4d159-b524-4f6f-bd86-c47f6e7764f6",
+      "Name": "Test",
+      "Description": "Test",
+      "ProductStatus": "Active",
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+    }
+  }
+}
+```
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/productprice/{product_price_id}/unarchive`
+
+Use this endpoint if you want to unarchive a specific product price.
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | string | The Id for the product price
+ProductId | string | The Id for the product on witch is related
+CreatedAt | date | Creation date
+ProductPriceType | string | Price Model
+ProductPriceStatus | string |  Status for the product price
+Price | decimal | Price
+PerUnit | string | Package size
+Frequency | string | Price frequency
+PlanName | string | Plan name
+PlanDescription | string | Plan description
+BillingPeriod | string | Billing Period Type
+EnableSubscriptionEndDate | bool | Enable subscription end date
+SubscriptionEndDate | date | End date that makes subscription available
+EnableFreeTrial | bool | Enable free trial feature
+FreeTrialInDays | int | Number of days for free trial
+EnableSetupFee | bool | Enable setup fee
+SetupFee | decimal | Number of days for free trial
+Currency | string | Currency set for the product price
+**Product** | | Related product
+Id | guid | Id for the Product
+Name | string | Product name
+Description | string | Product Description
+ProductStatus | string | Product status
+CustomerId | guid | Id for the related customer
