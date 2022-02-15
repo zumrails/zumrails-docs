@@ -223,6 +223,7 @@ SetupFee | decimal | yes (if EnableSetupFee is true) | Number of days for free t
 SetToRemove | bool | yes (only if you are editing) | This will remove the product price of the product if set to true 
 
 ## Get a specific product
+Use this endpoint if you want to get all the information for a specific product.
 
 ```json
 > Response example:
@@ -273,8 +274,6 @@ SetToRemove | bool | yes (only if you are editing) | This will remove the produc
 `Method: GET`
 
 `Endpoint: {{env}}/api/product/{product_id}`
-
-Use this endpoint if you want to get all the information for a specific product.
 
 **Response**
 
@@ -501,7 +500,7 @@ If you need to search for a specific product, we recommend that you retrieve the
 :::
 
 ## Archive a product
-
+Use this endpoint if you want to archive a product. Once archived, the product will not be visible in any end user facing screens. If there are any active subscriptions or invoices they will remain until cancelled.
 ```json
 >Response
 {
@@ -535,6 +534,7 @@ CreatedAt | date | The creation date for the product
 Use this endpoint if you want to archive a product.
 
 ## Unarchive a product
+Use this endpoint if you want to unarchive a product. Once unarchived, the product will be visible in any end user facing screens. If there are any active subscriptions or invoices they will remain until unaffected.
 
 ```json
 >Response
@@ -565,5 +565,3 @@ Name | string | The product name
 Description | string | The product description
 ProducStatus | string | The status for the product
 CreatedAt | date | The creation date for the product
-
-Use this endpoint if you want to unarchive a product.

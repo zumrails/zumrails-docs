@@ -73,6 +73,7 @@ ProductStatus | string | Product status
 CustomerId | guid | Id for the related customer
 
 ## Delete a product price
+Use this endpoint if you want to delete a specific price. You can only delete prices that are not being used on any active invoices or subscriptions.
 
 ```json
 > Response example:
@@ -88,7 +89,6 @@ CustomerId | guid | Id for the related customer
 
 `Endpoint: {{env}}/api/productprice/{product_price_id}`
 
-Use this endpoint if you want to delete a specific product price.
 
 :::info
  You can only delete prices that are not being used on any active invoices or subscriptions
@@ -96,6 +96,7 @@ Use this endpoint if you want to delete a specific product price.
 
 
 ## Archive a product price
+Use this endpoint if you want to archive a specific product price. Once archived, the product price will not be visible in any end user facing screens. If there are any active subscriptions or invoices they will remain until cancelled.
 
 ```json
 > Response example:
@@ -132,8 +133,6 @@ Use this endpoint if you want to delete a specific product price.
 
 `Endpoint: {{env}}/api/productprice/{product_price_id}/archive`
 
-Use this endpoint if you want to archive a specific product price.
-
 Parameter | Type | Description
 --------- | ------- | -----------
 Id | string | The Id for the product price
@@ -162,6 +161,7 @@ ProductStatus | string | Product status
 CustomerId | guid | Id for the related customer
 
 ## Unarchive a product price
+Use this endpoint if you want to unarchive a specific product price. Once unarchived, the product price will be visible in any end user facing screens. If there are any active subscriptions or invoices they will remain until unaffected.
 
 ```json
 > Response example:
@@ -198,7 +198,6 @@ CustomerId | guid | Id for the related customer
 
 `Endpoint: {{env}}/api/productprice/{product_price_id}/unarchive`
 
-Use this endpoint if you want to unarchive a specific product price.
 
 Parameter | Type | Description
 --------- | ------- | -----------
