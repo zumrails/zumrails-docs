@@ -124,6 +124,11 @@ Quantity              | int       | yes            | Desired quantity for the pr
 PaymentGateways       | string[]  | yes            | Payment gateways through witch the subscription will be processed
 ProductPriceId        | guid      | yes            | Id for the product price
 UserId                | guid      | yes            | Id for the user that will be charged for the subscription
+StartDateType         | string    | no             | Start Date Type Operator
+StartDate             | date      | yes (if start date type custom is selected) | Desired start date
+EndDateType           | string    | no             | End Date Type Operator
+EndDate               | date      | yes (if end date type custom is selected) | Desired end date
+BillingCycle          | int       | yes (if end date type billing cycles is selected) | Desired number od billing cycles
 
 :::info
 Differently from invoices, subscriptions only accept one product, witch can only be of the recurrent type
@@ -144,6 +149,22 @@ Eft                 | Process through Eft
 Interac             | Process through Interac
 VisaDirect          | Process through VisaDirect
 CreditCard          | Process through CreditCard
+
+**Start Date Type**
+
+Type                | Behavior 
+------------------- | ------- 
+CustomStartDate     | Set a custom start date
+NextMonth           | Set to the first day of the next month
+FirstInvoiceDate    | Set to the first invoice date based on the invoice date calculation
+
+**End Date Type**
+
+Type                | Behavior 
+------------------- | ------- 
+CustomEndDate       | Set a custom end date
+BillingCycles       | Set the number of billing cycles upon witch the end date will be calculated
+Never               | **Never** ends the subscription
 
 **Response**
 
