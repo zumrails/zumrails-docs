@@ -209,6 +209,296 @@ ProductStatus           | string        | Product status
 CustomerId              | guid          | Id for the related customer
 
 ## Update a subscription
+Zum supports changing existing subscriptions without having to cancel and recreate them. Some of the most significant changes you might make are:
+
+Changing the quantity of products within the subscription
+Changing the method/way of payment collection
+
+
+```json
+> Payload example for updating a subscription:
+{
+  "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+  "ProductPriceId": "8e881238-170a-4dd1-bc00-81e315522e33",
+  "Quantity": 4,
+  "InvoicePaymentType": "AutomaticallyCharge",
+  "PaymentGateways": [
+    "Eft"
+  ],
+  "Memo": "Thank you",
+  "BillingDay": null,
+  "BillingDayOfMonth": null,
+  "AnnuallyBillingDay": null,
+  "AnnuallyBillingMonth": null,
+  "DueDay": 30,
+  "LastDayOfTheMonth": true,
+  "TaxRates": null,
+  "Shipping": null,
+  "SecurityPassword": "your_password"
+}
+
+> Response:
+{
+  "statusCode": 200,
+  "message": "PUT Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "4472acd4-e2f6-4dc9-9638-a567b288b619",
+    "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+    "Customer": {
+      "CompleteEftTransactionInDays": 1,
+      "RbcInteracEnabled": false,
+      "EftProvider": "RBC",
+      "CreditCardProvider": "AuthorizeNet",
+      "EntityStatus": "Active",
+      "BankAccountInformationOrigin": "Plaid",
+      "CustomerType": "Customer",
+      "WebhookSecret": "4134dfea0e3b4964a95d6350a120328c",
+      "FastEftAp": false,
+      "FastEftAr": false,
+      "EftCustomLimitsEnabled": true,
+      "EftTransactionQuantityLimitPerDay": 100,
+      "EftTransactionAmountLimitPerDay": 100.99,
+      "InteracCustomLimitsEnabled": true,
+      "InteracTransactionQuantityLimitPerDay": 200,
+      "InteracTransactionAmountLimitPerDay": 200.99,
+      "VisaCardCustomLimitsEnabled": true,
+      "VisaCardTransactionQuantityLimitPerDay": 200,
+      "VisaCardTransactionAmountLimitPerDay": 300.99,
+      "CreditCardCustomLimitsEnabled": true,
+      "CreditCardTransactionQuantityLimitPerDay": 200,
+      "CreditCardTransactionAmountLimitPerDay": 400.99,
+      "AutomaticDailyWithdraw": false,
+      "GroupByBatchFile": false,
+      "HasDirectSettlementAccount": false,
+      "LoginType": "EmailPassword",
+      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "CompanyName": "Sam's Gym",
+      "TransactionDescriptionType": "Fixed",
+      "TransactionDescription": "AAA",
+      "FirstName": "jaouhara4203@uorak.com",
+      "LastName": "jaouhara",
+      "Email": "jaouhara4203@uorak.com",
+      "PhoneNumber": "1111111122222",
+      "AddressStreet": "rua",
+      "AddressCity": "montreal",
+      "AddressProvince": "QC",
+      "AddressPostalCode": "a1a1a1",
+      "MonthlyCost": 0,
+      "CostPerTransaction": 0,
+      "CostPerUser": 0,
+      "CostPerBankRefresh": 0,
+      "CostPerNSF": 0,
+      "PercentagePerTransaction": 0,
+      "PercentagePerUser": 0,
+      "PercentagePerBankRefresh": 0,
+      "PercentagePerNSF": 0,
+      "CustomerAccountStatus": "Active",
+      "CustomerBillingType": "PercentageSplit",
+      "PartnerId": "4d3a4670-f26d-40d6-8dbe-3769397bf5de",
+      "WebhookUrl": "https://zumrails.requestcatcher.com/test",
+      "WebhookConfigurations": [
+        {
+          "WebhookType": "Transaction",
+          "Name": "EftFailedInsufficientFunds",
+          "StatusValue": 901
+        },
+        {
+          "WebhookType": "Transaction",
+          "Name": "EftFailedInsufficientFunds",
+          "StatusValue": 901
+        },
+        {
+          "WebhookType": "Transaction",
+          "Name": "InteracAcknowledgedDebit",
+          "StatusValue": 202
+        }
+      ],
+      "NotificationConfigurations": [
+        {
+          "Id": "540f30de-fcca-434d-a6f8-27b08b3a3044",
+          "Method": "Email",
+          "Type": "TransactionFailure",
+          "TransactionMethod": "Interac",
+          "TransactionEvents": [
+            "InteracFailedGenericError",
+            "InteracFailedInvalidEmailFormat"
+          ],
+          "Emails": [
+            "ihar1620@uorak.com"
+          ]
+        },
+        {
+          "Id": "af48810c-27e9-4119-8cbf-3e7dd6dc33ac",
+          "Method": "Email",
+          "Type": "TransactionFailure",
+          "TransactionMethod": "Interac",
+          "TransactionEvents": [
+            "InteracFailedGenericError"
+          ],
+          "Emails": [
+            "ihar1620@uorak.com"
+          ]
+        }
+      ],
+      "CustomerBillingPrices": [],
+      "ActivationDate": "2021-06-30T18:24:06.458786",
+      "CreatedAt": "2021-06-30T18:24:06.458875",
+      "TransacionMethodVisaDirectEnabled": true,
+      "TransacionMethodEftEnabled": true,
+      "TransacionMethodInteracEnabled": true,
+      "TransacionMethodCreditCardEnabled": true,
+      "HasUnifiedWallet": true,
+      "LogoURL": "",
+      "PrimaryColor": "#FF0000",
+      "ConnectRedirectSuccessURL": "",
+      "VerifyCreditCard": false,
+      "PeoplesTrustInteracEnabled": false,
+      "PeoplesTrustInteracNotificationsEnabled": false,
+      "CustomerCsvDelimiter": "Comma",
+      "IsTwoFactorAuthenticationEnabled": false
+    },
+    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+    "User": {
+      "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+      "CreatedAt": "2021-06-30T18:28:59.650781",
+      "AccountType": "Personal",
+      "Name": "p17dyyno5390h97yt798pwe Doe",
+      "FirstName": " p17dyyno5390h97yt798pwe",
+      "LastName": "Doe",
+      "PhoneNumber": "514-123-1234",
+      "ShippingSameAsBilling": false,
+      "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
+      "LastRefresh": "0001-01-01T00:00:00",
+      "Customer": {
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym"
+      },
+      "Addresses": [],
+      "TransactionMethodsAvailable": {
+        "Interac": true,
+        "Eft": true,
+        "VisaDirectPull": false,
+        "VisaDirectPush": false,
+        "CreditCard": false
+      }
+    },
+    "ProductPriceId": "8e881238-170a-4dd1-bc00-81e315522e33",
+    "ProductPrice": {
+      "Id": "8e881238-170a-4dd1-bc00-81e315522e33",
+      "ProductId": "4986c149-f8f3-4789-82e9-f07b32c9c000",
+      "CreatedAt": "2021-10-27T19:29:51.836045",
+      "ProductPriceType": "Package",
+      "ProductPriceStatus": "Active",
+      "Price": 10,
+      "PerUnit": 1,
+      "Frequency": "Recurring",
+      "PlanName": "sub sjdjk",
+      "BillingPeriod": "Monthly",
+      "EnableSubscriptionEndDate": false,
+      "EnableFreeTrial": false,
+      "FreeTrialInDays": 0,
+      "EnableSetupFee": false,
+      "SetupFee": 0,
+      "Currency": "CAD",
+      "Product": {
+        "Id": "4986c149-f8f3-4789-82e9-f07b32c9c000",
+        "Name": "test sub",
+        "ProductStatus": "Active",
+        "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+      }
+    },
+    "Memo": "Thank you",
+    "DueDay": 30,
+    "LastDayOfTheMonth": true,
+    "Quantity": 4,
+    "AnnuallyBillingDay": 0,
+    "AnnuallyBillingMonth": 0,
+    "StartDate": "2022-02-16T00:00:00",
+    "InvoicePaymentType": "AutomaticallyCharge",
+    "PaymentGateways": [
+      "Eft"
+    ],
+    "SubscriptionStatus": "Active",
+    "EndDateType": "Never",
+    "CreatedAt": "2022-02-15T18:25:07.749224",
+    "TaxRates": []
+  }
+}
+```
+
+`Method: PUT`
+
+`Endpoint: {{env}}/api/subscription/{{subscription_id}}`
+
+Use this endpoint if you want to add a new subscription.
+
+**Input parameters**
+
+Parameter             | Type      | Mandatory      | Description
+---------             | -------   | -------------  | --------------------
+Id                    | guid      | yes            | Id for the subscription
+AnnuallyBillingDay    | int       | yes            | Billing day for anual product prices (1-28)
+AnnuallyBillingMonth  | int       | yes            | Billing month for anual product price (0-11)
+BillingDay            | int       | yes            | Billing day for monthy product prices (1-28)
+DueDay                | int       | yes            | Days to due date
+InvoicePaymentType    | int       | yes            | Payment Type Operator
+LastDayOfTheMonth     | boolean   | no             | Set to true if you to use the last day of the month to be used has a billing day (can be used with monthy and anual product prices)
+Memo                  | string    | no             | Memo that will be reflect on invoices and trasactions
+Quantity              | int       | yes            | Desired quantity for the product
+PaymentGateways       | string[]  | yes            | Payment gateways through witch the subscription will be processed
+ProductPriceId        | guid      | yes            | Id for the product price
+UserId                | guid      | yes            | Id for the user that will be charged for the subscription
+StartDateType         | string    | no             | Start Date Type Operator
+StartDate             | date      | yes (if start date type custom is selected) | Desired start date
+EndDateType           | string    | no             | End Date Type Operator
+EndDate               | date      | yes (if end date type custom is selected) | Desired end date
+BillingCycle          | int       | yes (if end date type billing cycles is selected) | Desired number od billing cycles
+SecurityPassword      | string    | yes           | Your security password
+
+
+**Response**
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------  
+Id                      | guid          | Id for the subscription
+Total                   | decimal       | Total amount for the subscription 
+CreatedAt               | date          | Cration date for the subscription
+ProductName             | string        | Name for the product related to subscription
+SubscriptionStatus      | string        | Subscription status
+**Customer**            |               | Basic Customer data
+CompanyName             | string        | Company Name
+Id                      | guid          | Id for the related customer
+**User**                |               | Basic User data
+FirstName               | string        | User first name
+LastName                | string        | User Last name
+CompanyName             | string        | User Company
+IsActive                | boolean       | Indicates if the user is active or not
+Email                   | string        | User email
+Id                      | guid          | Id for the user that is related to the subscription
+**ProductPrice**        |               | Product price related to product
+Id                      | string        | The Id for the product price
+ProductId               | string        | The Id for the product on witch is related
+CreatedAt               | date          | Creation date
+ProductPriceType        | string        | Price Model
+ProductPriceStatus      | string        | Status for the product price
+Price                   | decimal       | Price
+PerUnit                 | string        | Package size
+Frequency               | string        | Price frequency
+EnableFreeTrial         | bool          | Enable free trial feature
+FreeTrialInDays         | int           | Number of days for free trial
+EnableSetupFee          | bool          | Enable setup fee
+SetupFee                | decimal       | Number of days for free trial
+Currency                | string        | Currency set for the product price
+EnableSubscriptionEndDate | boolean     | Enable subscription end date
+SubscriptionEndDate     | date          | Subscription end date
+**Product**             |               | Product related to product price
+Id                      | guid          | Id for the Product
+Name                    | string        | Product name
+Description             | string        | Product Description
+ProductStatus           | string        | Product status
+CustomerId              | guid          | Id for the related customer
+
 ## Get a specific subscription
 ## Search a subscription
 ## Cancel a subscription
