@@ -7,6 +7,186 @@ description:
 #Subscriptions
 
 ## Creating a new subscription
+```json
+> Payload example for creating a subscription:
+{
+  "UserId": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
+  "ProductPriceId": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
+  "Quantity": 1,
+  "InvoicePaymentType": "NotifyUser",
+  "PaymentGateways": [
+    "Eft",
+    "Interac",
+    "VisaDirect"
+  ],
+  "Memo": "Test",
+  "BillingDay": null,
+  "AnnuallyBillingDay": null,
+  "AnnuallyBillingMonth": null,
+  "DueDay": 30,
+  "LastDayOfTheMonth": true
+}
+
+> Payload example for creating a scheduled subscription:
+{
+  "UserId": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
+  "ProductPriceId": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
+  "Quantity": 1,
+  "InvoicePaymentType": "NotifyUser",
+  "PaymentGateways": [
+    "Eft",
+    "Interac",
+    "VisaDirect"
+  ],
+  "Memo": "Test",
+  "BillingDay": null,
+  "BillingDayOfMonth": 28,
+  "AnnuallyBillingDay": null,
+  "AnnuallyBillingMonth": null,
+  "DueDay": 30,
+  "LastDayOfTheMonth": false,
+  "BillingCycle": 23,
+  "EndDate": null,
+  "StartDate": null,
+  "StartDateType": "NextMonth",
+  "EndDateType": "BillingCycles"
+}
+
+> Response:
+{
+  "statusCode": 200,
+  "message": "POST Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "467e7df2-bbc1-4028-88f9-cebc1db52c3c",
+    "Customer": {
+      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "CompanyName": "Sam's Gym"
+    },
+    "User": {
+      "Id": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
+      "FirstName": "John",
+      "LastName": "111",
+      "Email": "lxtkzblpk12wurb4tczfy@gmail.com",
+      "IsActive": true
+    },
+    "ProductName": "gym",
+    "CreatedAt": "2022-02-15T15:04:00.5499962Z",
+    "SubscriptionStatus": "Scheduled",
+    "ProductPrice": {
+      "Id": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
+      "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+      "CreatedAt": "2021-10-27T19:18:12.956011",
+      "ProductPriceType": "Standard",
+      "ProductPriceStatus": "Active",
+      "Price": 100,
+      "PerUnit": 0,
+      "Frequency": "Recurring",
+      "PlanName": "gold member",
+      "BillingPeriod": "Monthly",
+      "EnableSubscriptionEndDate": true,
+      "SubscriptionEndDate": "2022-10-30T00:00:00",
+      "EnableFreeTrial": false,
+      "FreeTrialInDays": 0,
+      "EnableSetupFee": true,
+      "SetupFee": 10,
+      "Currency": "CAD",
+      "Product": {
+        "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+        "Name": "gym",
+        "ProductStatus": "Active",
+        "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+      }
+    },
+    "Total": 100
+  }
+}
+```
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/subscription`
+
+Use this endpoint if you want to add a new subscription.
+
+**Input parameters**
+
+Parameter             | Type      | Mandatory      | Description
+---------             | -------   | -------------  | --------------------
+AnnuallyBillingDay    | int       | yes            | Billing day for anual product prices (1-28)
+AnnuallyBillingMonth  | int       | yes            | Billing month for anual product price (0-11)
+BillingDay            | int       | yes            | Billing day for monthy product prices (1-28)
+DueDay                | int       | yes            | Days to due date
+InvoicePaymentType    | int       | yes            | Payment Type Operator
+LastDayOfTheMonth     | boolean   | no             | Set to true if you to use the last day of the month to be used has a billing day (can be used with monthy and anual product prices)
+Memo                  | string    | no             | Memo that will be reflect on invoices and trasactions
+Quantity              | int       | yes            | Desired quantity for the product
+PaymentGateways       | string[]  | yes            | Payment gateways through witch the subscription will be processed
+ProductPriceId        | guid      | yes            | Id for the product price
+UserId                | guid      | yes            | Id for the user that will be charged for the subscription
+
+:::info
+Differently from invoices, subscriptions only accept one product, witch can only be of the recurrent type
+:::
+
+**PaymentType**
+
+Type                | Behavior 
+------------------- | ------- 
+AutomaticallyCharge | Automatically charge the user by initiating a transaction has soon as possible on the selected Rails
+NotifyUser          | Email invoice to the user to pay manually
+
+**PaymentGateway**
+
+Type                | Behavior 
+------------------- | ------- 
+Eft                 | Process through Eft
+Interac             | Process through Interac
+VisaDirect          | Process through VisaDirect
+CreditCard          | Process through CreditCard
+
+**Response**
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------  
+Id                      | guid          | Id for the subscription
+Total                   | decimal       | Total amount for the subscription 
+CreatedAt               | date          | Cration date for the subscription
+ProductName             | string        | Name for the product related to subscription
+SubscriptionStatus      | string        | Subscription status
+**Customer**            |               | Basic Customer data
+CompanyName             | string        | Company Name
+Id                      | guid          | Id for the related customer
+**User**                |               | Basic User data
+FirstName               | string        | User first name
+LastName                | string        | User Last name
+CompanyName             | string        | User Company
+IsActive                | boolean       | Indicates if the user is active or not
+Email                   | string        | User email
+Id                      | guid          | Id for the user that is related to the subscription
+**ProductPrice**        |               | Product price related to product
+Id                      | string        | The Id for the product price
+ProductId               | string        | The Id for the product on witch is related
+CreatedAt               | date          | Creation date
+ProductPriceType        | string        | Price Model
+ProductPriceStatus      | string        | Status for the product price
+Price                   | decimal       | Price
+PerUnit                 | string        | Package size
+Frequency               | string        | Price frequency
+EnableFreeTrial         | bool          | Enable free trial feature
+FreeTrialInDays         | int           | Number of days for free trial
+EnableSetupFee          | bool          | Enable setup fee
+SetupFee                | decimal       | Number of days for free trial
+Currency                | string        | Currency set for the product price
+EnableSubscriptionEndDate | boolean     | Enable subscription end date
+SubscriptionEndDate     | date          | Subscription end date
+**Product**             |               | Product related to product price
+Id                      | guid          | Id for the Product
+Name                    | string        | Product name
+Description             | string        | Product Description
+ProductStatus           | string        | Product status
+CustomerId              | guid          | Id for the related customer
+
 ## Update a subscription
 ## Get a specific subscription
 ## Search a subscription
