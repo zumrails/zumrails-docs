@@ -99,20 +99,76 @@ After a user creates and links his account, you will be able to view it in the Z
 
 Add payment profile using URL:
 
-Prefilling the form
+### Pre-filling the form
+To help streamline the Zūm Connect experience, it is possible to pass information that you already have through optional parameters in the url:
 
-prefilling the form parameters to be added here, same as how we have currently
+Name | Description
+-------| ----------- 
+accountType| Personal or Business
+firstName| User first name, when the account type is Personal
+lastName| User last name,  when the account type when is Personal
+email| User email
+companyName| Company name, when the account type is Business
+memo| Transaction memo that will be created with the *request funds*.
+comment| Transaction comment that will be created with the *request funds*.
+allowEft| To display only EFT payment method.
+allowInterac| To display only INTERAC payment method.
+allowVisaDirect| To display only VISA DIRECT payment method.
+allowCreditCard| To display only CREDIT CARD payment method.
+displayTermsAndCondition| To display the terms and conditions checkbox or not.
+displayDetailsColumn| To display the left side column with transaction details, amount and recurrency
+displayZumRailsLogo| To display the powered by Zũm Rails logo
+displayPhoneNumber| To display the phone number field
+displayAccountType| To display account type option
+displayFullName| To display a full name field instead of first and last name fields when the user chooses Personal as account type. (It can be pre-filled with firstName query param)
+hideShippingAddress| To hide the shipping address
+hideRailsName| To hide the rails name when there is just one 
+hideFirstName*| To hide the first name field 
+hideLastName*| To hide the last name field
+hideFullName*| To hide the full name field
+hideEmail*| To hide the email field
+hideCreditCardAddress*| To hide all the credit card address fields
+language| Change the connect language. There are two available options: en (english) and fr (french). If not set, the language will be chosen according to the browser language. English is applied if the given language is not available
+backgroundColor| Change the background color around the form with a hex code (Only numbers, you don't need to send the hash symbol prefix)
+foregroundColor| Change the foreground color in the form with a hex code (Only numbers, you don't need to send the hash symbol prefix)
+disablePreFilledFields | Disable all fields that received a value by query parameter (Example: firstName, lastName...)
 
-Event Listener
+:::info
+Hiding a field doesn't mean that it is no longer mandatory, please use the other query params to pre-fill: firstName, lastName, email, etc.
+:::
+
+Examples:
+
+`{{env}}/connect/{{customerId}}?accountType=personal&firstname=Name&lastname=Last&email=user@zumrails.com`
+
+`{{env}}/connect/{{customerId}}/{{requestFundsId}}?accountType=personal&memo=memo&comment=here%20is%20an%20example%20comment`
+
+`{{env}}/connect/{{customerId}}?allowEft=true&language=fr`
+
+`{{env}}/connect/{{customerId}}?allowEft=true&allowInterac=true`
+
+### Event Listeners
+
 When a new user is added or a request funds is fulfilled, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or RecurrentTransactionId.
 
-To listen to the event in js, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
+To listen to the event in js, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example.
 
-User added: {origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}
+```html
+> Javascript example:
+<script>
+window.addEventListener('message', function(e) {
+    
+    var data = e.data;
+    if (data && data.origin && data.origin === 'ZUM_RAILS') {
+        console.log(data);
+    }
+});
+</script>
+```
 
 Add payment profile using SDK:
 
-explain the call backs here and show them how we have shown for aggregation
+`{origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}`
 
 ## Invoice checkout
 The best way to let the user choose and pay for an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
