@@ -3,3 +3,42 @@ title: Testing
 description:
   How to Test the Data Aggregation.
 ---
+
+# Testing
+
+Nothing blocks you from testing with a live card, but we recommend using the Zūm Rails Test Institution.
+
+- If you are using the Connector without a javascript library, you have to specify the parameter `testinstitution=true` in the url.
+- If you are using the javascript library, you have to pass the property `testinstitution:true` in the config parameter.
+
+By doing the configuration above, the first institution in the list will be Zūm Rails Test Institution.
+
+### Happy path without security question
+
+Username | Password
+ ----- | ----
+zum | rails
+
+### Security question single answer
+
+This option is used with institutions that prompt a one time verification code/SMS, or a single question, for example: `What is the name of your first pet?` or `Confirm your identity in your phone`
+
+Username | Password
+ ----- | ----
+zumquestionwithsingleanswer | rails
+
+### Security question with multiple choices and a single answer
+
+This option is used with institutions that prompt SMS or Email verification, when they give a list of options to send the verification code.
+
+Username | Password
+ ----- | ----
+zummultiplechoicequestionwithsingleanswer | rails
+
+### Security question with multiple options
+
+This option is used with institutions that prompt SMS or Email verification, when they give a list of phones and a list options (SMS/Phone Call/Email) to send the verification code.
+
+Username | Password
+ ----- | ----
+zumsendtooptions | rails

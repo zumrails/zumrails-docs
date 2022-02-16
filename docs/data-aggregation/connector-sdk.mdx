@@ -3,3 +3,118 @@ title: Connector SDK
 description:
   How to use the Connector SDK
 ---
+
+# Connector SDK
+
+The javascript sdk library allows you to build a more robust integration with the Zūm Rails Connector. Instead of hosting a public URL, the library offers the possibility for you to first create a temporary token, then initiate and configure the Connector via Javascript and finally receive callbacks when the connection is completed.
+
+> Steps to follow in order to complete your integration:
+
+1. Call Zūm Rails API to create a Connector Token
+2. Refer the javascript sdk library into your website, build your configuration options and init the sdk
+3. Handle the callbacks
+4. Go Live
+
+## Create a token
+
+To create a token you have first to authenticate in Zūm Rails API. More information can be found [here](../api-specification/authentication)):
+
+After, the second step is to create a token, by calling this endpoint.
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/aggregationconnector/createtoken`
+
+Code block for create a token example
+
+You will need to use the property `result.Token`.
+
+:::info
+Each token is valid only once, for 15 minutes. 
+:::
+
+## Configuration
+
+The first thing to do is to host the library inside your page.
+
+Code Block for JS example
+
+```html
+<script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/connector.js" type="text/javascript" async=""></script>
+```
+
+After you will need to init the library accordingly to your needs, like the example on the right side of this page
+
+Code block for JS example
+
+**The library expects 2 mandatory parameters:**
+
+Parameter | Description 
+----- | ----
+token | The token received in the endpoint {{env}}/api/aggregationconnector/createtoken
+config | A json config representing all the configurations available and described [here](#configuration)
+
+## Callbacks
+
+When something happens, the sdk library will fire a few callbacks, this allows you to easily get the data and take an immediate action. For example, call the endpoint to get the full card information onSuccess by passing the requestId or cardId
+
+### onLoad
+
+This callback is triggered when the UI is loaded and presented on the screen.
+
+_Parameters_
+
+- There are no parameters in this callback
+
+
+### onConnectorClosed
+
+This callback is triggered when the end user clicks in the X button to close the Connector
+
+_Parameters_
+
+- There are no parameters in this callback
+
+### onError
+
+This callback is triggered when the connection failed by any error not expected in the happy flow
+
+_Parameters_
+
+- error: An error message explaining the reason why the failure happened
+
+### onSuccess
+
+This callback is triggered when the connection is completed and the card was successfully linked
+
+_Parameters_
+
+- requestid: The id of the request, unique per attempt
+- cardid: The id of the card, unique per card and institution number. If you connect the same card 2 times, the cardid will keep being the same
+- extrafield1: The extra field you can pass as an option, at this moment this field is returned as well
+- extrafield2: The extra field you can pass as an option, at this moment this field is returned as well
+
+### onStepChanged
+
+This callback is triggered when there is a page change or an action was taken by end the user
+
+**Parameters** 
+
+- data: A json object with this format `{ step: <STEP>, data: {EXTRA DATA}}`
+
+A list of steps can be found here:
+
+Parameter | Description 
+----- | ----
+CONNECTORLOADED | When the Connector is loaded
+CONNECTORCLOSED | When the Connector is closed
+CONSENTACCEPTED | When the consent was accepted
+INSTITUTIONSELECTED | When an institution is selected
+AUTHENTICATEINITIATED | When we start authenticating the connection
+SECURITYQUESTIONPROMPTED | When a security question is prompted
+SECURITYQUESTIONANSWERINITIATED | When the security question is answered and we resume the authentication
+AUTHENTICATECOMPLETED | When authentication is completed
+GETINFORMATIONINITIATED | When the get card information process starts
+GETINFORMATIONCOMPLETED | When the get card information process starts
+CONNECTIONSUCCESSFULLYCOMPLETED | When the process is completed
+GENERICERROR | When an unexpected error occurs
