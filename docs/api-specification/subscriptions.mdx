@@ -500,7 +500,286 @@ ProductStatus           | string        | Product status
 CustomerId              | guid          | Id for the related customer
 
 ## Get a specific subscription
+Use this endpoint if you want to get all the information for a specific subscription.
+
+```json
+>Response example
+{
+  "statusCode": 200,
+  "message": "GET Request successful.",
+  "isError": false,
+  "result": {
+    "Id": "8fc541a7-f8c8-49d4-a6cf-61348f2dd9b2",
+    "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
+    "UserId": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
+    "User": {
+      "Id": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
+      "CreatedAt": "2022-01-31T19:15:01.458104",
+      "AccountType": "Personal",
+      "Name": "Jonathan Doe",
+      "FirstName": "Jonathan",
+      "LastName": "Doe",
+      "CompanyName": "",
+      "ShippingSameAsBilling": false,
+      "LastRefresh": "0001-01-01T00:00:00",
+      "Customer": {
+        "Id": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
+        "CompanyName": "All Rails Customer"
+      },
+      "Addresses": [],
+      "TransactionMethodsAvailable": {
+        "Interac": false,
+        "Eft": true,
+        "VisaDirectPull": true,
+        "VisaDirectPush": true,
+        "CreditCard": true
+      }
+    },
+    "ProductPriceId": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
+    "ProductPrice": {
+      "Id": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
+      "ProductId": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+      "CreatedAt": "2022-02-09T18:19:05.452181",
+      "ProductPriceType": "Standard",
+      "ProductPriceStatus": "Active",
+      "Price": 22.45,
+      "PerUnit": 0,
+      "Frequency": "Recurring",
+      "PlanName": "Test",
+      "BillingPeriod": "Weekly",
+      "EnableFreeTrial": false,
+      "FreeTrialInDays": 0,
+      "EnableSetupFee": false,
+      "SetupFee": 0,
+      "Currency": "CAD",
+      "Product": {
+        "Id": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+        "Name": "Test",
+        "ProductStatus": "Archived",
+        "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937"
+      }
+    },
+    "Memo": "Thank you",
+    "DueDay": 30,
+    "BillingDay": 2,
+    "LastDayOfTheMonth": false,
+    "Quantity": 1,
+    "AnnuallyBillingDay": 0,
+    "AnnuallyBillingMonth": 0,
+    "StartDate": "2022-02-10T00:00:00",
+    "InvoicePaymentType": "AutomaticallyCharge",
+    "PaymentGateways": [
+      "Eft"
+    ],
+    "SubscriptionStatus": "Active",
+    "EndDateType": "Never",
+    "CreatedAt": "2022-02-09T18:19:13.815643",
+    ]
+  }
+}
+```
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/subscription/{subscription_id}`
+
+**Response**
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------  
+Id                      | guid          | Id for the subscription
+Total                   | decimal       | Total amount for the subscription 
+CreatedAt               | date          | Cration date for the subscription
+ProductName             | string        | Name for the product related to subscription
+SubscriptionStatus      | string        | Subscription status
+AnnuallyBillingDay      | int           |  Billing day for anual product prices (1-28)
+AnnuallyBillingMonth    | int           |  Billing month for anual product price (0-11)
+BillingDay              | int           |  Billing day for monthy product prices (1-28)
+DueDay                  | int           |  Days to due date
+InvoicePaymentType      | int           | Payment Type Operator
+LastDayOfTheMonth       | boolean       | Set to true if you to use the last day of the month to be used has a billing day (can be used with monthy and anual product prices)
+Memo                    | string        | Memo that will be reflect on invoices and trasactions
+Quantity                | int           | Desired quantity for the product
+PaymentGateways         | string[]      | Payment gateways through witch the subscription will be processed
+ProductPriceId          | guid          | Id for the product price
+UserId                  | guid          | Id for the user that will be charged for the subscription
+StartDateType           | string        | Start Date Type Operator
+StartDate               | date          | Desired start date
+EndDateType             | string        | End Date Type Operator
+EndDate                 | date          | Desired end date
+BillingCycle            | int           | Desired number od billing cycles
+**Customer**            |               | Basic Customer data
+CompanyName             | string        | Company Name
+Id                      | guid          | Id for the related customer
+**User**                |               | Basic User data
+FirstName               | string        | User first name
+LastName                | string        | User Last name
+CompanyName             | string        | User Company
+IsActive                | boolean       | Indicates if the user is active or not
+Email                   | string        | User email
+Id                      | guid          | Id for the user that is related to the subscription
+**ProductPrice**        |               | Product price related to product
+Id                      | string        | The Id for the product price
+ProductId               | string        | The Id for the product on witch is related
+CreatedAt               | date          | Creation date
+ProductPriceType        | string        | Price Model
+ProductPriceStatus      | string        | Status for the product price
+Price                   | decimal       | Price
+PerUnit                 | string        | Package size
+Frequency               | string        | Price frequency
+EnableFreeTrial         | bool          | Enable free trial feature
+FreeTrialInDays         | int           | Number of days for free trial
+EnableSetupFee          | bool          | Enable setup fee
+SetupFee                | decimal       | Number of days for free trial
+Currency                | string        | Currency set for the product price
+EnableSubscriptionEndDate | boolean     | Enable subscription end date
+SubscriptionEndDate     | date          | Subscription end date
+**Product**             |               | Product related to product price
+Id                      | guid          | Id for the Product
+Name                    | string        | Product name
+Description             | string        | Product Description
+ProductStatus           | string        | Product status
+CustomerId              | guid          | Id for the related customer
+
 ## Search a subscription
+This endpoint will return subscriptions based on the filter informed. Subscriptions are returned with pagination, which means that if you need to retrieve all subscriptions you need to call the same endpoint incrementing the CurrentPage.
+
+```json
+>Payload example:
+{
+  "CreatedAt": "2022-02-16T03:00:00.000Z",
+  "CreatedAtOperator": "isBefore",
+  "SubscriptionStatus": 0,
+  "UserName": "Doe",
+  "UserNameOperator": "contains",
+  "GenericSearch": "Doe",
+  "Pagination": {
+    "PageNumber": 1,
+    "ItemsPerPage": 10
+  }
+}
+
+>Response example:
+{
+  "statusCode": 200,
+  "message": "POST Request successful.",
+  "isError": false,
+  "result": {
+    "CurrentPage": 1,
+    "PageSize": 10,
+    "TotalCount": 1,
+    "Items": [
+      {
+        "Id": "8fc541a7-f8c8-49d4-a6cf-61348f2dd9b2",
+        "Customer": {
+          "Id": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
+          "CompanyName": "All Rails Customer"
+        },
+        "User": {
+          "Id": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
+          "FirstName": "Jonathan",
+          "LastName": "Doe",
+          "CompanyName": "",
+          "IsActive": true
+        },
+        "ProductName": "Test",
+        "CreatedAt": "2022-02-09T18:19:13.815643",
+        "SubscriptionStatus": "Active",
+        "ProductPrice": {
+          "Id": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
+          "ProductId": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+          "CreatedAt": "2022-02-09T18:19:05.452181",
+          "ProductPriceType": "Standard",
+          "ProductPriceStatus": "Active",
+          "Price": 22.45,
+          "PerUnit": 0,
+          "Frequency": "Recurring",
+          "PlanName": "Test",
+          "BillingPeriod": "Weekly",
+          "EnableFreeTrial": false,
+          "FreeTrialInDays": 0,
+          "EnableSetupFee": false,
+          "SetupFee": 0,
+          "Currency": "CAD",
+          "Product": {
+            "Id": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+            "Name": "Test",
+            "ProductStatus": "Archived",
+            "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937"
+          }
+        },
+        "Total": 22.9
+      }
+    ]
+  }
+}
+```
+`Method: POST`
+
+`Endpoint: {{env}}/api/subscription/filter`
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+GenericSearch | string | no | Filter subscription by subscription id, user name and user email
+SubscriptionStatus | string | no | Subscription status
+CreatedAt | datetime | no | Create date
+CreatedAtOperator | string | no | Operator to filter with CreatedAt properties
+UserName  | string | no | Username value
+UserNameOperator | string | no | Username Operator
+**Pagination** | | no |
+PageNumber | number | no | The respective page, starting at 1
+ItemsPerPage      | number  | no          | The quantity of items per page
+
+**Response**
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------
+CurrentPage             | number        | The current page
+PageSize                | number        | The amount of rows returned in the current page
+TotalCount              | number        | The total rows the filter returns  
+**Items** | | List of subscriptions
+Id                      | guid          | Id for the subscription
+Total                   | decimal       | Total amount for the subscription 
+CreatedAt               | date          | Cration date for the subscription
+ProductName             | string        | Name for the product related to subscription
+SubscriptionStatus      | string        | Subscription status
+**Customer**            |               | Basic Customer data
+CompanyName             | string        | Company Name
+Id                      | guid          | Id for the related customer
+**User**                |               | Basic User data
+FirstName               | string        | User first name
+LastName                | string        | User Last name
+CompanyName             | string        | User Company
+IsActive                | boolean       | Indicates if the user is active or not
+Email                   | string        | User email
+Id                      | guid          | Id for the user that is related to the subscription
+**ProductPrice**        |               | Product price related to product
+Id                      | string        | The Id for the product price
+ProductId               | string        | The Id for the product on witch is related
+CreatedAt               | date          | Creation date
+ProductPriceType        | string        | Price Model
+ProductPriceStatus      | string        | Status for the product price
+Price                   | decimal       | Price
+PerUnit                 | string        | Package size
+Frequency               | string        | Price frequency
+EnableFreeTrial         | bool          | Enable free trial feature
+FreeTrialInDays         | int           | Number of days for free trial
+EnableSetupFee          | bool          | Enable setup fee
+SetupFee                | decimal       | Number of days for free trial
+Currency                | string        | Currency set for the product price
+EnableSubscriptionEndDate | boolean     | Enable subscription end date
+SubscriptionEndDate     | date          | Subscription end date
+**Product**             |               | Product related to product price
+Id                      | guid          | Id for the Product
+Name                    | string        | Product name
+Description             | string        | Product Description
+ProductStatus           | string        | Product status
+CustomerId              | guid          | Id for the related customer
+
 ## Cancel a subscription
+
 ## Get subscription events
+
 ## Get subscription invoices
