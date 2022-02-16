@@ -12,11 +12,74 @@ Our URLs allow you to host our UI within your application and it's the easiest t
 The javascript sdk library allows you to build a more robust integration with Zūm Rails. Instead of hosting a public URL, the library offers the possibility for you to first create a temporary token, then initiate and receive real-time updates and listen to events. Hence, it is the best option for our clients. 
 To start using the library you will need to do the following:
 
-Authorize using the endpoint {{env}}/api/authorize. More information on how to authorize can be found [here](../api-specification/authentication)
-Create a token which has to be informed in the SDK. Use the endpoint {{env}}/api/connect/createtoken to generate the token. The token is valid for 1 hour, and it will be automatically expired after a user uses it. 
-Use the payload as below:
+1. Authorize using the endpoint `{{env}}/api/authorize`. More information on how to authorize can be found [here](../api-specification/authentication)
+2. Create a token which has to be informed in the SDK. Use the endpoint `{{env}}/api/connect/createtoken` to generate the token. The token is valid for 1 hour, and it will be automatically expired after a user uses it. 
+3. Use the payload as below:
 
-show createtoken payload here
+```json
+>Payload
+{
+    "ConnectTokenType": "UserOnboard",
+    "CustomAttributes": {
+        "ValidateVisaDirectHolderNameWithAggregation": true
+    },
+    "TransactionMethods": 
+    {
+        "Eft": false,
+        "Interac": false,
+        "VisaDirect": false,
+        "CreditCard": false
+    },
+    "User": {
+        "Email": "test@zumrails.com",
+        "FirstName": "john",
+        "LastName": "doe",
+        "AddressCity": "AddressCity",
+        "AddressLine1": "AddressLine1",
+        "AddressProvince": "ON",
+        "AddressPostalCode": "a4a4a4"
+    }
+}
+
+>Response
+{
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+        "Token": "develop-UserOnboard-ca3c2e64f3584cfdab7387cbbc59df55",
+        "ExpirationUTC": "2022-02-16T19:14:01.1439136Z"
+    }
+}
+```
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+ConnectTokenType | string | yes | Transaction type
+**CustomAttributes** |  |  | CustomAttributes
+ValidateVisaDirectHolderNameWithAggregation | boolean | yes | Activates validation for visa direct using aggregation data
+**TransactionMethods** | | | List on enabled transaction methods
+Eft | boolean | no | Enables EFT
+Interac | boolean | no | Enables Interac
+VisaDirect | boolean | no | Enables Visa Direct
+CreditCard | boolean | no | Enables Credit Card
+**User** | | | User data
+Email | string | yes | User email
+FirstName | string | yes | User first name
+LastName | string | yes | User last name
+AddressCity | string | yes | User city
+AddressLine1 | string | yes | User adress data
+AddressProvince | string | yes | User province code
+AddressPostalCode | string | yes | User postal code
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Token | string | Authentication token
+ExpirationUTC | string | Expiration date on UTC
 
 Inform the token in any request you want to execute.
 
