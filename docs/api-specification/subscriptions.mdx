@@ -782,4 +782,227 @@ CustomerId              | guid          | Id for the related customer
 
 ## Get subscription events
 
+```json
+>Response
+{
+  "statusCode": 200,
+  "message": "GET Request successful.",
+  "isError": false,
+  "result": [
+    {
+      "CreatedAt": "2021-11-03T15:37:47.328195",
+      "Description": "Subscription status has changed to Cancelled",
+      "Type": "StatusChanged",
+      "SubscriptionId": "bab3a770-484d-48d6-b89e-77485a05fe97"
+    },
+    {
+      "CreatedAt": "2021-10-27T19:45:58.323213",
+      "Description": "Subscription bab3a770-484d-48d6-b89e-77485a05fe97 was created",
+      "Type": "Created",
+      "SubscriptionId": "bab3a770-484d-48d6-b89e-77485a05fe97"
+    }
+  ]
+}
+```
+`Method: GET`
+
+`Endpoint: {{env}}/api/subscription/getsubscriptionevents/{{subscription_id}}`
+
+Use this endpoint if you want to get all the subscription events related to a specific subscription.
+
+**Response**
+
+A list of:
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------  
+InvoiceId               | guid          | Id for the subscription
+CreatedAt               | date          | Creation date for the subscription event
+Description             | string        | User friendly description for the event
+Type                    | string        | Event Type
+
+**Subscription Event Type**
+
+Type                     | Behavior 
+-------------------      | ------- 
+Created                  | Subscription was created
+Updated                  | Subscription was edited
+StatusChanged            | Subscription status was changed
+
 ## Get subscription invoices
+
+```json
+>Response
+{
+  "statusCode": 200,
+  "message": "GET Request successful.",
+  "isError": false,
+  "result": [
+    {
+      "Id": "e0a79d0e-611a-40d7-973a-e41a09fc3021",
+      "UserId": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
+      "User": {
+        "Id": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
+        "FirstName": "renan",
+        "LastName": "zacheo",
+        "Email": "renan@gmail.com",
+        "IsActive": true
+      },
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "Customer": {
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym"
+      },
+      "CreatedAt": "2021-11-27T05:05:12.776243",
+      "Amount": 100,
+      "InvoiceStatus": "Paid",
+      "Memo": "Thank you for your business!",
+      "DaysToDueDate": 0,
+      "DueDate": "2021-11-27T00:00:00",
+      "PaymentType": "AutomaticallyCharge",
+      "PaymentGateways": [
+        "Eft"
+      ],
+      "Items": [
+        {
+          "ProductPrice": {
+            "Id": "e1ddcecd-dc9c-41ee-b762-49056532b727",
+            "ProductId": "ba01bbed-a741-419a-839b-17c5baa30f39",
+            "CreatedAt": "2021-10-27T16:12:14.536959",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 100,
+            "PerUnit": 0,
+            "Frequency": "Recurring",
+            "PlanName": "Silver member",
+            "BillingPeriod": "Monthly",
+            "EnableSubscriptionEndDate": false,
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "ba01bbed-a741-419a-839b-17c5baa30f39",
+              "Name": "Gym ",
+              "Description": "gym membership",
+              "ProductStatus": "Archived",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          },
+          "ProductPriceId": "e1ddcecd-dc9c-41ee-b762-49056532b727",
+          "Quantity": 1,
+          "Currency": "CAD",
+          "Price": 100
+        }
+      ],
+      "Transactions": [
+        {
+          "FastEft": false,
+          "Id": "63a77973-702a-4ab9-9dad-985a2439fdf5",
+          "CreatedAt": "2021-11-27T05:05:13.391365",
+          "Memo": "Thank you for your business!",
+          "Comment": "",
+          "Amount": 100,
+          "Customer": {
+            "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+            "CompanyName": "Sam's Gym"
+          },
+          "User": {
+            "Id": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
+            "FirstName": "renan",
+            "LastName": "zacheo",
+            "Email": "renan@gmail.com",
+            "IsActive": true
+          },
+          "ZumRailsType": "AccountsReceivable",
+          "TransactionMethod": "Eft",
+          "TransactionHistory": [],
+          "TransactionStatus": "Completed",
+          "From": "renan zacheo - renan@gmail.com",
+          "To": "Not able to parse",
+          "InteracHasSecurityQuestionAndAnswer": false,
+          "CompletedAt": "2021-11-27T05:06:13.019093",
+          "IsRefundable": false,
+          "InvoiceId": "e0a79d0e-611a-40d7-973a-e41a09fc3021",
+          "SubscriptionId": "b270fca6-f811-4d06-a4c9-32aa88565a48"
+        }
+      ],
+    }
+  ]
+}
+```
+`Method: GET`
+
+`Endpoint: {{env}}/api/subscription/getsubscriptioninvoices/{{subscription_id}}`
+
+Use this endpoint if you want to get all the invoices related to a specific subscription.
+
+**Response**
+
+A list of:
+
+Parameter               | Type          | Description                         
+---------               | -------       | --------------------------------  
+Id                      | guid          | Id for the invoice
+Amount                  | decimal       | Total amount for the invoice 
+CreatedAt               | date          | Cration date for the invoice
+CustomerId              | guid          | Id for the related customer
+DaysToDueDate           | int           | Days until due date from the creation date
+DueDate                 | date          | Due date
+InvoiceStatus           | string        | Invoice status
+Memo                    | string        | Memo that will be reflected on the transactions
+PaymentType             | string        | PaymentType Operator
+PaymentGateways         | string[]      | PaymentGateways Operator
+UserId                  | guid          | Id for the user that is related to the invoice
+**Customer**            |               | Basic Customer data
+CompanyName             | string        | Company Name
+Id                      | guid          | Id for the related customer
+**User**                |               | Basic User data
+FirstName               | string        | User first name
+LastName                | string        | User Last name
+CompanyName             | string        | User Company
+IsActive                | boolean       | Indicates if the user is active or not
+Email                   | string        | User email
+Id                      | guid          | Id for the user that is related to the invoice
+**Items**               |               |
+OneOffProductName       | string        | Name for the one-off product
+OneOffProductAmount     | decimal       | Amount for each unit or package
+Quantity                | int           | Quantity for the product price
+Currency                | string        | Currency set for the product price
+Price                   | decimal       | Price amount for each unit or package
+ProductPriceId          | guid          | Id for the related product price
+**ProductPrice**        |               | Product price related to product
+Id                      | string        | The Id for the product price
+ProductId               | string        | The Id for the product on witch is related
+CreatedAt               | date          | Creation date
+ProductPriceType        | string        | Price Model
+ProductPriceStatus      | string        |  Status for the product price
+Price                   | decimal       | Price
+PerUnit                 | string        | Package size
+Frequency               | string        | Price frequency
+EnableFreeTrial         | bool          | Enable free trial feature
+FreeTrialInDays         | int           | Number of days for free trial
+EnableSetupFee          | bool          | Enable setup fee
+SetupFee                | decimal       | Number of days for free trial
+Currency                | string        | Currency set for the product price
+**Product**             |               | Product related to product price
+Id                      | guid          | Id for the Product
+Name                    | string        | Product name
+Description             | string        | Product Description
+ProductStatus           | string        | Product status
+CustomerId              | guid          | Id for the related customer
+**Transactions**        |               | Transactions related to the invoice
+Id                      | guid          | Id for the transaction
+Amount                  | decimal       | Total amount for the transaction
+Comment                 | string        | Comment fo the transaction
+CreatedAt               | date          | Creation date for the transaction
+FastEft                 | boolean       | Indicates if this was a fast eft or not
+From                    | string        | From description for the transaction
+InvoiceId               | guid          | Id for the related Invoice
+IsRefundable            | boolean       | Indicates if the transaction is IsRefundable
+Memo                    | string        | Memo for the transaction
+To                      | string        | To description for the transaction
+TransactionMethod       | string        | Transaction method for the transaction
+TransactionStatus       | string        | Status for the transaction
+ZumRailsType            | string        | ZumRailsType Operator for the transaction
