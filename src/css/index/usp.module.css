@@ -31,7 +31,7 @@
 
 .usp__description::before {
   content: "> ";
-  color: var(--palette-pink);
+  color: var(--palette-zum);
 }
 
 @media (max-width: 996px) {

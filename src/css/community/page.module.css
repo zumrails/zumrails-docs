@@ -37,7 +37,7 @@
 }
 
 .pink__color {
-  color: var(--palette-pink);
+  color: var(--palette-zum);
 }
 
 .border {
@@ -57,7 +57,7 @@
 }
 
 .level__title {
-  color: var(--palette-pink);
+  color: var(--palette-zum);
   font-weight: 400;
   font-size: var(--font-size-normal);
   line-height: 26px;
@@ -96,7 +96,7 @@
 
 .link_item {
   text-decoration: underline;
-  color: var(--palette-pink);
+  color: var(--palette-zum);
 }
 
 .contribution_link_item {
@@ -155,7 +155,7 @@ html[data-theme="light"] .main_icon {
 
 .list__description::before {
   content: "o ";
-  color: var(--palette-pink);
+  color: var(--palette-zum);
   left: 0;
   top: 0;
   position: absolute;
@@ -171,7 +171,7 @@ html[data-theme="light"] .main_icon {
 
 .message__content::before {
   content: "> ";
-  color: var(--palette-pink);
+  color: var(--palette-zum);
 }
 
 .card {

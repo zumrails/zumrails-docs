@@ -12,7 +12,7 @@
 .press_release {
   display: flex;
   flex-direction: column;
-  background-color: var(--palette-pink);
+  background-color: var(--palette-zum);
   border-radius: var(--ifm-global-border-radius);
   padding: 1rem;
   border: 1px solid transparent;

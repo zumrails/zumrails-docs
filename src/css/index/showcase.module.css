@@ -113,7 +113,7 @@
 }
 
 .showcase__button--active {
-  background: var(--palette-pink);
+  background: var(--palette-zum);
 }
 
 .showcase__button--active .showcase__description {
