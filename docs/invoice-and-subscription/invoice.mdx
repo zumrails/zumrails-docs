@@ -4,12 +4,38 @@ description:
   How invoices works.
 ---
 
+## How invoices work
+
 Invoices are statements of amount owed by a user, and are either generated one-time, or generated periodically from a subscription.
 
 Standalone invoices contain items which are product prices that have a “one-time” frequency. You can also create a one-off product which will be a temporary product just for the sake of a particular invoice. 
 
-If your invoice is configured to be charged automatically to the user on the available payment method, Zum Rails will automatically finalize your invoice and attempt payment. Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same.
+Here’s how you can create an invoice:
 
-If your invoice is configured to be billed by sending an email to the user with a link to pay, then Zum Rails will email the invoice to your user and await payment. These emails will contain a link to a hosted page to pay the invoice.
+If your invoice is configured to be charged automatically to the user on the available payment method, Zum Rails will automatically finalize your invoice and attempt payment. 
+Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same. 
+If your invoice is configured to be billed by sending an email to the user with a link to pay, then Zum Rails will email the invoice to your user and await payment. These emails will contain a link to a hosted page to pay the invoice. 
 
-Invoices can also be created using the checkout URL/SDK if you do not have your user information. See how to get started with checkout URL/SDK here
+Here’s what happens after the invoice has been created based on the payment selections:
+
+<a name="void">Here’s how you can void invoices:</a>
+
+Voiding an invoice is conceptually similar to deleting (canceling) it. 
+However, voiding an invoice maintains a trail, which allows you to look up the invoice by ID. Voided invoices are treated as zero-value for reporting purposes. 
+After you void an invoice, the Hosted Invoice Page is still accessible, and displays a message indicating that the invoice has been voided. Voided invoices aren’t payable. 
+You can void invoices only when they have a status of open or uncollectible. To void an invoice from the portal, go to the Invoice details page, click on Change invoice status. In the resulting dialog, select Void. 
+You can also void an invoice through the API. 
+
+Invoices can also be created using the checkout URL/SDK if you do not have your user information. See how to get started with checkout URL/SDK [here](../ways-to-integrate/zum-connect)
+
+## Invoice Lifecycle
+A successful subscription flow looks like this:
+ 1. The invoice is created with status Open
+ 2. Based on the way of payment collection, the invoice will be either automatically charged to the user over the available payment method or the invoice will be emailed to the user to pay manually.
+ 3. If the transaction to collect payment succeeds, Zum updates the status to paid, and the user receives an email with the invoice. 
+ 4. If the transaction to collect payment fails, the invoice remains open.
+
+Draft invoices are still editable and remain unsent. At this point, you can finalize the invoice, or delete it.
+If the Invoice was created with the option “Automatically charge user”, Zum will initiate a transaction to collect the payment. If the transaction fails, the invoice will remain in the “open” status with the transaction status “failed”. We will not reinitiate the transaction at this stage. 
+If the Invoice was created with the option “Email invoice to user to pay manually”, Zum will wait for the user to initiate a transaction. 
+If the user pays the invoice and the payment is successful, the invoice updates to paid. If they don’t make a payment, the invoice will remain open until the due date is reached. Once the due date is reached, the invoice status will change to Past due. If the user tries to pay an invoice that is past due, they will still be able to make the payment. 

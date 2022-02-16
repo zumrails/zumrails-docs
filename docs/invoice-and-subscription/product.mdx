@@ -20,10 +20,17 @@ Prices define how much and how often to charge for products. Prices can either b
 Because a product can have multiple prices associated with it, you’ll need to specify which price to use when creating Checkout links, Invoices or Subscriptions if you want to sell a specific product price to the user. 
 
 :::note
- At Least one price is necessary to create a product. 
+At Least one price is necessary to create a product. 
 :::
 
 Pricing models reflect your business revenue model. We currently offer the below models for pricing:
+- Standard pricing—Charge the same price for each unit. 
+- Package pricing—Charge by the package, or group of units, like charging $15.00 CAD for every 5 units. Purchases are rounded up by default, so a customer buying 8 units would pay  $30.00 CAD.
 
-- Standard pricing: Charge the same price for each unit. 
-- Package pricing: Charge by the package, or group of units, like charging $15.00 CAD for every 5 units. Purchases are rounded up by default, so a customer buying 8 units would pay  $30.00 CAD.
+Here’s how you can create products/prices:
+
+## Manage existing products and prices
+You can update product details through the Portal or API. For example, you might change the description of a product, or add new product images to use on the Checkout page.
+
+If you’re no longer selling a product, you can archive both it and the price through the Dashboard by clicking the Archive button, or through the API. We store the archived product and price information indefinitely to maintain records of past invoices/subscriptions/transactions.
+You can delete products or prices that are currently not being used for invoices/subscriptions.
