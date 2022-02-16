@@ -3,3 +3,54 @@ title: Aggregation
 description:
   How to integrate with aggregation API
 ---
+When aggregation is enabled in your account, Zūm Rails can pull a user’s financial data. This applies for use-cases such as account verification (Know Your Customer - KYC) and risk assessment (90 days of transaction history).
+
+To pull a user’s financial data, this user will have to login using Zūm Connect. If a user was registered with Zūm Rails through a method outside of Zūm Connect, his financial data cannot be extracted.
+
+Zūm will then dispatch the connection to the financial data aggregator.
+
+Code Block for Get a user's bank account information
+
+When a user logs in through the Zūm Connect iframe, his information can be accessed by calling the user/getBankaccountinformation endpoint.
+
+:::caution
+This endpoint will only work for users who have successfully connected through the financial aggregator integrated with Zūm Rails.
+:::
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+Id | guid | Zūm aggregation card id
+HolderName | string | Account holder name
+HolderCivicAddress | string | Account holder civic address
+HolderCity | string | Account holder address city
+HolderProvince | string | Account holder address province
+HolderPostalCode | string | Account holder address postal code
+HolderCountry | string | Account holder address country
+HolderEmail | string | Account holder e-mail
+FirstName | string | Account holder first name
+HolderPhoneNumber | string | Account holder phone number
+Institution | string | Institution name
+LastRefresh | datetime | Last time the card information was refreshed
+ProviderCardId | guid | The provider card id
+**Accounts** | |
+Id | guid | Zūm account id
+ProviderAccountId | guid | Provider account id
+TransitNumber | string | Transit number
+InstitutionNumber | string | InstitutionNumber
+AccountNumber | string | Account number
+Title | string | Account title
+Balance | decimal | Account balance
+Category | string | Account category
+Type | string | Account type
+Currency | string | Account currency
+IsEftEligible | boolean | Indicates if account is EFT eligible
+**Transactions** | |
+Id | guid | Zūm transaction id
+ProviderTransactionId | guid | Provider transaction id
+Date | datetime | Transaction date
+Description | string | Transaction description
+Debit | string | Transaction debit
+Credit | string | Transaction credit
+Balance | string | Balance

@@ -17,8 +17,8 @@ There are five transaction types (ZumRailsType):
 - UserTransfer
 
 :::note
-Zūm Rails allows money to be sent to a user from your virtual wallet or from your funding source.
-Zūm Rails allows money to be collected from a user to your virtual wallet or to your funding source.
+- Zūm Rails allows money to be sent to a user from your virtual wallet or from your funding source.
+- Zūm Rails allows money to be collected from a user to your virtual wallet or to your funding source.
 :::
 
 1. If you want to send money from your **Funding Source** to **Zūm Wallet**, use ZumRailsType **FundZumWallet** and inform:
@@ -45,11 +45,11 @@ Zūm Rails allows money to be collected from a user to your virtual wallet or to
 
 
 :::info
-For accounts payable use-case, Zūm Rails recommend you to first Fund the Zūm Wallet, so that the money can be quickly moved.
+- For accounts payable use-case, Zūm Rails recommend you to first Fund the Zūm Wallet, so that the money can be quickly moved.
 :::
 
 :::info
-For accounts receivable use-case Zūm Rails, recommend you to move funds from the User to the Zūm Wallet, then set up an automatic daily withdrawal at the end of each day to your funding source.
+- For accounts receivable use-case Zūm Rails, recommend you to move funds from the User to the Zūm Wallet, then set up an automatic daily withdrawal at the end of each day to your funding source.
 :::
 
 ![Zum Payment Methods](/img/docs/diagrams/payment_methods_v2.png)
@@ -131,10 +131,10 @@ InteracSecurityQuestion | string | yes if InteracHasSecurityQuestionAndAnswer is
 InteracSecurityAnswer | string | yes if InteracHasSecurityQuestionAndAnswer is true | The answer for the user to process the interac request
 ScheduledStartDate | date | no | The date when the transaction will be sent to the financial institution. Must be greater than today
 ClientTransactionId | string | no | This field can be used to store the Transaction id created in your system when the Transaction is initiated
-UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user)
+UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user). Read more about Interac ANR [here](https://help.zumrails.com/en/articles/5978993-interac-anr).
 
 :::info
-* Either a memo or comment is mandatory for Interac transactions. If both are specified, the comment will be presented on the Interac request.
+Either a memo or comment is mandatory for Interac transactions. If both are specified, the comment will be presented on the Interac request.
 :::
 
 **Response**

@@ -166,7 +166,8 @@ TransactionType | string | yes | Transaction type
 WalletId | string | no | The Wallet Id, according to TransactionType
 FundingSourceId | string | no | The Funding Source Id
 Bytes | string | yes | The file's blob
-WithdrawSumTotalFromFundingSource | bool | no | If set to True, we will do one transaction to pull the entire sum of transactions in the batch from the funding source. This is only applicable for Accounts Payable transactions with more than 1 transaction in the file. It does not work for scheduled transactions.
+WithdrawSumTotalFromFundingSource | bool | no | If set to True, we will do one transaction to pull the entire sum of transactions in the batch from the funding source. This is only applicable for Accounts Payable transactions with more than 1 transaction in the file. It does not work for scheduled transactions. Read more about this feature here.
+
 
 - Concerning `FundingSourceId` and `WalletId`, just one of them must be sent
 
