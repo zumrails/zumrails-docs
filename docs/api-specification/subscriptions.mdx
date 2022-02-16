@@ -7,6 +7,8 @@ description:
 #Subscriptions
 
 ## Creating a new subscription
+Use this endpoint if you want to add a new subscription.
+
 ```json
 > Payload example for creating a subscription:
 {
@@ -106,8 +108,6 @@ description:
 `Method: POST`
 
 `Endpoint: {{env}}/api/subscription`
-
-Use this endpoint if you want to add a new subscription.
 
 **Input parameters**
 
@@ -779,8 +779,63 @@ ProductStatus           | string        | Product status
 CustomerId              | guid          | Id for the related customer
 
 ## Cancel a subscription
+Use this endpoint if you want to cancel a subscription.
+
+```json
+>Payload example
+{
+  "CancellationType": "CustomDate",
+  "CustomCancellationDate": "2022-02-18T03:00:00.000Z",
+  "CancellationReason": "Other",
+  "CustomCancellationReason": "I want to test the cancel subscription feature",
+  "RefundLastInvoice": true,
+  "SecurityPassword": "your_password"
+}
+
+>Response example
+{
+  "statusCode": 200,
+  "message": "PUT Request successful.",
+  "isError": false,
+  "result": "Request completed"
+}
+```
+`Method: PUT`
+
+`Endpoint: {{env}}/api/subscription/cancel/{{subscription_id}}`
+
+**Input parameters**
+
+Parameter | Type | Mandatory | Description
+--------- | ------- | ----------- | -------
+CancellationReason | string | no | CancellationReason
+CancellationType | string | no | Cancellation Type
+CustomCancellationDate | datetime | yes (only if CancellationReason is CustomDate) | Desired cancellation date
+CustomCancellationReason | string | yes (only if CancellationReason is Other) | Description for the cancellation reason
+RefundLastInvoice  | bool | no | Refund the last processed Invoice
+SecurityPassword | string | yes | Your password
+
+**Cancellation Reasons**
+
+Type  | Description
+----- | --------
+TooExpensive | This is too expensive
+Accident | This was created by accident
+DifferentProduct | I want a different product/variety
+NoNeed | I no longer need this product
+Sooner | I need it sooner
+Other | Other
+
+**Cancellation Type**
+
+Type  | Behavior
+----- | --------
+Immediately | Cancel the subscription rigtht away
+EndOfCurrentPeriod | Wait for the next billing period and then cancels the subscription
+CustomDate | Set the cancellation to a chosen date
 
 ## Get subscription events
+Use this endpoint if you want to get all the subscription events related to a specific subscription.
 
 ```json
 >Response
@@ -808,8 +863,6 @@ CustomerId              | guid          | Id for the related customer
 
 `Endpoint: {{env}}/api/subscription/getsubscriptionevents/{{subscription_id}}`
 
-Use this endpoint if you want to get all the subscription events related to a specific subscription.
-
 **Response**
 
 A list of:
@@ -830,6 +883,7 @@ Updated                  | Subscription was edited
 StatusChanged            | Subscription status was changed
 
 ## Get subscription invoices
+Use this endpoint if you want to get all the invoices related to a specific subscription.
 
 ```json
 >Response
@@ -935,8 +989,6 @@ StatusChanged            | Subscription status was changed
 `Method: GET`
 
 `Endpoint: {{env}}/api/subscription/getsubscriptioninvoices/{{subscription_id}}`
-
-Use this endpoint if you want to get all the invoices related to a specific subscription.
 
 **Response**
 
