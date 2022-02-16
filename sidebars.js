@@ -34,7 +34,6 @@ module.exports = {
       label: "Basic Concepts",
       type: "category",
       items: [
-        "basic-concepts/introduction",
         "basic-concepts/moving-funds",
         "basic-concepts/payment-methods",
         "basic-concepts/zum-wallet",
@@ -44,8 +43,8 @@ module.exports = {
       label: "Ways to Integrate",
       type: "category",
       items: [
-        "ways-to-integrate/zum-connect-url",
-        "ways-to-integrate/zum-connect-sdk",
+        "ways-to-integrate/introduction",
+        "ways-to-integrate/zum-connect",
       ],
     },
     {

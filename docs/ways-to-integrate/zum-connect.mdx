@@ -1,0 +1,108 @@
+---
+title: Zum Connect URL/SDK
+description:
+  How to use the Zum Connect Url.
+---
+#Zum Connect URL/SDK
+
+## URL V/S SDK
+
+Our URLs allow you to host our UI within your application and it's the easiest to use for our clients.  It's a unique URL which you can host as an iframe, send by e-mail or sms. Since, this is a public URL which is not tokenized, it’s not the most recommended option. 
+
+The javascript sdk library allows you to build a more robust integration with Zūm Rails. Instead of hosting a public URL, the library offers the possibility for you to first create a temporary token, then initiate and receive real-time updates and listen to events. Hence, it is the best option for our clients. 
+To start using the library you will need to do the following:
+
+Authorize using the endpoint {{env}}/api/authorize. More information on how to authorize can be found [here](../api-specification/authentication)
+Create a token which has to be informed in the SDK. Use the endpoint {{env}}/api/connect/createtoken to generate the token. The token is valid for 1 hour, and it will be automatically expired after a user uses it. 
+Use the payload as below:
+
+show createtoken payload here
+
+Inform the token in any request you want to execute.
+
+:::note
+To get the URL/SDK navigate to the settings menu option > Integration codes 
+:::
+
+## User tokenization / Add payment profile
+The best way to add a user to the Zūm Rails platform is through Zūm Connect. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
+
+The Zūm Connect iframe will display a form to capture the user's basic information (Full Name and Email) so that we can create an identity.
+ 
+Independent of the method, the user will always be asked to agree and consent the information shared (PAD). The message can be customized for your needs as well.
+Your specific settings will be available under your profile in Zūm Rails portal. Depending on your need, you can capture the new user using our webhook mechanism, or if you need it right at the moment we redirect back to your flow, you can capture the Zūm user id (token) by listening to an event message as described in your portal settings.
+
+After a user creates and links his account, you will be able to view it in the Zūm Rails portal or use the API to filter and get a specific user.
+
+Add payment profile using URL:
+
+Prefilling the form
+
+prefilling the form parameters to be added here, same as how we have currently
+
+Event Listener
+When a new user is added or a request funds is fulfilled, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or RecurrentTransactionId.
+
+To listen to the event in js, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
+
+User added: {origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}
+
+Add payment profile using SDK:
+
+explain the call backs here and show them how we have shown for aggregation
+
+## Invoice checkout
+The best way to let the user choose and pay for an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
+The Iframe will display the products/prices to the user and they can choose what they would like to pay for. It will display the form to collect the user’s payment information, then create a transaction and send the invoice to the user over their email once the transaction is successful.
+
+Invoice checkout using URL:
+
+Event Listener
+When a new invoice is created through checkout, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or InvoiceId.
+
+To listen to the js event, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
+
+Invoice checkout : {origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}
+
+
+Invoice checkout using SDK:
+explain the call backs here and show them how we have shown for aggregation
+
+## Subscription checkout
+The best way to let the user choose and subscribe to an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
+The Iframe will display the products/prices to the user and they can choose what they would like to subscribe to. It will display the form to collect the user’s payment information, create the subscription and email the subscription details to the user.
+
+:::note
+In case of subscription, a new invoice will be generated based on the billing cycle. Whenever a new invoice is generated we will automatically charge the payment method that was used when creating the subscription using the checkout link.
+:::
+
+Subscription checkout using URL:
+Event Listener
+When a new subscription is created through checkout, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or subscriptionId.
+
+To listen to the js event, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
+
+Invoice checkout : {origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}
+
+Subscription checkout using SDK:
+explain the call backs here and show them how we have shown for aggregation
+
+## Manage subscriptions
+This library will allow the users to manage their subscriptions (view, cancel or update them). It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
+
+View/update subscription using SDK:
+explain the call backs here and show them how we have shown for aggregation
+
+Cancel subscription using SDK:
+explain the call backs here and show them how we have shown for aggregation
+
+## Manage user account
+This library will allow the users to manage their account (view, cancel or update, pay for subscriptions/invoices). It consists of an iFrame website, hosted by Zūm Rails and referenced in your website. 
+
+Manage user account using SDK:
+
+explain the call backs here and show them how we have shown for aggregation
+
+:::note
+Each user will receive a link along with the emails for invoices or subscriptions which they can use to manage their account. If they initiate this flow on their own they will be asked to enter their email address > Zum will check if that email address has any subscriptions/invoices under your customer account. If yes, we will send a one-time passcode to the users email which if matches with what the user enters in the UI, we will show them their Invoices, subscriptions, payment details
+:::
