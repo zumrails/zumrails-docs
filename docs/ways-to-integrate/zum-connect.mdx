@@ -12,6 +12,8 @@ Our URLs allow you to host our UI within your application and it's the easiest t
 The javascript sdk library allows you to build a more robust integration with Zūm Rails. Instead of hosting a public URL, the library offers the possibility for you to first create a temporary token, then initiate and receive real-time updates and listen to events. Hence, it is the best option for our clients. 
 To start using the library you will need to do the following:
 
+![Library authentication](/img/docs/diagrams/flows/flow1.png)
+
 1. Authorize using the endpoint `{{env}}/api/authorize`. More information on how to authorize can be found [here](../api-specification/authentication)
 2. Create a token which has to be informed in the SDK. Use the endpoint `{{env}}/api/connect/createtoken` to generate the token. The token is valid for 1 hour, and it will be automatically expired after a user uses it. 
 3. Use the payload as below:
@@ -99,6 +101,9 @@ After a user creates and links his account, you will be able to view it in the Z
 
 ### Add payment profile using URL
 
+![URL add user flow](/img/docs/diagrams/flows/flow15.png)
+
+
 ### Pre-filling the form
 To help streamline the Zūm Connect experience, it is possible to pass information that you already have through optional parameters in the url:
 
@@ -170,6 +175,10 @@ Add payment event
 
 `{origin: "ZUM_RAILS_IFRAME", userId: "c18dd952-...-9bd6a46eb1c4"}`
 
+### Add payment profile using SDK
+
+![SDK add user flow](/img/docs/diagrams/flows/flow12.png)
+
 ## Invoice checkout
 The best way to let the user choose and pay for an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
 The Iframe will display the products/prices to the user and they can choose what they would like to pay for. It will display the form to collect the user’s payment information, then create a transaction and send the invoice to the user over their email once the transaction is successful.
@@ -185,6 +194,10 @@ Invoice checkout : `{origin: "ZUM_RAILS_IFRAME", InvoiceId: "c18dd952-...-9bd6a4
 
 Invoice checkout (EFT only) : `{origin: "ZUM_RAILS_IFRAME", UserId: "c18dd952-...-9bd6a46eb1c4"}`
 
+### Invoice checkout using SDK
+
+![SDK invoice checkout flow](/img/docs/diagrams/flows/flow13.png)
+
 ## Subscription checkout
 The best way to let the user choose and subscribe to an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
 The Iframe will display the products/prices to the user and they can choose what they would like to subscribe to. It will display the form to collect the user’s payment information, create the subscription and email the subscription details to the user.
@@ -195,6 +208,8 @@ In case of subscription, a new invoice will be generated based on the billing cy
 
 ### Subscription checkout using URL
 
+![URL subscriptionw](/img/docs/diagrams/flows/flow16.png)
+
 ### Event Listener
 When a new subscription is created through checkout, Zūm Connect will trigger an event to provide to your application the UserId, TransactionId or subscriptionId.
 
@@ -203,6 +218,10 @@ To listen to the js event, your website must refer to Zūm Connect using an iFra
 Subscription checkout : `{origin: "ZUM_RAILS_IFRAME", SubscriptionId: "c18dd952-...-9bd6a46eb1c4", UserId: "c18dd952-...-9bd6a46eb1c4"}`
 
 Subscription checkout (EFT only) : `{origin: "ZUM_RAILS_IFRAME", UserId: "c18dd952-...-9bd6a46eb1c4"}`
+
+### Subscription checkout using SDK
+
+![SDK subscription](/img/docs/diagrams/flows/flow14.png)
 
 :::note
 Each user will receive a link along with the emails for invoices or subscriptions which they can use to manage their account. If they initiate this flow on their own they will be asked to enter their email address > Zūm will check if that email address has any subscriptions/invoices under your customer account. If yes, we will send a one-time passcode to the users email which if matches with what the user enters in the UI, we will show them their Invoices, subscriptions, payment details
@@ -213,3 +232,7 @@ This library will allow the users to manage their subscriptions (view, cancel or
 
 ## Manage user account
 This library will allow the users to manage their account (view, cancel or update, pay for subscriptions/invoices). It consists of an iFrame website, hosted by Zūm Rails and referenced in your website. 
+
+### Manage user account using SDK
+
+![SDK manage user](/img/docs/diagrams/flows/flow17.png)
