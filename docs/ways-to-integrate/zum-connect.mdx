@@ -183,6 +183,9 @@ Add payment event
 The best way to let the user choose and pay for an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
 The Iframe will display the products/prices to the user and they can choose what they would like to pay for. It will display the form to collect the user’s payment information, then create a transaction and send the invoice to the user over their email once the transaction is successful.
 
+### Add payment profile using SDK
+
+![SDK add user flow](/img/docs/diagrams/flows/flow17.png)
 
 ### Event Listener
 When a new invoice is created through checkout, Zūm Connect will trigger an event to provide to your application the UserId, TransactionId or InvoiceId.
@@ -228,6 +231,14 @@ Each user will receive a link along with the emails for invoices or subscription
 
 ## Manage subscriptions
 This library will allow the users to manage their subscriptions (view, cancel or update them). It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
+
+### View/update subscription using SDK:
+
+![SDK manage user](/img/docs/diagrams/flows/flow2.png)
+
+### Cancel subscription using SDK:
+
+![SDK manage user](/img/docs/diagrams/flows/flow3.png)
 
 ## Manage user account
 This library will allow the users to manage their account (view, cancel or update, pay for subscriptions/invoices). It consists of an iFrame website, hosted by Zūm Rails and referenced in your website. 
