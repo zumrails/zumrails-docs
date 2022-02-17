@@ -31,20 +31,13 @@ module.exports = {
       type: "doc",
     },
     {
-      label: "Basic Concepts",
+      label: "Payments",
       type: "category",
       items: [
-        "basic-concepts/moving-funds",
-        "basic-concepts/payment-methods",
-        "basic-concepts/zum-wallet",
-      ],
-    },
-    {
-      label: "Ways to Integrate",
-      type: "category",
-      items: [
-        "ways-to-integrate/introduction",
-        "ways-to-integrate/zum-connect",
+        "payments/moving-funds",
+        "payments/payment-methods",
+        "payments/zum-wallet",
+        "payments/ways-to-integrate",
       ],
     },
     {
@@ -63,9 +56,10 @@ module.exports = {
       type: "category",
       items: [
         "data-aggregation/introduction",
+        "data-aggregation/configure",
+        "data-aggregation/parameters",
         "data-aggregation/connector-ui",
         "data-aggregation/connector-sdk",
-        "data-aggregation/configure",
         "data-aggregation/testing",
       ],
     },

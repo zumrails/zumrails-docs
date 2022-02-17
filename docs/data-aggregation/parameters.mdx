@@ -1,0 +1,67 @@
+---
+title: Configure
+description:
+  How to configure the data aggregation
+---
+
+# Parameters
+
+## Required configuration
+
+In order to use Zūm Rails Aggregation you will need to have a valid CustomerId, this information will be provided within your onboarding, if not you can easily grab it from Zūm Portal.
+
+A customer Id for testing looks like this: `a3510efb-5edb-4972-96be-a5a91ddfa56a`
+
+### Basic configuration
+
+Parameter | Description | Default value | Required
+-------------- | -------------- | ----- | ----
+**customerid** | Your CustomerId | - | yes
+
+The base url for Connector is `https://connector.aggregation.zumrails.com/?customerid=a3510efb-5edb-4972-96be-a5a91ddfa56a`.
+
+### Configure the user experience
+
+Parameter | Description | Default value | Required
+-------------- | -------------- | ----- | ----
+consent | When true, display the consent page. This page explains to the end user what information will be extracted, as well let the end user agree with the terms & conditions | true | false
+accountselector | Display a page to select the preferred account, usually used for EFT payment initiation.  | true | false
+testinstitution | Display Zūm Rails test institution, used while you are testing | false | false
+
+### Configure the user interface
+
+Parameter | Description | Default value | Required
+-------------- | -------------- | ----- | ----
+backbutton | Display the back button on the left hand top corner | false | false
+closebutton | Display the close button on the right hand top corner | false | false
+logo | Display the logo on the top of the screen | true | false
+buttonbgcolor | The navigation buttons background color | #000000 | false
+buttontextcolor | The navigation buttons text color | #FFFFFF | false
+logourl | Your logo url to be used on the UI. If not informed, Zūm Rails logo is the default one | - | false
+tecUrl | Your terms & conditions URL (consent page). When clicked a new tab will be opened | - | false
+institutionsearch | Display the Institution Search box | true | false
+finishRredirecturl | An URL to redirect the page after the connection is completed | - | false
+
+### Configure the data to extract
+
+Parameter | Description | Default value | Required
+-------------- | -------------- | ----- | ----
+gettransactions | If you want to extract transactions | true | false
+getstatements | If you want to extract pdf statements | false | false
+getholderinformation | If you want to extract the account holder name and address | true | false
+datefrom | By default we extract information for the last 12 months. Use this field if you want to specify another range. Format (yyyy-MM-dd) | - | false
+
+### Extra configuration
+
+Parameter | Description | Default value | Required
+-------------- | -------------- | ----- | ----
+extrafield1 | And extra field so that you can add custom information, later receive it when the connection is completed | - | false
+extrafield2 | And extra field so that you can add custom information, later receive it when the connection is completed | - | false
+
+:::info
+Any parameters that are not true/false, like urls or texts must be encoded.
+:::
+
+:::warning
+We recommend you using the **[Configure](./configure)** page to build your URL. No advanced technical knowledge is required.
+:::

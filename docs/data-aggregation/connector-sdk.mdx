@@ -17,15 +17,31 @@ The javascript sdk library allows you to build a more robust integration with th
 
 ## Create a token
 
-To create a token you have first to authenticate in Zūm Rails API. More information can be found [here](../api-specification/authentication)):
+To create a token you have first to authenticate in Zūm Rails API. More information can be found [here](../api-specification/authentication)
 
-After, the second step is to create a token, by calling this endpoint.
+After, the second step is to create a token for the Connector SDK. 
 
 `Method: POST`
 
 `Endpoint: {{env}}/api/aggregationconnector/createtoken`
 
-Code block for create a token example
+```json
+> Payload example (empty):
+{}
+
+> Response example:
+{
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+        "Token": "production-75c90e75e76c49f5a3ae4504afc8cfc5",
+        "ExpirationUTC": "2022-02-17T22:33:44.9490972Z",
+        "CustomerId": "a3510efb-5edb-4972-96be-a5a91ddfa56a",
+        "CompanyName": "Demo Aggregation"
+    }
+}
+```
 
 You will need to use the property `result.Token`.
 
@@ -33,26 +49,64 @@ You will need to use the property `result.Token`.
 Each token is valid only once, for 15 minutes. 
 :::
 
-## Configuration
+## Install JS SDK 
 
-The first thing to do is to host the library inside your page.
-
-Code Block for JS example
+Refer the js library bellow into your website.
 
 ```html
 <script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/connector.js" type="text/javascript" async=""></script>
 ```
 
-After you will need to init the library accordingly to your needs, like the example on the right side of this page
-
-Code block for JS example
+## Init the JS SDK
 
 **The library expects 2 mandatory parameters:**
 
 Parameter | Description 
 ----- | ----
-token | The token received in the endpoint {{env}}/api/aggregationconnector/createtoken
+token | The token received in the endpoint `{{env}}/api/aggregationconnector/createtoken`
 config | A json config representing all the configurations available and described [here](#configuration)
+
+Bellow you can find an example of the code needed to init the JS SDK.
+
+```javascript
+<script>
+    $(function() {
+        $('#btnGoConnect').click(function() {
+            const token = '<THE TOKEN RECEIVED IN THE CREATE TOKEN ENDPOINT>';
+
+            ZumRailsConnector.init({
+                token: token,
+                options: {
+                    accountselector: true,
+                    testinstitution: true,
+                    backbutton: true,
+                    closebutton: true,
+                    extrafield1: '<my-extra-data>
+                },
+                onLoad: function () {
+                    console.log('onLoad');
+                },
+                onError: function (error) {
+                    console.log('onError', error);
+                },
+                onSuccess: function (requestid, cardid, extrafield1, extrafield2) {
+                    console.log('onSuccess', requestid, cardid, extrafield1, extrafield2);
+                },
+                onStepChanged: function (data) {
+                    console.log('onStepChanged', data);
+                },
+                onConnectorClosed: function () {
+                    console.log('onConnectorClosed');
+                }
+            });
+        });
+    });
+</script>
+```
+
+:::info
+We recommend you using the **[Configure](./configure)** page to build the `options` property.
+:::
 
 ## Callbacks
 

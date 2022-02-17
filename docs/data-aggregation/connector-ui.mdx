@@ -6,81 +6,63 @@ description:
 
 # Connector UI
 
-## Required Information
+The connector URL is an URL you can simply host on your website or send by email. No specific integration is required to let your clients to link their card.
 
-In order to use Zūm Rails Aggregation you will need to have a valid CustomerId, this information will be provided within your onboarding, if not you can easily grab it from Zūm Portal.
-
-A customer Id for testing looks like this: `a3510efb-5edb-4972-96be-a5a91ddfa56a`
-
-## Configuration
-
-To build your Connector URL, you have to select a few parameters you might want to use.
-
-
-### Basic configuration
-
-Parameter | Description | Default value | Required
--------------- | -------------- | ----- | ----
-**customerid** | Your CustomerId | - | yes
-
-
-The base url for Connector is `https://connector.aggregation.zumrails.com/?customerid=a3510efb-5edb-4972-96be-a5a91ddfa56a`.
-
-### Configure the user experience
-
-Parameter | Description | Default value | Required
--------------- | -------------- | ----- | ----
-consent | Display the consent page, this page explains to the end user what information will be extracted, as well let the end user agree with the terms & conditions | true | false
-accountselector | Display a page to select the preferred account, usually used for EFT payment initiation.  | true | false
-testinstitution | Display Zūm Rails test institution, used while you are testing | false | false
-
-### Configure the user interface
-
-Parameter | Description | Default value | Required
--------------- | -------------- | ----- | ----
-backbutton | Display the back button on the left hand top corner | false | false
-closebutton | Display the close button on the right hand top corner | false | false
-logo | Display the logo on the top of the screen | true | false
-buttonbgcolor | The navigation buttons background color | #000000 | false
-buttontextcolor | The navigation buttons text color | #FFFFFF | false
-logourl | Your logo url to be used on the UI, if not informed, Zūm Rails logo is the default one | - | false
-tecUrl | Your terms & conditions URL (consent page). When clicked a new tab will be opened | - | false
-institutionsearch | Display the Institution Search box | true | false
-finishRredirecturl | An URL to redirect the page after the connection is completed | - | false
-
-### Configure the data to extract
-
-Parameter | Description | Default value | Required
--------------- | -------------- | ----- | ----
-gettransactions | If you want to extract transactions | true | false
-getstatements | If you want to extract pdf statements | false | false
-getholderinformation | If you want to extract the account holder name and address | true | false
-datefrom | By default we extract information for the last 12 months, use this field if you want to specify another range with this format (yyyy-MM-dd) | - | false
-
-### Extra configuration
-
-Parameter | Description | Default value | Required
--------------- | -------------- | ----- | ----
-extrafield1 | And extra field so that you can add custom information, later receive it when the connection is completed | - | false
-extrafield2 | And extra field so that you can add custom information, later receive it when the connection is completed | - | false
+An example url looks like this: `https://connector.aggregation.zumrails.com/?customerid=a3510efb-5edb-4972-96be-a5a91ddfa56a`.
 
 :::info
-Any parameters that are not true/false, like urls or texts must be encoded.
+We recommend you using the **[Configure](./configure)** page to build your URL.
 :::
 
 ## Access the data
 
-After a new connection is made, the data can be available to you in different ways, listed bellow:
+After a new connection is made, if you are using the Connector UI, the data can be available to you in different ways, listed bellow:
 
 ### Access the data in Zūm Rails portal
 
-For every new connection made for an specific card, a new user will be automatically created in Zūm Rails portal, you can search it under the User page
+For every new connection made for an specific card, a new user will be automatically created in Zūm Rails portal, you can search it under the User page by the user name of email. In this option, zero integration is required, but it's a bit difficult to match the user, since the name in the bank account might be different than the name you have your our file. 
 
 ### Access the data via javascript event listener
 
-Every interaction with the UI triggers a javascript event listener that your host page can listen to. Each message has a step as described [here](#callbacks). An example of how to listen for events in javascript can be found at the right side of this page.
+Every interaction with the UI triggers a javascript event listener that your host page can listen to. Each message has a step as described bellow.
 
-Code block for event listener
+To add the event listener on your website:
+
+```javascript
+<script>
+  window.addEventListener('message', function(e) {
+    console.log(e.data);
+  });
+</script>
+```
+
+Example message:
+
+```javascript
+{
+    step: 'INSTITUTIONSELECTED'
+    data: {
+        intitution: 'asdf...asdf'
+    }
+}
+```
+
+Steps that can be listened:
+
+Step | Description 
+----- | ----
+CONNECTORLOADED | When the Connector is loaded
+CONNECTORCLOSED | When the Connector is closed
+CONSENTACCEPTED | When the consent was accepted
+INSTITUTIONSELECTED | When an institution is selected
+AUTHENTICATEINITIATED | When we start authenticating the connection
+SECURITYQUESTIONPROMPTED | When a security question is prompted
+SECURITYQUESTIONANSWERINITIATED | When the security question is answered and we resume the authentication
+AUTHENTICATECOMPLETED | When authentication is completed
+GETINFORMATIONINITIATED | When the get card information process starts
+GETINFORMATIONCOMPLETED | When the get card information process starts
+CONNECTIONSUCCESSFULLYCOMPLETED | **When the process is completed.** The property `data` will contain up to 4 fields that can be used to link the user from your system with the aggregation. Example: `{ requestid: 'asdf...asdf', cardid: 'asdf...asdf', extrafield1: '', extrafield2: '' }`
+GENERICERROR | When an unexpected error occurs
 
 ### Access the data via webhooks
 

@@ -9,31 +9,30 @@ description:
 Welcome to Zūm Rails Aggregation Documentation!
 
 This documentation provides both a high-level view of the process as well as the steps to successfully use the aggregation services.
+
 ## Ways to integrate
 
-There are two main ways of using Zūm Rails Aggregation service:
+> There are two main different ways of using Zūm Rails Aggregation service:
+
+1. Full API Integration
+2. Connector UI
 
 ### Full API Integration
 
-This allows your application to take full control of the experience, it's recommended only for partners. In order to have access to it, please drop us a message at [support@zumrails.com](mailto:support@zumrails.com). 
+This integration method allows your own application to take full control of the experience. It's recommended only for partners. In order to have access to it, please drop us a message at [support@zumrails.com](mailto:support@zumrails.com) or using the chat inside our portal. We will review case by case to enable this option.
 
 ### Connector UI
 
-This allows you to display Zūm Rails Aggregation inside your current flow, it's the recommended way for most of our clients.
+**Connector UI is the recommended way of integrating with Zum Rails Aggregation** for most of our clients. For this integration method, we provide you a complete component for you to embed inside your existing application.
 
-There are two different ways to use Connector UI, using a javascript library to initiate it, or simply getting a public URL. 
+There are two different ways to use Connector UI, simply getting a public URL (The Connector UI), or using a javascript library (The Connector SDK) to initiate it. 
 
 - **[The Connector SDK](./connector-sdk)**, gives you more security and flexibility to take actions based on javascript callbacks.
 
 - **[The Connector UI](./connector-ui)** it's the easiest way to use. It's a unique URL you can host as an iframe, send by e-mail or sms.
 
-## Configure
+The first step to build your aggregation integration is to [configure](./configure) your experience.
 
-```html
-<iframe 
-    src="https://connector.aggregation.zumrails.com/connector-setup" 
-    title="Setup"
-    scrolling="no"
-    style="border:0px; width:100%; height: 652px; overflow: hidden;">
-</iframe>
-```
+:::info
+If you are using other products from Zūm Rails, such us the Payments or Invoice and Subscription, the Zūm Rails UI will automatically use Zūm Rails Data Aggregation. ** This session is only usefull if you are using only Zūm Rails Data Aggregation services**
+:::

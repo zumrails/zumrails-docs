@@ -107,8 +107,8 @@ const config = {
       darkTheme: require("./src/internals/prism-dracula"),
     },
     algolia: {
-      apiKey: "b2a69b4869a2a85284a82fb57519dcda",
-      indexName: "questdb",
+      apiKey: "30ebdc1936d670289449270ace2c677e",
+      indexName: "documentation_index",
     },
     navbar: {
       title: " ",
