@@ -56,7 +56,7 @@ There are five transaction types (ZumRailsType):
 - Credit Card transactions are settled directly into the merchant account. Hence, it is not required to specify the `WalletId` or `FundingSourceId` while creating a credit card transaction
 :::
 
-![Zum Payment Methods](/img/docs/diagrams/payment_methods_v2.png)
+![Zūm Payment Methods](/img/docs/diagrams/payment_methods_v2.png)
 
 ## Creating a new transaction
 
@@ -307,7 +307,7 @@ ScheduledStartDate | date | The date transaction will be sent to the financial i
 ClientTransactionId | string | The Transaction id you informed in the creation of this transaction
 InteracUrl | string | The interac URL to complete the transaction, if available
 InteracDebtorInstitutionNumber | string | The Financial Institution used to complete the Interac Request money.
-InteracDebtorFullName | string | The Full Name used to complete the Interac Request money. This information not yet 100% accurate, often is the same name sent. Gradually each Institution is improving and sending this information for Zum Rails.
+InteracDebtorFullName | string | The Full Name used to complete the Interac Request money. This information not yet 100% accurate, often is the same name sent. Gradually each Institution is improving and sending this information for Zūm Rails.
 UseInteracANR | boolean | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user)
 **User** | | If transaction has a user - * Not all information from a user is returned in this endpoint
 Id | guid | The user id

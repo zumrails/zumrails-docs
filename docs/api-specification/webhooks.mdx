@@ -58,7 +58,7 @@ You can verify the authenticity of the webhook response by using HMAC. The HMAC 
 2. Your app computes a signature based on payload received, using your Webhook Secret
 3. You verify that your signature matches the zumrails-signature in the request
 
-Here are the steps to validate a request coming from Zum Rails You’ll need the zumrails-signature sent by the webhook and your key (which is your Webhook Secret):
+Here are the steps to validate a request coming from Zūm Rails You’ll need the zumrails-signature sent by the webhook and your key (which is your Webhook Secret):
 
 1. Retrieve the zumrails-signature header
 2. Retrieve json body of the request. Make sure you are not adding any new spaces or formats.

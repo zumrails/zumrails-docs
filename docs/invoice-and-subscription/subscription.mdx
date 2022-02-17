@@ -12,14 +12,14 @@ Subscription creation requires items which are product prices that have a “rec
 Here’s how you can create a subscription:
 
 Whenever a subscription is first created, the user will receive an email with the subscription details.
-If your subscription is configured to be charged automatically to the user on the available payment method, Zum Rails will automatically finalize your invoice and attempt payment according to the billing cycle. 
+If your subscription is configured to be charged automatically to the user on the available payment method, Zūm Rails will automatically finalize your invoice and attempt payment according to the billing cycle. 
 Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same. 
-If your subscription is configured to be billed by sending an email to the user with a link to pay, then Zum Rails will email the invoice to your user and await payment according to the billing cycle. 
+If your subscription is configured to be billed by sending an email to the user with a link to pay, then Zūm Rails will email the invoice to your user and await payment according to the billing cycle. 
 These emails will contain a link to a hosted page to pay the invoice. 
 
 Here’s what happens after the subscription has been created based on the payment selections:
 
-Zum supports changing existing subscriptions without having to cancel and recreate them. Some of the most significant changes you might make are:
+Zūm supports changing existing subscriptions without having to cancel and recreate them. Some of the most significant changes you might make are:
 - Changing the quantity of products within the subscription
 - Changing the method/way of payment collection
 
@@ -27,7 +27,7 @@ Changes are reflected with the next invoice generated as per the billing cycle o
 
 Here’s how you can update subscriptions:
 
-By default, subscriptions and billing continue until cancellation. You can also cancel subscriptions yourself, either through the API or the Zum Portal. 
+By default, subscriptions and billing continue until cancellation. You can also cancel subscriptions yourself, either through the API or the Zūm Portal. 
 
 Here’s how you can cancel subscriptions:
 
@@ -49,7 +49,7 @@ A successful subscription flow looks like this:
 2. An invoice is created with status open for the subscription as per the billing period
 3. Based on the way of payment collection, the invoice will be either automatically charged to the user over the available payment method or the invoice will be emailed to the user to pay manually.
 
-If the subscription was created with the option “Automatically charge user”, Zum will initiate a transaction to collect the payment. If the transaction fails, the invoice will remain in the “open” status with the transaction status “failed”. We will not reinitiate the transaction at this stage. 
-If the subscription was created with the option “Email invoice to user to pay manually”, Zum will wait for the user to initiate a transaction. If the user pays the invoice and the payment is successful, the invoice updates to paid. If they don’t make a payment, the invoice will remain open until the due date is reached. Once the due date is reached, the invoice status will change to Past due. If the user tries to pay an invoice that is past due, they will still be able to make the payment. 
+If the subscription was created with the option “Automatically charge user”, Zūm will initiate a transaction to collect the payment. If the transaction fails, the invoice will remain in the “open” status with the transaction status “failed”. We will not reinitiate the transaction at this stage. 
+If the subscription was created with the option “Email invoice to user to pay manually”, Zūm will wait for the user to initiate a transaction. If the user pays the invoice and the payment is successful, the invoice updates to paid. If they don’t make a payment, the invoice will remain open until the due date is reached. Once the due date is reached, the invoice status will change to Past due. If the user tries to pay an invoice that is past due, they will still be able to make the payment. 
 
 If you leave the subscription in place, the most recent unpaid invoice remains open, new invoices are generated, and payments on new invoices are attempted. 
