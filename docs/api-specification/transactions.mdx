@@ -52,6 +52,10 @@ There are five transaction types (ZumRailsType):
 - For accounts receivable use-case Zūm Rails, recommend you to move funds from the User to the Zūm Wallet, then set up an automatic daily withdrawal at the end of each day to your funding source.
 :::
 
+:::info
+- Credit Card transactions are settled directly into the merchant account. Hence, it is not required to specify the WalletId or FundingSourceId while creating a credit card transaction
+:::
+
 ![Zum Payment Methods](/img/docs/diagrams/payment_methods_v2.png)
 
 ## Creating a new transaction
