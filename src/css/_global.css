@@ -70,7 +70,7 @@
   --ifm-h4-font-size: var(--font-size-large);
   --ifm-heading-margin-bottom: 1.5rem;
   --ifm-hr-border-color: var(--palette-white-20);
-  --ifm-link-color: var(--palette-turquoise);
+  --ifm-link-color: var(--palette-zum);
   --ifm-list-paragraph-margin: 0.5rem;
   --ifm-menu-link-sublist-icon: url("/img/infima/arrow.svg");
   --ifm-navbar-background-color: var(--palette-charade);
@@ -162,7 +162,7 @@ html[data-theme="light"] {
   --ifm-dropdown-background-color: var(--palette-white);
   --ifm-navbar-shadow: 0 1px 0 0 var(--palette-dark-10);
   --ifm-toc-border-color: var(--palette-dark-10);
-  --ifm-link-color: #0aa6c2;
+  --ifm-link-color: var(--palette-zum);
   --ifm-code-background: #dadada;
   --ifm-code-color: var(--palette-charade);
 
