@@ -168,7 +168,7 @@ window.addEventListener('message', function(e) {
 
 Add payment event
 
-`{origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}`
+`{origin: "ZUM_RAILS_IFRAME", userId: "c18dd952-...-9bd6a46eb1c4"}`
 
 ## Invoice checkout
 The best way to let the user choose and pay for an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
@@ -181,7 +181,8 @@ When a new invoice is created through checkout, Zũm Connect will trigger an eve
 
 To listen to the js event, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
 
-Invoice checkout : `{origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}`
+Invoice checkout : `{origin: "ZUM_RAILS_IFRAME", InvoiceId: "c18dd952-...-9bd6a46eb1c4", UserId: "c18dd952-...-9bd6a46eb1c4", TransactionId: "c18dd952-...-9bd6a46eb1c4"}`
+Invoice checkout (EFT only) : `{origin: "ZUM_RAILS_IFRAME", UserId: "c18dd952-...-9bd6a46eb1c4"}`
 
 ## Subscription checkout
 The best way to let the user choose and subscribe to an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
@@ -197,7 +198,8 @@ When a new subscription is created through checkout, Zũm Connect will trigger a
 
 To listen to the js event, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
 
-Subscription checkout : `{origin: "ZUM_RAILS", userId: "c18dd952-...-9bd6a46eb1c4"}`
+Subscription checkout : `{origin: "ZUM_RAILS_IFRAME", SubscriptionId: "c18dd952-...-9bd6a46eb1c4", UserId: "c18dd952-...-9bd6a46eb1c4"}`
+Subscription checkout (EFT only) : `{origin: "ZUM_RAILS_IFRAME", UserId: "c18dd952-...-9bd6a46eb1c4"}`
 
 :::note
 Each user will receive a link along with the emails for invoices or subscriptions which they can use to manage their account. If they initiate this flow on their own they will be asked to enter their email address > Zum will check if that email address has any subscriptions/invoices under your customer account. If yes, we will send a one-time passcode to the users email which if matches with what the user enters in the UI, we will show them their Invoices, subscriptions, payment details
