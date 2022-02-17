@@ -117,7 +117,7 @@ allowVisaDirect| To display only VISA DIRECT payment method.
 allowCreditCard| To display only CREDIT CARD payment method.
 displayTermsAndCondition| To display the terms and conditions checkbox or not.
 displayDetailsColumn| To display the left side column with transaction details, amount and recurrency
-displayZumRailsLogo| To display the powered by Zũm Rails logo
+displayZumRailsLogo| To display the powered by Zūm Rails logo
 displayPhoneNumber| To display the phone number field
 displayAccountType| To display account type option
 displayFullName| To display a full name field instead of first and last name fields when the user chooses Personal as account type. (It can be pre-filled with firstName query param)
@@ -149,9 +149,9 @@ Examples:
 
 ### Event Listeners
 
-When a new user is added or a request funds is fulfilled, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or RecurrentTransactionId.
+When a new user is added or a request funds is fulfilled, Zūm Connect will trigger an event to provide to your application the UserId, TransactionId or RecurrentTransactionId.
 
-To listen to the event in js, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example.
+To listen to the event in js, your website must refer to Zūm Connect using an iFrame, and then your website should have the script/example.
 
 ```html
 > Javascript example:
@@ -177,9 +177,9 @@ The Iframe will display the products/prices to the user and they can choose what
 ### Invoice checkout using URL
 
 ### Event Listener
-When a new invoice is created through checkout, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or InvoiceId.
+When a new invoice is created through checkout, Zūm Connect will trigger an event to provide to your application the UserId, TransactionId or InvoiceId.
 
-To listen to the js event, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
+To listen to the js event, your website must refer to Zūm Connect using an iFrame, and then your website should have the script/example described at the right.
 
 Invoice checkout : `{origin: "ZUM_RAILS_IFRAME", InvoiceId: "c18dd952-...-9bd6a46eb1c4", UserId: "c18dd952-...-9bd6a46eb1c4", TransactionId: "c18dd952-...-9bd6a46eb1c4"}`
 
@@ -195,9 +195,9 @@ In case of subscription, a new invoice will be generated based on the billing cy
 
 ### Subscription checkout using URL
 ### Event Listener
-When a new subscription is created through checkout, Zũm Connect will trigger an event to provide to your application the UserId, TransactionId or subscriptionId.
+When a new subscription is created through checkout, Zūm Connect will trigger an event to provide to your application the UserId, TransactionId or subscriptionId.
 
-To listen to the js event, your website must refer to Zũm Connect using an iFrame, and then your website should have the script/example described at the right.
+To listen to the js event, your website must refer to Zūm Connect using an iFrame, and then your website should have the script/example described at the right.
 
 Subscription checkout : `{origin: "ZUM_RAILS_IFRAME", SubscriptionId: "c18dd952-...-9bd6a46eb1c4", UserId: "c18dd952-...-9bd6a46eb1c4"}`
 
