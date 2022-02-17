@@ -111,7 +111,7 @@ const config = {
       indexName: "documentation_index",
     },
     navbar: {
-      title: " ",
+      title: "Zūm Rails",
       logo: {
         alt: "Zūm Rails",
         src: "/img/navbar/questdb.svg",
@@ -121,6 +121,31 @@ const config = {
           label: "Documentation",
           to: "/docs/introduction/",
           position: "left",
+        },
+        {
+          href: 'https://zumrails.statuspage.io/',
+          label: 'Status',
+          position: 'right',
+        },
+        {
+          href: 'https://changelog.zumrails.com',
+          label: 'Changelog',
+          position: 'right',
+        },
+        {
+          href: 'https://changelog.zumrails.com',
+          label: 'Changelog',
+          position: 'right',
+        },
+        {
+          href: 'https://help.zumrails.com/',
+          label: 'FAQ',
+          position: 'right',
+        },
+        {
+          href: 'https://www.youtube.com/channel/UCNefEZKqPOlM_Lf3fPn6zJw/videos',
+          label: 'Video Tutorials',
+          position: 'right',
         },
       ],
     },
