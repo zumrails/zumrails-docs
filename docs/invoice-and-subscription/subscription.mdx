@@ -9,9 +9,6 @@ description:
 Subscriptions allow you to charge a user on a recurring basis. 
 Subscription creation requires items which are product prices that have a “recurring plan” frequency. Subscription will generate invoices according to the billing cycle (monthly, weekly, biweekly, annually).
 
-Here’s how you can create a subscription:
-
-
 Whenever a subscription is first created, the user will receive an email with the subscription details.
 If your subscription is configured to be charged automatically to the user on the available payment method, Zūm Rails will automatically finalize your invoice and attempt payment according to the billing cycle. 
 Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same. 
@@ -30,13 +27,13 @@ Zūm supports changing existing subscriptions without having to cancel and recre
 Changes are reflected with the next invoice generated as per the billing cycle of the user. 
 
 Here’s how you can update subscriptions:
-![Subscription update flow](/img/docs/diagrams/flows/flow7.png)
+![Subscription update flow](/img/docs/diagrams/flows/flow8.png)
 
 By default, subscriptions and billing continue until cancellation. You can also cancel subscriptions yourself, either through the API or the Zūm Portal. 
 
 Here’s how you can cancel subscriptions:
+![Subscription update flow](/img/docs/diagrams/flows/flow9.png)
 
-Here’s how you can void invoices:
 
 [Voiding invoices](../invoice-and-subscription/invoice#void) related to subscriptions works the same way as for standalone invoices. 
 
