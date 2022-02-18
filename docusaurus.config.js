@@ -133,11 +133,6 @@ const config = {
           position: 'right',
         },
         {
-          href: 'https://changelog.zumrails.com',
-          label: 'Changelog',
-          position: 'right',
-        },
-        {
           href: 'https://help.zumrails.com/',
           label: 'FAQ',
           position: 'right',
