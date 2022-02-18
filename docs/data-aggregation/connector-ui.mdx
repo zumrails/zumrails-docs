@@ -3,6 +3,8 @@ title: Connector UI
 description:
   How to use the connector Ui
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Connector UI
 
@@ -26,26 +28,37 @@ For every new connection made for an specific card, a new user will be automatic
 
 Every interaction with the UI triggers a javascript event listener that your host page can listen to. Each message has a step as described bellow.
 
-To add the event listener on your website:
 
-```javascript
-<script>
-  window.addEventListener('message', function(e) {
-    console.log(e.data);
-  });
-</script>
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Add the event listener on your website', value: 'tab1'},
+    {label: 'Example message', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-Example message:
+  ```html
+      <script>
+        window.addEventListener('message', function(e) {
+          console.log(e.data);
+        });
+      </script>
+  ```
 
-```javascript
-{
-    step: 'INSTITUTIONSELECTED'
-    data: {
-        intitution: 'asdf...asdf'
-    }
-}
-```
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```javascript
+  {
+      step: 'INSTITUTIONSELECTED'
+      data: {
+          intitution: 'asdf...asdf'
+      }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 Steps that can be listened:
 

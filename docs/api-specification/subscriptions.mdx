@@ -3,107 +3,127 @@ title: Subscriptions
 description:
     How to integrate with subscription API
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-#Subscriptions
 
 ## Creating a new subscription
 Use this endpoint if you want to add a new subscription.
 
-```json
-> Payload example for creating a subscription:
-{
-  "UserId": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
-  "ProductPriceId": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
-  "Quantity": 1,
-  "InvoicePaymentType": "NotifyUser",
-  "PaymentGateways": [
-    "Eft",
-    "Interac",
-    "VisaDirect"
-  ],
-  "Memo": "Test",
-  "BillingDay": null,
-  "AnnuallyBillingDay": null,
-  "AnnuallyBillingMonth": null,
-  "DueDay": 30,
-  "LastDayOfTheMonth": true
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Payload for scheduled subscription', value: 'tab2'},
+    {label: 'Response', value: 'tab3'},
+  ]}>
+  <TabItem value="tab1">
 
-> Payload example for creating a scheduled subscription:
-{
-  "UserId": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
-  "ProductPriceId": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
-  "Quantity": 1,
-  "InvoicePaymentType": "NotifyUser",
-  "PaymentGateways": [
-    "Eft",
-    "Interac",
-    "VisaDirect"
-  ],
-  "Memo": "Test",
-  "BillingDay": null,
-  "BillingDayOfMonth": 28,
-  "AnnuallyBillingDay": null,
-  "AnnuallyBillingMonth": null,
-  "DueDay": 30,
-  "LastDayOfTheMonth": false,
-  "BillingCycle": 23,
-  "EndDate": null,
-  "StartDate": null,
-  "StartDateType": "NextMonth",
-  "EndDateType": "BillingCycles"
-}
-
-> Response:
-{
-  "statusCode": 200,
-  "message": "POST Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "467e7df2-bbc1-4028-88f9-cebc1db52c3c",
-    "Customer": {
-      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-      "CompanyName": "Sam's Gym"
-    },
-    "User": {
-      "Id": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
-      "FirstName": "John",
-      "LastName": "111",
-      "Email": "lxtkzblpk12wurb4tczfy@gmail.com",
-      "IsActive": true
-    },
-    "ProductName": "gym",
-    "CreatedAt": "2022-02-15T15:04:00.5499962Z",
-    "SubscriptionStatus": "Scheduled",
-    "ProductPrice": {
-      "Id": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
-      "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
-      "CreatedAt": "2021-10-27T19:18:12.956011",
-      "ProductPriceType": "Standard",
-      "ProductPriceStatus": "Active",
-      "Price": 100,
-      "PerUnit": 0,
-      "Frequency": "Recurring",
-      "PlanName": "gold member",
-      "BillingPeriod": "Monthly",
-      "EnableSubscriptionEndDate": true,
-      "SubscriptionEndDate": "2022-10-30T00:00:00",
-      "EnableFreeTrial": false,
-      "FreeTrialInDays": 0,
-      "EnableSetupFee": true,
-      "SetupFee": 10,
-      "Currency": "CAD",
-      "Product": {
-        "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
-        "Name": "gym",
-        "ProductStatus": "Active",
-        "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-      }
-    },
-    "Total": 100
+  ```json
+  {
+    "UserId": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
+    "ProductPriceId": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
+    "Quantity": 1,
+    "InvoicePaymentType": "NotifyUser",
+    "PaymentGateways": [
+      "Eft",
+      "Interac",
+      "VisaDirect"
+    ],
+    "Memo": "Test",
+    "BillingDay": null,
+    "AnnuallyBillingDay": null,
+    "AnnuallyBillingMonth": null,
+    "DueDay": 30,
+    "LastDayOfTheMonth": true
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "UserId": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
+    "ProductPriceId": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
+    "Quantity": 1,
+    "InvoicePaymentType": "NotifyUser",
+    "PaymentGateways": [
+      "Eft",
+      "Interac",
+      "VisaDirect"
+    ],
+    "Memo": "Test",
+    "BillingDay": null,
+    "BillingDayOfMonth": 28,
+    "AnnuallyBillingDay": null,
+    "AnnuallyBillingMonth": null,
+    "DueDay": 30,
+    "LastDayOfTheMonth": false,
+    "BillingCycle": 23,
+    "EndDate": null,
+    "StartDate": null,
+    "StartDateType": "NextMonth",
+    "EndDateType": "BillingCycles"
+  }
+  ```
+  
+  </TabItem>
+  <TabItem value="tab3">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "467e7df2-bbc1-4028-88f9-cebc1db52c3c",
+      "Customer": {
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym"
+      },
+      "User": {
+        "Id": "c11cc378-7f58-4e29-9a9e-8f34ac8173be",
+        "FirstName": "John",
+        "LastName": "111",
+        "Email": "lxtkzblpk12wurb4tczfy@gmail.com",
+        "IsActive": true
+      },
+      "ProductName": "gym",
+      "CreatedAt": "2022-02-15T15:04:00.5499962Z",
+      "SubscriptionStatus": "Scheduled",
+      "ProductPrice": {
+        "Id": "38e3da09-d722-4a81-8aa7-1a9cf2f91372",
+        "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+        "CreatedAt": "2021-10-27T19:18:12.956011",
+        "ProductPriceType": "Standard",
+        "ProductPriceStatus": "Active",
+        "Price": 100,
+        "PerUnit": 0,
+        "Frequency": "Recurring",
+        "PlanName": "gold member",
+        "BillingPeriod": "Monthly",
+        "EnableSubscriptionEndDate": true,
+        "SubscriptionEndDate": "2022-10-30T00:00:00",
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": true,
+        "SetupFee": 10,
+        "Currency": "CAD",
+        "Product": {
+          "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+          "Name": "gym",
+          "ProductStatus": "Active",
+          "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+        }
+      },
+      "Total": 100
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -214,218 +234,231 @@ Zūm supports changing existing subscriptions without having to cancel and recre
 Changing the quantity of products within the subscription
 Changing the method/way of payment collection
 
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-```json
-> Payload example for updating a subscription:
-{
-  "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-  "ProductPriceId": "8e881238-170a-4dd1-bc00-81e315522e33",
-  "Quantity": 4,
-  "InvoicePaymentType": "AutomaticallyCharge",
-  "PaymentGateways": [
-    "Eft"
-  ],
-  "Memo": "Thank you",
-  "BillingDay": null,
-  "BillingDayOfMonth": null,
-  "AnnuallyBillingDay": null,
-  "AnnuallyBillingMonth": null,
-  "DueDay": 30,
-  "LastDayOfTheMonth": true,
-  "TaxRates": null,
-  "Shipping": null,
-  "SecurityPassword": "your_password"
-}
-
-> Response:
-{
-  "statusCode": 200,
-  "message": "PUT Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "4472acd4-e2f6-4dc9-9638-a567b288b619",
-    "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-    "Customer": {
-      "CompleteEftTransactionInDays": 1,
-      "RbcInteracEnabled": false,
-      "EftProvider": "RBC",
-      "CreditCardProvider": "AuthorizeNet",
-      "EntityStatus": "Active",
-      "BankAccountInformationOrigin": "Plaid",
-      "CustomerType": "Customer",
-      "WebhookSecret": "4134dfea0e3b4964a95d6350a120328c",
-      "FastEftAp": false,
-      "FastEftAr": false,
-      "EftCustomLimitsEnabled": true,
-      "EftTransactionQuantityLimitPerDay": 100,
-      "EftTransactionAmountLimitPerDay": 100.99,
-      "InteracCustomLimitsEnabled": true,
-      "InteracTransactionQuantityLimitPerDay": 200,
-      "InteracTransactionAmountLimitPerDay": 200.99,
-      "VisaCardCustomLimitsEnabled": true,
-      "VisaCardTransactionQuantityLimitPerDay": 200,
-      "VisaCardTransactionAmountLimitPerDay": 300.99,
-      "CreditCardCustomLimitsEnabled": true,
-      "CreditCardTransactionQuantityLimitPerDay": 200,
-      "CreditCardTransactionAmountLimitPerDay": 400.99,
-      "AutomaticDailyWithdraw": false,
-      "GroupByBatchFile": false,
-      "HasDirectSettlementAccount": false,
-      "LoginType": "EmailPassword",
-      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-      "CompanyName": "Sam's Gym",
-      "TransactionDescriptionType": "Fixed",
-      "TransactionDescription": "AAA",
-      "FirstName": "jaouhara4203@uorak.com",
-      "LastName": "jaouhara",
-      "Email": "jaouhara4203@uorak.com",
-      "PhoneNumber": "1111111122222",
-      "AddressStreet": "rua",
-      "AddressCity": "montreal",
-      "AddressProvince": "QC",
-      "AddressPostalCode": "a1a1a1",
-      "MonthlyCost": 0,
-      "CostPerTransaction": 0,
-      "CostPerUser": 0,
-      "CostPerBankRefresh": 0,
-      "CostPerNSF": 0,
-      "PercentagePerTransaction": 0,
-      "PercentagePerUser": 0,
-      "PercentagePerBankRefresh": 0,
-      "PercentagePerNSF": 0,
-      "CustomerAccountStatus": "Active",
-      "CustomerBillingType": "PercentageSplit",
-      "PartnerId": "4d3a4670-f26d-40d6-8dbe-3769397bf5de",
-      "WebhookUrl": "https://zumrails.requestcatcher.com/test",
-      "WebhookConfigurations": [
-        {
-          "WebhookType": "Transaction",
-          "Name": "EftFailedInsufficientFunds",
-          "StatusValue": 901
-        },
-        {
-          "WebhookType": "Transaction",
-          "Name": "EftFailedInsufficientFunds",
-          "StatusValue": 901
-        },
-        {
-          "WebhookType": "Transaction",
-          "Name": "InteracAcknowledgedDebit",
-          "StatusValue": 202
-        }
-      ],
-      "NotificationConfigurations": [
-        {
-          "Id": "540f30de-fcca-434d-a6f8-27b08b3a3044",
-          "Method": "Email",
-          "Type": "TransactionFailure",
-          "TransactionMethod": "Interac",
-          "TransactionEvents": [
-            "InteracFailedGenericError",
-            "InteracFailedInvalidEmailFormat"
-          ],
-          "Emails": [
-            "ihar1620@uorak.com"
-          ]
-        },
-        {
-          "Id": "af48810c-27e9-4119-8cbf-3e7dd6dc33ac",
-          "Method": "Email",
-          "Type": "TransactionFailure",
-          "TransactionMethod": "Interac",
-          "TransactionEvents": [
-            "InteracFailedGenericError"
-          ],
-          "Emails": [
-            "ihar1620@uorak.com"
-          ]
-        }
-      ],
-      "CustomerBillingPrices": [],
-      "ActivationDate": "2021-06-30T18:24:06.458786",
-      "CreatedAt": "2021-06-30T18:24:06.458875",
-      "TransacionMethodVisaDirectEnabled": true,
-      "TransacionMethodEftEnabled": true,
-      "TransacionMethodInteracEnabled": true,
-      "TransacionMethodCreditCardEnabled": true,
-      "HasUnifiedWallet": true,
-      "LogoURL": "",
-      "PrimaryColor": "#FF0000",
-      "ConnectRedirectSuccessURL": "",
-      "VerifyCreditCard": false,
-      "PeoplesTrustInteracEnabled": false,
-      "PeoplesTrustInteracNotificationsEnabled": false,
-      "CustomerCsvDelimiter": "Comma",
-      "IsTwoFactorAuthenticationEnabled": false
-    },
+  ```json
+  {
     "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-    "User": {
-      "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-      "CreatedAt": "2021-06-30T18:28:59.650781",
-      "AccountType": "Personal",
-      "Name": "p17dyyno5390h97yt798pwe Doe",
-      "FirstName": " p17dyyno5390h97yt798pwe",
-      "LastName": "Doe",
-      "PhoneNumber": "514-123-1234",
-      "ShippingSameAsBilling": false,
-      "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
-      "LastRefresh": "0001-01-01T00:00:00",
-      "Customer": {
-        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-        "CompanyName": "Sam's Gym"
-      },
-      "Addresses": [],
-      "TransactionMethodsAvailable": {
-        "Interac": true,
-        "Eft": true,
-        "VisaDirectPull": false,
-        "VisaDirectPush": false,
-        "CreditCard": false
-      }
-    },
     "ProductPriceId": "8e881238-170a-4dd1-bc00-81e315522e33",
-    "ProductPrice": {
-      "Id": "8e881238-170a-4dd1-bc00-81e315522e33",
-      "ProductId": "4986c149-f8f3-4789-82e9-f07b32c9c000",
-      "CreatedAt": "2021-10-27T19:29:51.836045",
-      "ProductPriceType": "Package",
-      "ProductPriceStatus": "Active",
-      "Price": 10,
-      "PerUnit": 1,
-      "Frequency": "Recurring",
-      "PlanName": "sub sjdjk",
-      "BillingPeriod": "Monthly",
-      "EnableSubscriptionEndDate": false,
-      "EnableFreeTrial": false,
-      "FreeTrialInDays": 0,
-      "EnableSetupFee": false,
-      "SetupFee": 0,
-      "Currency": "CAD",
-      "Product": {
-        "Id": "4986c149-f8f3-4789-82e9-f07b32c9c000",
-        "Name": "test sub",
-        "ProductStatus": "Active",
-        "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-      }
-    },
-    "Memo": "Thank you",
-    "DueDay": 30,
-    "LastDayOfTheMonth": true,
     "Quantity": 4,
-    "AnnuallyBillingDay": 0,
-    "AnnuallyBillingMonth": 0,
-    "StartDate": "2022-02-16T00:00:00",
     "InvoicePaymentType": "AutomaticallyCharge",
     "PaymentGateways": [
       "Eft"
     ],
-    "SubscriptionStatus": "Active",
-    "EndDateType": "Never",
-    "CreatedAt": "2022-02-15T18:25:07.749224",
-    "TaxRates": []
+    "Memo": "Thank you",
+    "BillingDay": null,
+    "BillingDayOfMonth": null,
+    "AnnuallyBillingDay": null,
+    "AnnuallyBillingMonth": null,
+    "DueDay": 30,
+    "LastDayOfTheMonth": true,
+    "TaxRates": null,
+    "Shipping": null,
+    "SecurityPassword": "your_password"
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "PUT Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "4472acd4-e2f6-4dc9-9638-a567b288b619",
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "Customer": {
+        "CompleteEftTransactionInDays": 1,
+        "RbcInteracEnabled": false,
+        "EftProvider": "RBC",
+        "CreditCardProvider": "AuthorizeNet",
+        "EntityStatus": "Active",
+        "BankAccountInformationOrigin": "Plaid",
+        "CustomerType": "Customer",
+        "WebhookSecret": "4134dfea0e3b4964a95d6350a120328c",
+        "FastEftAp": false,
+        "FastEftAr": false,
+        "EftCustomLimitsEnabled": true,
+        "EftTransactionQuantityLimitPerDay": 100,
+        "EftTransactionAmountLimitPerDay": 100.99,
+        "InteracCustomLimitsEnabled": true,
+        "InteracTransactionQuantityLimitPerDay": 200,
+        "InteracTransactionAmountLimitPerDay": 200.99,
+        "VisaCardCustomLimitsEnabled": true,
+        "VisaCardTransactionQuantityLimitPerDay": 200,
+        "VisaCardTransactionAmountLimitPerDay": 300.99,
+        "CreditCardCustomLimitsEnabled": true,
+        "CreditCardTransactionQuantityLimitPerDay": 200,
+        "CreditCardTransactionAmountLimitPerDay": 400.99,
+        "AutomaticDailyWithdraw": false,
+        "GroupByBatchFile": false,
+        "HasDirectSettlementAccount": false,
+        "LoginType": "EmailPassword",
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym",
+        "TransactionDescriptionType": "Fixed",
+        "TransactionDescription": "AAA",
+        "FirstName": "jaouhara4203@uorak.com",
+        "LastName": "jaouhara",
+        "Email": "jaouhara4203@uorak.com",
+        "PhoneNumber": "1111111122222",
+        "AddressStreet": "rua",
+        "AddressCity": "montreal",
+        "AddressProvince": "QC",
+        "AddressPostalCode": "a1a1a1",
+        "MonthlyCost": 0,
+        "CostPerTransaction": 0,
+        "CostPerUser": 0,
+        "CostPerBankRefresh": 0,
+        "CostPerNSF": 0,
+        "PercentagePerTransaction": 0,
+        "PercentagePerUser": 0,
+        "PercentagePerBankRefresh": 0,
+        "PercentagePerNSF": 0,
+        "CustomerAccountStatus": "Active",
+        "CustomerBillingType": "PercentageSplit",
+        "PartnerId": "4d3a4670-f26d-40d6-8dbe-3769397bf5de",
+        "WebhookUrl": "https://zumrails.requestcatcher.com/test",
+        "WebhookConfigurations": [
+          {
+            "WebhookType": "Transaction",
+            "Name": "EftFailedInsufficientFunds",
+            "StatusValue": 901
+          },
+          {
+            "WebhookType": "Transaction",
+            "Name": "EftFailedInsufficientFunds",
+            "StatusValue": 901
+          },
+          {
+            "WebhookType": "Transaction",
+            "Name": "InteracAcknowledgedDebit",
+            "StatusValue": 202
+          }
+        ],
+        "NotificationConfigurations": [
+          {
+            "Id": "540f30de-fcca-434d-a6f8-27b08b3a3044",
+            "Method": "Email",
+            "Type": "TransactionFailure",
+            "TransactionMethod": "Interac",
+            "TransactionEvents": [
+              "InteracFailedGenericError",
+              "InteracFailedInvalidEmailFormat"
+            ],
+            "Emails": [
+              "ihar1620@uorak.com"
+            ]
+          },
+          {
+            "Id": "af48810c-27e9-4119-8cbf-3e7dd6dc33ac",
+            "Method": "Email",
+            "Type": "TransactionFailure",
+            "TransactionMethod": "Interac",
+            "TransactionEvents": [
+              "InteracFailedGenericError"
+            ],
+            "Emails": [
+              "ihar1620@uorak.com"
+            ]
+          }
+        ],
+        "CustomerBillingPrices": [],
+        "ActivationDate": "2021-06-30T18:24:06.458786",
+        "CreatedAt": "2021-06-30T18:24:06.458875",
+        "TransacionMethodVisaDirectEnabled": true,
+        "TransacionMethodEftEnabled": true,
+        "TransacionMethodInteracEnabled": true,
+        "TransacionMethodCreditCardEnabled": true,
+        "HasUnifiedWallet": true,
+        "LogoURL": "",
+        "PrimaryColor": "#FF0000",
+        "ConnectRedirectSuccessURL": "",
+        "VerifyCreditCard": false,
+        "PeoplesTrustInteracEnabled": false,
+        "PeoplesTrustInteracNotificationsEnabled": false,
+        "CustomerCsvDelimiter": "Comma",
+        "IsTwoFactorAuthenticationEnabled": false
+      },
+      "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+      "User": {
+        "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+        "CreatedAt": "2021-06-30T18:28:59.650781",
+        "AccountType": "Personal",
+        "Name": "p17dyyno5390h97yt798pwe Doe",
+        "FirstName": " p17dyyno5390h97yt798pwe",
+        "LastName": "Doe",
+        "PhoneNumber": "514-123-1234",
+        "ShippingSameAsBilling": false,
+        "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
+        "LastRefresh": "0001-01-01T00:00:00",
+        "Customer": {
+          "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+          "CompanyName": "Sam's Gym"
+        },
+        "Addresses": [],
+        "TransactionMethodsAvailable": {
+          "Interac": true,
+          "Eft": true,
+          "VisaDirectPull": false,
+          "VisaDirectPush": false,
+          "CreditCard": false
+        }
+      },
+      "ProductPriceId": "8e881238-170a-4dd1-bc00-81e315522e33",
+      "ProductPrice": {
+        "Id": "8e881238-170a-4dd1-bc00-81e315522e33",
+        "ProductId": "4986c149-f8f3-4789-82e9-f07b32c9c000",
+        "CreatedAt": "2021-10-27T19:29:51.836045",
+        "ProductPriceType": "Package",
+        "ProductPriceStatus": "Active",
+        "Price": 10,
+        "PerUnit": 1,
+        "Frequency": "Recurring",
+        "PlanName": "sub sjdjk",
+        "BillingPeriod": "Monthly",
+        "EnableSubscriptionEndDate": false,
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": false,
+        "SetupFee": 0,
+        "Currency": "CAD",
+        "Product": {
+          "Id": "4986c149-f8f3-4789-82e9-f07b32c9c000",
+          "Name": "test sub",
+          "ProductStatus": "Active",
+          "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+        }
+      },
+      "Memo": "Thank you",
+      "DueDay": 30,
+      "LastDayOfTheMonth": true,
+      "Quantity": 4,
+      "AnnuallyBillingDay": 0,
+      "AnnuallyBillingMonth": 0,
+      "StartDate": "2022-02-16T00:00:00",
+      "InvoicePaymentType": "AutomaticallyCharge",
+      "PaymentGateways": [
+        "Eft"
+      ],
+      "SubscriptionStatus": "Active",
+      "EndDateType": "Never",
+      "CreatedAt": "2022-02-15T18:25:07.749224",
+      "TaxRates": []
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PUT`
 
@@ -502,82 +535,92 @@ CustomerId              | guid          | Id for the related customer
 ## Get a specific subscription
 Use this endpoint if you want to get all the information for a specific subscription.
 
-```json
->Response example
-{
-  "statusCode": 200,
-  "message": "GET Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "8fc541a7-f8c8-49d4-a6cf-61348f2dd9b2",
-    "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
-    "UserId": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
-    "User": {
-      "Id": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
-      "CreatedAt": "2022-01-31T19:15:01.458104",
-      "AccountType": "Personal",
-      "Name": "Jonathan Doe",
-      "FirstName": "Jonathan",
-      "LastName": "Doe",
-      "CompanyName": "",
-      "ShippingSameAsBilling": false,
-      "LastRefresh": "0001-01-01T00:00:00",
-      "Customer": {
-        "Id": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
-        "CompanyName": "All Rails Customer"
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "8fc541a7-f8c8-49d4-a6cf-61348f2dd9b2",
+      "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
+      "UserId": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
+      "User": {
+        "Id": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
+        "CreatedAt": "2022-01-31T19:15:01.458104",
+        "AccountType": "Personal",
+        "Name": "Jonathan Doe",
+        "FirstName": "Jonathan",
+        "LastName": "Doe",
+        "CompanyName": "",
+        "ShippingSameAsBilling": false,
+        "LastRefresh": "0001-01-01T00:00:00",
+        "Customer": {
+          "Id": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
+          "CompanyName": "All Rails Customer"
+        },
+        "Addresses": [],
+        "TransactionMethodsAvailable": {
+          "Interac": false,
+          "Eft": true,
+          "VisaDirectPull": true,
+          "VisaDirectPush": true,
+          "CreditCard": true
+        }
       },
-      "Addresses": [],
-      "TransactionMethodsAvailable": {
-        "Interac": false,
-        "Eft": true,
-        "VisaDirectPull": true,
-        "VisaDirectPush": true,
-        "CreditCard": true
-      }
-    },
-    "ProductPriceId": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
-    "ProductPrice": {
-      "Id": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
-      "ProductId": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
-      "CreatedAt": "2022-02-09T18:19:05.452181",
-      "ProductPriceType": "Standard",
-      "ProductPriceStatus": "Active",
-      "Price": 22.45,
-      "PerUnit": 0,
-      "Frequency": "Recurring",
-      "PlanName": "Test",
-      "BillingPeriod": "Weekly",
-      "EnableFreeTrial": false,
-      "FreeTrialInDays": 0,
-      "EnableSetupFee": false,
-      "SetupFee": 0,
-      "Currency": "CAD",
-      "Product": {
-        "Id": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
-        "Name": "Test",
-        "ProductStatus": "Archived",
-        "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937"
-      }
-    },
-    "Memo": "Thank you",
-    "DueDay": 30,
-    "BillingDay": 2,
-    "LastDayOfTheMonth": false,
-    "Quantity": 1,
-    "AnnuallyBillingDay": 0,
-    "AnnuallyBillingMonth": 0,
-    "StartDate": "2022-02-10T00:00:00",
-    "InvoicePaymentType": "AutomaticallyCharge",
-    "PaymentGateways": [
-      "Eft"
-    ],
-    "SubscriptionStatus": "Active",
-    "EndDateType": "Never",
-    "CreatedAt": "2022-02-09T18:19:13.815643",
-    ]
+      "ProductPriceId": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
+      "ProductPrice": {
+        "Id": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
+        "ProductId": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+        "CreatedAt": "2022-02-09T18:19:05.452181",
+        "ProductPriceType": "Standard",
+        "ProductPriceStatus": "Active",
+        "Price": 22.45,
+        "PerUnit": 0,
+        "Frequency": "Recurring",
+        "PlanName": "Test",
+        "BillingPeriod": "Weekly",
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": false,
+        "SetupFee": 0,
+        "Currency": "CAD",
+        "Product": {
+          "Id": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+          "Name": "Test",
+          "ProductStatus": "Archived",
+          "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937"
+        }
+      },
+      "Memo": "Thank you",
+      "DueDay": 30,
+      "BillingDay": 2,
+      "LastDayOfTheMonth": false,
+      "Quantity": 1,
+      "AnnuallyBillingDay": 0,
+      "AnnuallyBillingMonth": 0,
+      "StartDate": "2022-02-10T00:00:00",
+      "InvoicePaymentType": "AutomaticallyCharge",
+      "PaymentGateways": [
+        "Eft"
+      ],
+      "SubscriptionStatus": "Active",
+      "EndDateType": "Never",
+      "CreatedAt": "2022-02-09T18:19:13.815643",
+      ]
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+</Tabs>
+
 
 `Method: GET`
 
@@ -644,76 +687,91 @@ CustomerId              | guid          | Id for the related customer
 ## Search a subscription
 This endpoint will return subscriptions based on the filter informed. Subscriptions are returned with pagination, which means that if you need to retrieve all subscriptions you need to call the same endpoint incrementing the CurrentPage.
 
-```json
->Payload example:
-{
-  "CreatedAt": "2022-02-16T03:00:00.000Z",
-  "CreatedAtOperator": "isBefore",
-  "SubscriptionStatus": 0,
-  "UserName": "Doe",
-  "UserNameOperator": "contains",
-  "GenericSearch": "Doe",
-  "Pagination": {
-    "PageNumber": 1,
-    "ItemsPerPage": 10
-  }
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
->Response example:
-{
-  "statusCode": 200,
-  "message": "POST Request successful.",
-  "isError": false,
-  "result": {
-    "CurrentPage": 1,
-    "PageSize": 10,
-    "TotalCount": 1,
-    "Items": [
-      {
-        "Id": "8fc541a7-f8c8-49d4-a6cf-61348f2dd9b2",
-        "Customer": {
-          "Id": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
-          "CompanyName": "All Rails Customer"
-        },
-        "User": {
-          "Id": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
-          "FirstName": "Jonathan",
-          "LastName": "Doe",
-          "CompanyName": "",
-          "IsActive": true
-        },
-        "ProductName": "Test",
-        "CreatedAt": "2022-02-09T18:19:13.815643",
-        "SubscriptionStatus": "Active",
-        "ProductPrice": {
-          "Id": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
-          "ProductId": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
-          "CreatedAt": "2022-02-09T18:19:05.452181",
-          "ProductPriceType": "Standard",
-          "ProductPriceStatus": "Active",
-          "Price": 22.45,
-          "PerUnit": 0,
-          "Frequency": "Recurring",
-          "PlanName": "Test",
-          "BillingPeriod": "Weekly",
-          "EnableFreeTrial": false,
-          "FreeTrialInDays": 0,
-          "EnableSetupFee": false,
-          "SetupFee": 0,
-          "Currency": "CAD",
-          "Product": {
-            "Id": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
-            "Name": "Test",
-            "ProductStatus": "Archived",
-            "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937"
-          }
-        },
-        "Total": 22.9
-      }
-    ]
+  ```json
+  {
+    "CreatedAt": "2022-02-16T03:00:00.000Z",
+    "CreatedAtOperator": "isBefore",
+    "SubscriptionStatus": 0,
+    "UserName": "Doe",
+    "UserNameOperator": "contains",
+    "GenericSearch": "Doe",
+    "Pagination": {
+      "PageNumber": 1,
+      "ItemsPerPage": 10
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+      "CurrentPage": 1,
+      "PageSize": 10,
+      "TotalCount": 1,
+      "Items": [
+        {
+          "Id": "8fc541a7-f8c8-49d4-a6cf-61348f2dd9b2",
+          "Customer": {
+            "Id": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937",
+            "CompanyName": "All Rails Customer"
+          },
+          "User": {
+            "Id": "0ba8d50e-a61d-45a4-b679-04ac466595f8",
+            "FirstName": "Jonathan",
+            "LastName": "Doe",
+            "CompanyName": "",
+            "IsActive": true
+          },
+          "ProductName": "Test",
+          "CreatedAt": "2022-02-09T18:19:13.815643",
+          "SubscriptionStatus": "Active",
+          "ProductPrice": {
+            "Id": "9b497b25-74b5-41c2-bbf2-93cfa40c6bbd",
+            "ProductId": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+            "CreatedAt": "2022-02-09T18:19:05.452181",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 22.45,
+            "PerUnit": 0,
+            "Frequency": "Recurring",
+            "PlanName": "Test",
+            "BillingPeriod": "Weekly",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "85d9ebd9-daf7-4146-ba1d-bf1f401b8933",
+              "Name": "Test",
+              "ProductStatus": "Archived",
+              "CustomerId": "e37f2f7a-111e-4c3f-9f83-8092dd5ef937"
+            }
+          },
+          "Total": 22.9
+        }
+      ]
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
+
 `Method: POST`
 
 `Endpoint: {{env}}/api/subscription/filter`
@@ -781,25 +839,40 @@ CustomerId              | guid          | Id for the related customer
 ## Cancel a subscription
 Use this endpoint if you want to cancel a subscription.
 
-```json
->Payload example
-{
-  "CancellationType": "CustomDate",
-  "CustomCancellationDate": "2022-02-18T03:00:00.000Z",
-  "CancellationReason": "Other",
-  "CustomCancellationReason": "I want to test the cancel subscription feature",
-  "RefundLastInvoice": true,
-  "SecurityPassword": "your_password"
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
->Response example
-{
-  "statusCode": 200,
-  "message": "PUT Request successful.",
-  "isError": false,
-  "result": "Request completed"
-}
-```
+  ```json
+  {
+    "CancellationType": "CustomDate",
+    "CustomCancellationDate": "2022-02-18T03:00:00.000Z",
+    "CancellationReason": "Other",
+    "CustomCancellationReason": "I want to test the cancel subscription feature",
+    "RefundLastInvoice": true,
+    "SecurityPassword": "your_password"
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "PUT Request successful.",
+    "isError": false,
+    "result": "Request completed"
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
+
 `Method: PUT`
 
 `Endpoint: {{env}}/api/subscription/cancel/{{subscription_id}}`
@@ -837,28 +910,38 @@ CustomDate | Set the cancellation to a chosen date
 ## Get subscription events
 Use this endpoint if you want to get all the subscription events related to a specific subscription.
 
-```json
->Response
-{
-  "statusCode": 200,
-  "message": "GET Request successful.",
-  "isError": false,
-  "result": [
-    {
-      "CreatedAt": "2021-11-03T15:37:47.328195",
-      "Description": "Subscription status has changed to Cancelled",
-      "Type": "StatusChanged",
-      "SubscriptionId": "bab3a770-484d-48d6-b89e-77485a05fe97"
-    },
-    {
-      "CreatedAt": "2021-10-27T19:45:58.323213",
-      "Description": "Subscription bab3a770-484d-48d6-b89e-77485a05fe97 was created",
-      "Type": "Created",
-      "SubscriptionId": "bab3a770-484d-48d6-b89e-77485a05fe97"
-    }
-  ]
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": [
+      {
+        "CreatedAt": "2021-11-03T15:37:47.328195",
+        "Description": "Subscription status has changed to Cancelled",
+        "Type": "StatusChanged",
+        "SubscriptionId": "bab3a770-484d-48d6-b89e-77485a05fe97"
+      },
+      {
+        "CreatedAt": "2021-10-27T19:45:58.323213",
+        "Description": "Subscription bab3a770-484d-48d6-b89e-77485a05fe97 was created",
+        "Type": "Created",
+        "SubscriptionId": "bab3a770-484d-48d6-b89e-77485a05fe97"
+      }
+    ]
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
 `Method: GET`
 
 `Endpoint: {{env}}/api/subscription/getsubscriptionevents/{{subscription_id}}`
@@ -885,107 +968,117 @@ StatusChanged            | Subscription status was changed
 ## Get subscription invoices
 Use this endpoint if you want to get all the invoices related to a specific subscription.
 
-```json
->Response
-{
-  "statusCode": 200,
-  "message": "GET Request successful.",
-  "isError": false,
-  "result": [
-    {
-      "Id": "e0a79d0e-611a-40d7-973a-e41a09fc3021",
-      "UserId": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
-      "User": {
-        "Id": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
-        "FirstName": "renan",
-        "LastName": "zacheo",
-        "Email": "renan@gmail.com",
-        "IsActive": true
-      },
-      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-      "Customer": {
-        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-        "CompanyName": "Sam's Gym"
-      },
-      "CreatedAt": "2021-11-27T05:05:12.776243",
-      "Amount": 100,
-      "InvoiceStatus": "Paid",
-      "Memo": "Thank you for your business!",
-      "DaysToDueDate": 0,
-      "DueDate": "2021-11-27T00:00:00",
-      "PaymentType": "AutomaticallyCharge",
-      "PaymentGateways": [
-        "Eft"
-      ],
-      "Items": [
-        {
-          "ProductPrice": {
-            "Id": "e1ddcecd-dc9c-41ee-b762-49056532b727",
-            "ProductId": "ba01bbed-a741-419a-839b-17c5baa30f39",
-            "CreatedAt": "2021-10-27T16:12:14.536959",
-            "ProductPriceType": "Standard",
-            "ProductPriceStatus": "Active",
-            "Price": 100,
-            "PerUnit": 0,
-            "Frequency": "Recurring",
-            "PlanName": "Silver member",
-            "BillingPeriod": "Monthly",
-            "EnableSubscriptionEndDate": false,
-            "EnableFreeTrial": false,
-            "FreeTrialInDays": 0,
-            "EnableSetupFee": false,
-            "SetupFee": 0,
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": [
+      {
+        "Id": "e0a79d0e-611a-40d7-973a-e41a09fc3021",
+        "UserId": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
+        "User": {
+          "Id": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
+          "FirstName": "renan",
+          "LastName": "zacheo",
+          "Email": "renan@gmail.com",
+          "IsActive": true
+        },
+        "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "Customer": {
+          "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+          "CompanyName": "Sam's Gym"
+        },
+        "CreatedAt": "2021-11-27T05:05:12.776243",
+        "Amount": 100,
+        "InvoiceStatus": "Paid",
+        "Memo": "Thank you for your business!",
+        "DaysToDueDate": 0,
+        "DueDate": "2021-11-27T00:00:00",
+        "PaymentType": "AutomaticallyCharge",
+        "PaymentGateways": [
+          "Eft"
+        ],
+        "Items": [
+          {
+            "ProductPrice": {
+              "Id": "e1ddcecd-dc9c-41ee-b762-49056532b727",
+              "ProductId": "ba01bbed-a741-419a-839b-17c5baa30f39",
+              "CreatedAt": "2021-10-27T16:12:14.536959",
+              "ProductPriceType": "Standard",
+              "ProductPriceStatus": "Active",
+              "Price": 100,
+              "PerUnit": 0,
+              "Frequency": "Recurring",
+              "PlanName": "Silver member",
+              "BillingPeriod": "Monthly",
+              "EnableSubscriptionEndDate": false,
+              "EnableFreeTrial": false,
+              "FreeTrialInDays": 0,
+              "EnableSetupFee": false,
+              "SetupFee": 0,
+              "Currency": "CAD",
+              "Product": {
+                "Id": "ba01bbed-a741-419a-839b-17c5baa30f39",
+                "Name": "Gym ",
+                "Description": "gym membership",
+                "ProductStatus": "Archived",
+                "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+              }
+            },
+            "ProductPriceId": "e1ddcecd-dc9c-41ee-b762-49056532b727",
+            "Quantity": 1,
             "Currency": "CAD",
-            "Product": {
-              "Id": "ba01bbed-a741-419a-839b-17c5baa30f39",
-              "Name": "Gym ",
-              "Description": "gym membership",
-              "ProductStatus": "Archived",
-              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-            }
-          },
-          "ProductPriceId": "e1ddcecd-dc9c-41ee-b762-49056532b727",
-          "Quantity": 1,
-          "Currency": "CAD",
-          "Price": 100
-        }
-      ],
-      "Transactions": [
-        {
-          "FastEft": false,
-          "Id": "63a77973-702a-4ab9-9dad-985a2439fdf5",
-          "CreatedAt": "2021-11-27T05:05:13.391365",
-          "Memo": "Thank you for your business!",
-          "Comment": "",
-          "Amount": 100,
-          "Customer": {
-            "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-            "CompanyName": "Sam's Gym"
-          },
-          "User": {
-            "Id": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
-            "FirstName": "renan",
-            "LastName": "zacheo",
-            "Email": "renan@gmail.com",
-            "IsActive": true
-          },
-          "ZumRailsType": "AccountsReceivable",
-          "TransactionMethod": "Eft",
-          "TransactionHistory": [],
-          "TransactionStatus": "Completed",
-          "From": "renan zacheo - renan@gmail.com",
-          "To": "Not able to parse",
-          "InteracHasSecurityQuestionAndAnswer": false,
-          "CompletedAt": "2021-11-27T05:06:13.019093",
-          "IsRefundable": false,
-          "InvoiceId": "e0a79d0e-611a-40d7-973a-e41a09fc3021",
-          "SubscriptionId": "b270fca6-f811-4d06-a4c9-32aa88565a48"
-        }
-      ],
-    }
-  ]
-}
-```
+            "Price": 100
+          }
+        ],
+        "Transactions": [
+          {
+            "FastEft": false,
+            "Id": "63a77973-702a-4ab9-9dad-985a2439fdf5",
+            "CreatedAt": "2021-11-27T05:05:13.391365",
+            "Memo": "Thank you for your business!",
+            "Comment": "",
+            "Amount": 100,
+            "Customer": {
+              "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+              "CompanyName": "Sam's Gym"
+            },
+            "User": {
+              "Id": "41ee276c-bd09-46ee-a9e0-28f5d23e07d5",
+              "FirstName": "renan",
+              "LastName": "zacheo",
+              "Email": "renan@gmail.com",
+              "IsActive": true
+            },
+            "ZumRailsType": "AccountsReceivable",
+            "TransactionMethod": "Eft",
+            "TransactionHistory": [],
+            "TransactionStatus": "Completed",
+            "From": "renan zacheo - renan@gmail.com",
+            "To": "Not able to parse",
+            "InteracHasSecurityQuestionAndAnswer": false,
+            "CompletedAt": "2021-11-27T05:06:13.019093",
+            "IsRefundable": false,
+            "InvoiceId": "e0a79d0e-611a-40d7-973a-e41a09fc3021",
+            "SubscriptionId": "b270fca6-f811-4d06-a4c9-32aa88565a48"
+          }
+        ],
+      }
+    ]
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
 `Method: GET`
 
 `Endpoint: {{env}}/api/subscription/getsubscriptioninvoices/{{subscription_id}}`

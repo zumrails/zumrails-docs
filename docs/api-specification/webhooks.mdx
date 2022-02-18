@@ -15,16 +15,24 @@ To enable webhooks you have to open the settings page using the portal. When a U
 - Customers (only available for partners)
 - Recurrent Transaction (only available for customers)
 
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
 
-```json
-> Response example:
-{
-    "Type": "User",
-    "Data": {
-        ...
+  ```json
+    {
+        "Type": "User",
+        "Data": {
+            ...
+        }
     }
-}
-```
+  ```
+
+  </TabItem>
+</Tabs>
 
 The payload has a property Type to indicate to each entity the webhook status change is coming from.
 

@@ -3,8 +3,9 @@ title: Products
 description:
     How to integrate with products API
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-#Products
 At Zūm Rails one product can have one or more prices, these are called product prices and need to be informed at the moment of creating a product. Product prices can have different types of configurations such as Pricing Model and Frequency.
 
 **Pricing Models Types**
@@ -23,18 +24,20 @@ Recurring | If this is a product which is available as a recurring subscription,
 
 ## Creating a new product
 
-```json
-> Payload example for product with one OneTime price:
-{
-  "Name": "Test Product",
-  "Description": "Product Description",
-  "SecurityPassword": "your_password",
-  "ProductPrices": [
-    {
-      "Name": "Test Product",
-      "Description": "Product Description",
-      "SecurityPassword": "your_password",
-      "ProductPrices": [
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload for product with one OneTime price', value: 'tab1'},
+    {label: 'Payload for product with one Recurring price', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "Name": "Test Product",
+    "Description": "Product Description",
+    "SecurityPassword": "your_password",
+    "ProductPrices": [
         {
           "ProductPriceType": "Standard",
           "Price": 22.55,
@@ -52,34 +55,38 @@ Recurring | If this is a product which is available as a recurring subscription,
         }
       ]
     }
-  ]
-}
+  ```
 
-> Payload example for product with one Recurring price:
-{
-  "Name": "Test Product",
-  "Description": "Product Description",
-  "SecurityPassword": "your_password",
-  "ProductPrices": [
-    {
-      "ProductPriceType": "Standard",
-      "Price": 123.25,
-      "PerUnit": 0,
-      "Frequency": "Recurring",
-      "PlanName": "Platinum Plan",
-      "PlanDescription": "Platinum plan description",
-      "BillingPeriod": "Annually",
-      "EnableSubscriptionEndDate": true,
-      "SubscriptionEndDate": "2022-02-26",
-      "EnableFreeTrial": false,
-      "FreeTrialInDays": 0,
-      "EnableSetupFee": false,
-      "SetupFee": 0
-    }
-  ]
-}
+  </TabItem>
+  <TabItem value="tab2">
 
-```
+  ```json
+  {
+    "Name": "Test Product",
+    "Description": "Product Description",
+    "SecurityPassword": "your_password",
+    "ProductPrices": [
+      {
+        "ProductPriceType": "Standard",
+        "Price": 123.25,
+        "PerUnit": 0,
+        "Frequency": "Recurring",
+        "PlanName": "Platinum Plan",
+        "PlanDescription": "Platinum plan description",
+        "BillingPeriod": "Annually",
+        "EnableSubscriptionEndDate": true,
+        "SubscriptionEndDate": "2022-02-26",
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": false,
+        "SetupFee": 0
+      }
+    ]
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -120,14 +127,23 @@ Annually | string | Sets an annual  recurrence
 
 ## Uploading a product picture
 
-```json
-> Payload example for uploading  picture:
-{
-  "Bytes": "/9j/4AAQSkZJRgABAQAAAQABAAD//gAfQ29tcHJlc3NlZCBieSBqcGVnLXJlY29tcHJlc3P/2wCEAAUFBQUGBQYHBwYJCQgJCQ0MCwsMDRMODw4PDhMdEhUSEhUSHRofGRcZHxouJCAgJC41LSotNUA5OUBRTVFqao4BBQUFBQYFBgcHBgkJCAkJDQwLCwwNEw4PDg8OEx0SFRISFRIdGh8ZFxkfGi4kICAkLjUtKi01QDk5QFFNUWpqjv/CABEIBd0F3AMBIgACEQEDEQH/xAAdA...",
-  "Filename": "marketing-kit-launch-binders-com-open-49901SD.jpg",
-  "SecurityPassword": "your_password"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "Bytes": "/9j/4AAQSkZJRgABAQAAAQABAAD//gAfQ29tcHJlc3NlZCBieSBqcGVnLXJlY29tcHJlc3P/2wCEAAUFBQUGBQYHBwYJCQgJCQ0MCwsMDRMODw4PDhMdEhUSEhUSHRofGRcZHxouJCAgJC41LSotNUA5OUBRTVFqao4BBQUFBQYFBgcHBgkJCAkJDQwLCwwNEw4PDg8OEx0SFRISFRIdGh8ZFxkfGi4kICAkLjUtKi01QDk5QFFNUWpqjv/CABEIBd0F3AMBIgACEQEDEQH/xAAdA...",
+    "Filename": "marketing-kit-launch-binders-com-open-49901SD.jpg",
+    "SecurityPassword": "your_password"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: PATCH`
 
@@ -148,49 +164,57 @@ To remove a image send a request with Filename and Bytes values has `null`
 :::
 
 ## Update a product
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
 
-```json
-> Payload example:
-{
-  "Name": "Test",
-  "Description": "Teste",
-  "SecurityPassword": "!@#Change",
-  "ProductPrices": [
-    {
-      "Id": "68fe5724-7a8b-41d7-9e9c-350f15953d00",
-      "ProductPriceType": "Standard",
-      "Price": 123.25,
-      "PerUnit": 0,
-      "Frequency": "Recurring",
-      "PlanName": "Test Recurring",
-      "PlanDescription": "Test Description",
-      "BillingPeriod": "Annually",
-      "EnableSubscriptionEndDate": true,
-      "SubscriptionEndDate": "2022-02-26",
-      "EnableFreeTrial": false,
-      "FreeTrialInDays": 0,
-      "EnableSetupFee": false,
-      "SetupFee": 0,
-      "SetToRemove": true
-    },
-    {
-      "ProductPriceType": "Standard",
-      "Price": 25.67,
-      "PerUnit": 0,
-      "Frequency": "Recurring",
-      "PlanName": "Test Recurring",
-      "PlanDescription": "Test Description",
-      "BillingPeriod": "Annually",
-      "EnableSubscriptionEndDate": true,
-      "SubscriptionEndDate": "2022-02-26",
-      "EnableFreeTrial": false,
-      "FreeTrialInDays": 0,
-      "EnableSetupFee": false,
-      "SetupFee": 0
-    }
-  ]
-}
-```
+  ```json
+  {
+    "Name": "Test",
+    "Description": "Teste",
+    "SecurityPassword": "!@#Change",
+    "ProductPrices": [
+      {
+        "Id": "68fe5724-7a8b-41d7-9e9c-350f15953d00",
+        "ProductPriceType": "Standard",
+        "Price": 123.25,
+        "PerUnit": 0,
+        "Frequency": "Recurring",
+        "PlanName": "Test Recurring",
+        "PlanDescription": "Test Description",
+        "BillingPeriod": "Annually",
+        "EnableSubscriptionEndDate": true,
+        "SubscriptionEndDate": "2022-02-26",
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": false,
+        "SetupFee": 0,
+        "SetToRemove": true
+      },
+      {
+        "ProductPriceType": "Standard",
+        "Price": 25.67,
+        "PerUnit": 0,
+        "Frequency": "Recurring",
+        "PlanName": "Test Recurring",
+        "PlanDescription": "Test Description",
+        "BillingPeriod": "Annually",
+        "EnableSubscriptionEndDate": true,
+        "SubscriptionEndDate": "2022-02-26",
+        "EnableFreeTrial": false,
+        "FreeTrialInDays": 0,
+        "EnableSetupFee": false,
+        "SetupFee": 0
+      }
+    ]
+  }
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: PUT`
 
@@ -225,51 +249,61 @@ SetToRemove | bool | yes (only if you are editing) | This will remove the produc
 ## Get a specific product
 Use this endpoint if you want to get all the information for a specific product.
 
-```json
-> Response example:
-{
-  "statusCode": 200,
-  "message": "GET Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
-    "Name": "Test",
-    "Description": "Test",
-    "ProductStatus": "Active",
-    "ProductPrices": [
-      {
-        "Id": "037b8b2e-9cc0-4059-a246-f4c02e3564d4",
-        "product_id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
-        "CreatedAt": "2022-02-11T17:25:26.970291",
-        "ProductPriceType": "Standard",
-        "ProductPriceStatus": "Active",
-        "Price": 25.67,
-        "PerUnit": 0,
-        "Frequency": "Recurring",
-        "PlanName": "Test Recurring",
-        "PlanDescription": "Test Description",
-        "BillingPeriod": "Annually",
-        "EnableSubscriptionEndDate": true,
-        "SubscriptionEndDate": "2022-02-26T03:00:00",
-        "EnableFreeTrial": false,
-        "FreeTrialInDays": 0,
-        "EnableSetupFee": false,
-        "SetupFee": 0,
-        "Currency": "CAD",
-        "Product": {
-          "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
-          "Name": "Test",
-          "Description": "Test",
-          "ProductStatus": "Active",
-          "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+      "Name": "Test",
+      "Description": "Test",
+      "ProductStatus": "Active",
+      "ProductPrices": [
+        {
+          "Id": "037b8b2e-9cc0-4059-a246-f4c02e3564d4",
+          "product_id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+          "CreatedAt": "2022-02-11T17:25:26.970291",
+          "ProductPriceType": "Standard",
+          "ProductPriceStatus": "Active",
+          "Price": 25.67,
+          "PerUnit": 0,
+          "Frequency": "Recurring",
+          "PlanName": "Test Recurring",
+          "PlanDescription": "Test Description",
+          "BillingPeriod": "Annually",
+          "EnableSubscriptionEndDate": true,
+          "SubscriptionEndDate": "2022-02-26T03:00:00",
+          "EnableFreeTrial": false,
+          "FreeTrialInDays": 0,
+          "EnableSetupFee": false,
+          "SetupFee": 0,
+          "Currency": "CAD",
+          "Product": {
+            "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+            "Name": "Test",
+            "Description": "Test",
+            "ProductStatus": "Active",
+            "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+          }
         }
-      }
-    ],
-    "ConnectUrl": "connect_url",
-    "CreatedAt": "2022-02-11T15:22:29.58586"
+      ],
+      "ConnectUrl": "connect_url",
+      "CreatedAt": "2022-02-11T15:22:29.58586"
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+</Tabs>
+
 
 `Method: GET`
 
@@ -309,139 +343,153 @@ Currency | string | Currency set for the product price
 ## Search a product
 This endpoint will return products based on the filter informed. Products are returned with pagination, which means that if you need to retrieve all products you need to call the same endpoint incrementing the CurrentPage.
 
-```json
-> Payload example:
-{
-  "CreatedAt": "2022-02-07T03:00:00.000Z",
-  "CreatedAtOperator": "isInTheLast",
-  "ProductStatus": 0,
-  "GenericSearch": "Product",
-  "Pagination": {
-    "PageNumber": 1,
-    "ItemsPerPage": 7
-  }
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-> Response example:
-{
-  "statusCode": 200,
-  "message": "POST Request successful.",
-  "isError": false,
-  "result": {
-    "CurrentPage": 1,
-    "PageSize": 7,
-    "TotalCount": 2,
-    "Items": [
-      {
-        "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
-        "Name": "Test Product",
-        "Description": "Product Description",
-        "ProductStatus": "Active",
-        "ProductPrices": [
-          {
-            "Id": "9f80a875-a1d3-4202-a859-4eafa669ff08",
-            "ProductId": "48711cce-c191-4491-8e22-11b9c0b8a967",
-            "CreatedAt": "2022-02-11T15:17:32.185776",
-            "ProductPriceType": "Standard",
-            "ProductPriceStatus": "Active",
-            "Price": 22.55,
-            "PerUnit": 0,
-            "Frequency": "OneTime",
-            "EnableFreeTrial": false,
-            "FreeTrialInDays": 0,
-            "EnableSetupFee": false,
-            "SetupFee": 0,
-            "Currency": "CAD",
-            "Product": {
-              "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
-              "Name": "Test Product",
-              "Description": "Product Description",
-              "ProductStatus": "Active",
-              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-            }
-          },
-          {
-            "Id": "e70eb52e-4938-4b0b-97a0-12f366febf04",
-            "ProductId": "48711cce-c191-4491-8e22-11b9c0b8a967",
-            "CreatedAt": "2022-02-11T15:17:32.185777",
-            "ProductPriceType": "Standard",
-            "ProductPriceStatus": "Active",
-            "Price": 35.68,
-            "PerUnit": 0,
-            "Frequency": "OneTime",
-            "EnableFreeTrial": false,
-            "FreeTrialInDays": 0,
-            "EnableSetupFee": false,
-            "SetupFee": 0,
-            "Currency": "CAD",
-            "Product": {
-              "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
-              "Name": "Test Product",
-              "Description": "Product Description",
-              "ProductStatus": "Active",
-              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-            }
-          }
-        ],
-        "CreatedAt": "2022-02-11T15:17:32.300689"
-      },
-      {
-        "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
-        "Name": "Test Product",
-        "Description": "Product Description",
-        "ProductStatus": "Active",
-        "ProductPrices": [
-          {
-            "Id": "9a7bb825-361d-4258-9c70-9fbe10119eba",
-            "ProductId": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
-            "CreatedAt": "2022-02-11T15:16:59.488244",
-            "ProductPriceType": "Standard",
-            "ProductPriceStatus": "Active",
-            "Price": 22.55,
-            "PerUnit": 0,
-            "Frequency": "OneTime",
-            "EnableFreeTrial": false,
-            "FreeTrialInDays": 0,
-            "EnableSetupFee": false,
-            "SetupFee": 0,
-            "Currency": "CAD",
-            "Product": {
-              "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
-              "Name": "Test Product",
-              "Description": "Product Description",
-              "ProductStatus": "Active",
-              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-            }
-          },
-          {
-            "Id": "fe07c018-beaa-42be-9a8c-0b75944bc70e",
-            "ProductId": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
-            "CreatedAt": "2022-02-11T15:16:59.488246",
-            "ProductPriceType": "Standard",
-            "ProductPriceStatus": "Active",
-            "Price": 35.68,
-            "PerUnit": 0,
-            "Frequency": "OneTime",
-            "EnableFreeTrial": false,
-            "FreeTrialInDays": 0,
-            "EnableSetupFee": false,
-            "SetupFee": 0,
-            "Currency": "CAD",
-            "Product": {
-              "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
-              "Name": "Test Product",
-              "Description": "Product Description",
-              "ProductStatus": "Active",
-              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-            }
-          }
-        ],
-        "CreatedAt": "2022-02-11T15:16:59.67639"
-      },
-    ]
+  ```json
+  {
+    "CreatedAt": "2022-02-07T03:00:00.000Z",
+    "CreatedAtOperator": "isInTheLast",
+    "ProductStatus": 0,
+    "GenericSearch": "Product",
+    "Pagination": {
+      "PageNumber": 1,
+      "ItemsPerPage": 7
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+      "CurrentPage": 1,
+      "PageSize": 7,
+      "TotalCount": 2,
+      "Items": [
+        {
+          "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
+          "Name": "Test Product",
+          "Description": "Product Description",
+          "ProductStatus": "Active",
+          "ProductPrices": [
+            {
+              "Id": "9f80a875-a1d3-4202-a859-4eafa669ff08",
+              "ProductId": "48711cce-c191-4491-8e22-11b9c0b8a967",
+              "CreatedAt": "2022-02-11T15:17:32.185776",
+              "ProductPriceType": "Standard",
+              "ProductPriceStatus": "Active",
+              "Price": 22.55,
+              "PerUnit": 0,
+              "Frequency": "OneTime",
+              "EnableFreeTrial": false,
+              "FreeTrialInDays": 0,
+              "EnableSetupFee": false,
+              "SetupFee": 0,
+              "Currency": "CAD",
+              "Product": {
+                "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
+                "Name": "Test Product",
+                "Description": "Product Description",
+                "ProductStatus": "Active",
+                "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+              }
+            },
+            {
+              "Id": "e70eb52e-4938-4b0b-97a0-12f366febf04",
+              "ProductId": "48711cce-c191-4491-8e22-11b9c0b8a967",
+              "CreatedAt": "2022-02-11T15:17:32.185777",
+              "ProductPriceType": "Standard",
+              "ProductPriceStatus": "Active",
+              "Price": 35.68,
+              "PerUnit": 0,
+              "Frequency": "OneTime",
+              "EnableFreeTrial": false,
+              "FreeTrialInDays": 0,
+              "EnableSetupFee": false,
+              "SetupFee": 0,
+              "Currency": "CAD",
+              "Product": {
+                "Id": "48711cce-c191-4491-8e22-11b9c0b8a967",
+                "Name": "Test Product",
+                "Description": "Product Description",
+                "ProductStatus": "Active",
+                "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+              }
+            }
+          ],
+          "CreatedAt": "2022-02-11T15:17:32.300689"
+        },
+        {
+          "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+          "Name": "Test Product",
+          "Description": "Product Description",
+          "ProductStatus": "Active",
+          "ProductPrices": [
+            {
+              "Id": "9a7bb825-361d-4258-9c70-9fbe10119eba",
+              "ProductId": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+              "CreatedAt": "2022-02-11T15:16:59.488244",
+              "ProductPriceType": "Standard",
+              "ProductPriceStatus": "Active",
+              "Price": 22.55,
+              "PerUnit": 0,
+              "Frequency": "OneTime",
+              "EnableFreeTrial": false,
+              "FreeTrialInDays": 0,
+              "EnableSetupFee": false,
+              "SetupFee": 0,
+              "Currency": "CAD",
+              "Product": {
+                "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+                "Name": "Test Product",
+                "Description": "Product Description",
+                "ProductStatus": "Active",
+                "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+              }
+            },
+            {
+              "Id": "fe07c018-beaa-42be-9a8c-0b75944bc70e",
+              "ProductId": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+              "CreatedAt": "2022-02-11T15:16:59.488246",
+              "ProductPriceType": "Standard",
+              "ProductPriceStatus": "Active",
+              "Price": 35.68,
+              "PerUnit": 0,
+              "Frequency": "OneTime",
+              "EnableFreeTrial": false,
+              "FreeTrialInDays": 0,
+              "EnableSetupFee": false,
+              "SetupFee": 0,
+              "Currency": "CAD",
+              "Product": {
+                "Id": "2c467d94-7e81-4154-a4b8-293c369c4fbf",
+                "Name": "Test Product",
+                "Description": "Product Description",
+                "ProductStatus": "Active",
+                "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+              }
+            }
+          ],
+          "CreatedAt": "2022-02-11T15:16:59.67639"
+        },
+      ]
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -507,21 +555,32 @@ If you need to search for a specific product, we recommend that you retrieve the
 
 ## Archive a product
 Use this endpoint if you want to archive a product. Once archived, the product will not be visible in any end user facing screens. If there are any active subscriptions or invoices they will remain until cancelled.
-```json
->Response
-{
-  "statusCode": 200,
-  "message": "PATCH Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
-    "Name": "Product",
-    "Description": "",
-    "ProductStatus": "Archived",
-    "CreatedAt": "2022-02-11T15:22:29.58586"
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "PATCH Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+      "Name": "Product",
+      "Description": "",
+      "ProductStatus": "Archived",
+      "CreatedAt": "2022-02-11T15:22:29.58586"
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+
+</Tabs>
 
 `Method: PATCH`
 
@@ -542,21 +601,31 @@ Use this endpoint if you want to archive a product.
 ## Unarchive a product
 Use this endpoint if you want to unarchive a product. Once unarchived, the product will be visible in any end user facing screens. If there are any active subscriptions or invoices they will remain until unaffected.
 
-```json
->Response
-{
-  "statusCode": 200,
-  "message": "PATCH Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
-    "Name": "Product",
-    "Description": "",
-    "ProductStatus": "Active",
-    "CreatedAt": "2022-02-11T15:22:29.58586"
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "PATCH Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "2ab8f5fa-02a7-4e91-a426-ef09adab3fc8",
+      "Name": "Product",
+      "Description": "",
+      "ProductStatus": "Active",
+      "CreatedAt": "2022-02-11T15:22:29.58586"
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+
+</Tabs>
 
 `Method: PATCH`
 

@@ -8,26 +8,35 @@ description:
 
 ## List all wallets
 
-```json
-> Response example:
-{
-    "statusCode": 200,
-    "message": "GET Request successful.",
-    "isError": false,
-    "result": [
-        {
-            "Id": "30126b59-...-008376504211",
-            "Type": "AccountsPayable",
-            "Balance": 50000.88
-        },
-        {
-            "Id": "30126b59-...-008376504210",
-            "Type": "Unified",
-            "Balance": 1000.50
-        }
-    ]
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "GET Request successful.",
+        "isError": false,
+        "result": [
+            {
+                "Id": "30126b59-...-008376504211",
+                "Type": "AccountsPayable",
+                "Balance": 50000.88
+            },
+            {
+                "Id": "30126b59-...-008376504210",
+                "Type": "Unified",
+                "Balance": 1000.50
+            }
+        ]
+    }
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: GET`
 
@@ -45,40 +54,55 @@ Balance | decimal | Current balance in the wallet
 
 ## Filter wallet transactions
 
-```json
-> Payload example:
-{
-    "WalletId": "30126b59-...-008376504210",
-    "Pagination": {
-        "PageNumber": 1
-    }
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": [
-        {
-            "CurrentPage": 1,
-            "PageSize": 8,
-            "TotalCount": 1,
-            "Items": [
-                {
-                    "Id": "faa32009-...-a52cc8996b61",
-                    "Description": "Funds received by Funding Source (RBC-01234-1234567)",
-                    "Debit": 0,
-                    "Credit": 0.01,
-                    "Balance": 0.01,
-                    "Type": "Credit",
-                    "Authorized": true,
-                    "CreatedAt": "2020-04-28T15:15:09.208515"
-                }
-            ]
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "WalletId": "30126b59-...-008376504210",
+        "Pagination": {
+            "PageNumber": 1
         }
-    ]
-}
-```
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": [
+            {
+                "CurrentPage": 1,
+                "PageSize": 8,
+                "TotalCount": 1,
+                "Items": [
+                    {
+                        "Id": "faa32009-...-a52cc8996b61",
+                        "Description": "Funds received by Funding Source (RBC-01234-1234567)",
+                        "Debit": 0,
+                        "Credit": 0.01,
+                        "Balance": 0.01,
+                        "Type": "Credit",
+                        "Authorized": true,
+                        "CreatedAt": "2020-04-28T15:15:09.208515"
+                    }
+                ]
+            }
+        ]
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 

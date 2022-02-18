@@ -4,6 +4,10 @@ description:
   How to use the Connector SDK
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
 # Connector SDK
 
 The javascript sdk library allows you to build a more robust integration with the Zūm Rails Connector. Instead of hosting a public URL, the library offers the possibility for you to first create a temporary token, then initiate and configure the Connector via Javascript and finally receive callbacks when the connection is completed.
@@ -25,12 +29,23 @@ After, the second step is to create a token for the Connector SDK.
 
 `Endpoint: {{env}}/api/aggregationconnector/createtoken`
 
-```json
-> Payload example (empty):
-{}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload (empty)', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-> Response example:
-{
+  ```json
+      {}
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
     "statusCode": 200,
     "message": "POST Request successful.",
     "isError": false,
@@ -41,7 +56,10 @@ After, the second step is to create a token for the Connector SDK.
         "CompanyName": "Demo Aggregation"
     }
 }
-```
+  ```
+  
+  </TabItem>
+</Tabs>
 
 You will need to use the property `result.Token`.
 
@@ -53,9 +71,21 @@ Each token is valid only once, for 15 minutes.
 
 Refer the js library bellow into your website.
 
-```html
-<script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/connector.js" type="text/javascript" async=""></script>
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Insert on your website', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```html
+    <script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/connector.js" type="text/javascript" async=""></script>
+  ```
+
+  </TabItem>
+
+</Tabs>
+
 
 ## Init the JS SDK
 
@@ -68,41 +98,52 @@ config | A json config representing all the configurations available and describ
 
 Bellow you can find an example of the code needed to init the JS SDK.
 
-```javascript
-<script>
-    $(function() {
-        $('#btnGoConnect').click(function() {
-            const token = '<THE TOKEN RECEIVED IN THE CREATE TOKEN ENDPOINT>';
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'JS SDK Code', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
 
-            ZumRailsConnector.init({
-                token: token,
-                options: {
-                    accountselector: true,
-                    testinstitution: true,
-                    backbutton: true,
-                    closebutton: true,
-                    extrafield1: '<my-extra-data>
-                },
-                onLoad: function () {
-                    console.log('onLoad');
-                },
-                onError: function (error) {
-                    console.log('onError', error);
-                },
-                onSuccess: function (requestid, cardid, extrafield1, extrafield2) {
-                    console.log('onSuccess', requestid, cardid, extrafield1, extrafield2);
-                },
-                onStepChanged: function (data) {
-                    console.log('onStepChanged', data);
-                },
-                onConnectorClosed: function () {
-                    console.log('onConnectorClosed');
-                }
+  ```html
+    <script>
+        $(function() {
+            $('#btnGoConnect').click(function() {
+                const token = '<THE TOKEN RECEIVED IN THE CREATE TOKEN ENDPOINT>';
+
+                ZumRailsConnector.init({
+                    token: token,
+                    options: {
+                        accountselector: true,
+                        testinstitution: true,
+                        backbutton: true,
+                        closebutton: true,
+                        extrafield1: '<my-extra-data>
+                    },
+                    onLoad: function () {
+                        console.log('onLoad');
+                    },
+                    onError: function (error) {
+                        console.log('onError', error);
+                    },
+                    onSuccess: function (requestid, cardid, extrafield1, extrafield2) {
+                        console.log('onSuccess', requestid, cardid, extrafield1, extrafield2);
+                    },
+                    onStepChanged: function (data) {
+                        console.log('onStepChanged', data);
+                    },
+                    onConnectorClosed: function () {
+                        console.log('onConnectorClosed');
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 ```
+
+  </TabItem>
+
+</Tabs>
 
 :::info
 We recommend you using the **[Configure](./configure)** page to build the `options` property.

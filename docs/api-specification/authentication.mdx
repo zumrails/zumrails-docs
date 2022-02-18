@@ -3,6 +3,8 @@ title: Authentication
 description:
   How to integrate with authentication API
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Authentication
 
@@ -10,30 +12,45 @@ All API requests are using the Bearer Token Authorization. A Bearer Token will l
 
 To be able to get your token access, open the Settings page in the Portal, then navigate to the section Webhook & API settings. You will need the username and password.
 
-```json
-> Payload example:
-{
-  "Username": "abc...123",
-  "Password": "xyz...321"
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": {
-        "Role": "API",
-        "Token": "eyJhbG...tOTuvNvJc",
-        "CustomerId": "3012...042f2",
-        "CompanyName": "Test Company Inc."
-        "CustomerType": "Customer",
-        "Username": "b022aced-fae9-414f-853e-959fdf90d8f1",
-        "IsTermsOfUseAccepted": false,
-        "IsTwoFactorAuthenticationEnabled": false,
-        "LoginType": "EmailPassword"
-    }
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "Username": "abc...123",
+    "Password": "xyz...321"
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+      "statusCode": 200,
+      "message": "POST Request successful.",
+      "isError": false,
+      "result": {
+          "Role": "API",
+          "Token": "eyJhbG...tOTuvNvJc",
+          "CustomerId": "3012...042f2",
+          "CompanyName": "Test Company Inc."
+          "CustomerType": "Customer",
+          "Username": "b022aced-fae9-414f-853e-959fdf90d8f1",
+          "IsTermsOfUseAccepted": false,
+          "IsTwoFactorAuthenticationEnabled": false,
+          "LoginType": "EmailPassword"
+      }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 

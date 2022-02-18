@@ -4,7 +4,8 @@ description:
   How to integrate with transactions batch api.
 ---
 
-# Transactions Batch CSV
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 It is also possible to create transactions by uploading it using a CSV file. The template CSV file can be found in the portal.
 
@@ -15,67 +16,82 @@ Uploading a Batch CSV is only available right now for transaction method: EFT
 :::
 
 ## Validating transactions from batch file
-```json
-> Payload example:
-{
-    "TransactionType": "AccountsReceivable",
-    "WalletId": "30126b59-ab21-491c-8033-008376504210",
-    "Bytes": "Zmlyc3RfbmFtZSo7bGFzdF9uYW1lKjtidXNpbmVzc19uYW1lO2luc3RpdHV0aW9uX251bWJlcio7YnJhbmNoX251bWJlcio7YWNjb3VudF9udW1iZXIqO2Ftb3VudF9pbl9jZW50cyo7dHJhbnNhY3Rpb25fY29tbWVudDttZW1vKjtzY2hlZHVsZWRfZGF0ZQpKb2huO0RvZTs7MTIzOzEyMzQ1OzEyMzQ1Njc7MTAwO0ludGVybmFsIE1lc3NhZ2U7TWVtbyBtZXNzYWdlOw=="
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": {
-        "InvalidTransactions": "0",
-        "Status": "Ok",
-        "TotalAmount": 6,
-        "Transactions": [
-            {
-                "AccountNumber": "12345671",
-                "Amount": 1,
-                "Comment": "Internal message 1",
-                "CompanyName": "",
-                "CustomerId": null,
-                "FirstName": "John1",
-                "InstitutionNumber": "123",
-                "LastName": "Doe1",
-                "Memo": "Memo message 1",
-                "Status": "Ok",
-                "TransitNumber": "23451",
-            },
-            {
-                "AccountNumber": "12345672",
-                "Amount": 2,
-                "Comment": "Internal message 2",
-                "CompanyName": "",
-                "CustomerId": null,
-                "FirstName": "John2",
-                "InstitutionNumber": "123",
-                "LastName": "Doe2",
-                "Memo": "Memo message 2",
-                "Status": "Ok",
-                "TransitNumber": "23452",
-            },
-            {
-                "AccountNumber": "12345673",
-                "Amount": 3,
-                "Comment": "Internal message 3",
-                "CompanyName": "",
-                "CustomerId": null,
-                "FirstName": "John3",
-                "InstitutionNumber": "123",
-                "LastName": "Doe3",
-                "Memo": "Memo message 3",
-                "Status": "Ok",
-                "TransitNumber": "23453",
-            }
-        ],
-        "ValidTransactions": 13
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "TransactionType": "AccountsReceivable",
+        "WalletId": "30126b59-ab21-491c-8033-008376504210",
+        "Bytes": "Zmlyc3RfbmFtZSo7bGFzdF9uYW1lKjtidXNpbmVzc19uYW1lO2luc3RpdHV0aW9uX251bWJlcio7YnJhbmNoX251bWJlcio7YWNjb3VudF9udW1iZXIqO2Ftb3VudF9pbl9jZW50cyo7dHJhbnNhY3Rpb25fY29tbWVudDttZW1vKjtzY2hlZHVsZWRfZGF0ZQpKb2huO0RvZTs7MTIzOzEyMzQ1OzEyMzQ1Njc7MTAwO0ludGVybmFsIE1lc3NhZ2U7TWVtbyBtZXNzYWdlOw=="
     }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": {
+            "InvalidTransactions": "0",
+            "Status": "Ok",
+            "TotalAmount": 6,
+            "Transactions": [
+                {
+                    "AccountNumber": "12345671",
+                    "Amount": 1,
+                    "Comment": "Internal message 1",
+                    "CompanyName": "",
+                    "CustomerId": null,
+                    "FirstName": "John1",
+                    "InstitutionNumber": "123",
+                    "LastName": "Doe1",
+                    "Memo": "Memo message 1",
+                    "Status": "Ok",
+                    "TransitNumber": "23451",
+                },
+                {
+                    "AccountNumber": "12345672",
+                    "Amount": 2,
+                    "Comment": "Internal message 2",
+                    "CompanyName": "",
+                    "CustomerId": null,
+                    "FirstName": "John2",
+                    "InstitutionNumber": "123",
+                    "LastName": "Doe2",
+                    "Memo": "Memo message 2",
+                    "Status": "Ok",
+                    "TransitNumber": "23452",
+                },
+                {
+                    "AccountNumber": "12345673",
+                    "Amount": 3,
+                    "Comment": "Internal message 3",
+                    "CompanyName": "",
+                    "CustomerId": null,
+                    "FirstName": "John3",
+                    "InstitutionNumber": "123",
+                    "LastName": "Doe3",
+                    "Memo": "Memo message 3",
+                    "Status": "Ok",
+                    "TransitNumber": "23453",
+                }
+            ],
+            "ValidTransactions": 13
+        }
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -137,20 +153,35 @@ Duplicated transaction |
 
 
 ## Creating transactions through batch file
-```json
-> Payload example:
-{
-    "TransactionType": "AccountsReceivable",
-    "WalletId": "30126b59-ab21-491c-8033-008376504210",
-    "Bytes": "Zmlyc3RfbmFtZSo7bGFzdF9uYW1lKjtidXNpbmVzc19uYW1lO2luc3RpdHV0aW9uX251bWJlcio7YnJhbmNoX251bWJlcio7YWNjb3VudF9udW1iZXIqO2Ftb3VudF9pbl9jZW50cyo7dHJhbnNhY3Rpb25fY29tbWVudDttZW1vKjtzY2hlZHVsZWRfZGF0ZQpKb2huO0RvZTs7MTIzOzEyMzQ1OzEyMzQ1Njc7MTAwO0ludGVybmFsIE1lc3NhZ2U7TWVtbyBtZXNzYWdlOw=="
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "TransactionType": "AccountsReceivable",
+        "WalletId": "30126b59-ab21-491c-8033-008376504210",
+        "Bytes": "Zmlyc3RfbmFtZSo7bGFzdF9uYW1lKjtidXNpbmVzc19uYW1lO2luc3RpdHV0aW9uX251bWJlcio7YnJhbmNoX251bWJlcio7YWNjb3VudF9udW1iZXIqO2Ftb3VudF9pbl9jZW50cyo7dHJhbnNhY3Rpb25fY29tbWVudDttZW1vKjtzY2hlZHVsZWRfZGF0ZQpKb2huO0RvZTs7MTIzOzEyMzQ1OzEyMzQ1Njc7MTAwO0ludGVybmFsIE1lc3NhZ2U7TWVtbyBtZXNzYWdlOw=="
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 

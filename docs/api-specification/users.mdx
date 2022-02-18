@@ -3,8 +3,8 @@ title: Users
 description:
     How to integrate with users api.
 ---
-
-# Users
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 At Zūm, Users represent the payee for accounts payable, or the payer for accounts receivable.
 There are 3 ways of ingesting users, API, Portal, and Zūm Connect.
@@ -20,57 +20,71 @@ For more information about Zūm Connect, [click here](../ways-to-integrate/zum-c
 Use this endpoint if you want to add a new user to your account.
 For Credit Card and Visa Direct, if you want to add a user through API, please contact Zūm support.
 
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-```json
-> Payload example:
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "johndoe@zumrails.com",
-  "companyName": null,
-  "phoneNumber": "5141231234",
-  "BankAccountInformation": {
-    "institutionNumber": "111",
-    "transitNumber": "12345",
-    "accountNumber": "1234567"
-  },
-  "CreditCardInformation": {
-    "Number": "1234123412341234",
-    "ExpireMonth": "01",
-    "ExpireYear": "2020",
-    "CVV": "123",
-    "AddressLine1": "123 street",
-    "AddressLine2": "Apartment 123",
-    "AddressPostalCode": "A1A 1A1",
-    "AddressCountry": "Canada",
-    "AddressCity": "Toronto",
-    "AddressState": "ON"
-  },
-  "ShippingSameAsBilling": false,
-  "Addresses":[
+  ```json
     {
-        "AddressCity": "User City",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@zumrails.com",
+    "companyName": null,
+    "phoneNumber": "5141231234",
+    "BankAccountInformation": {
+        "institutionNumber": "111",
+        "transitNumber": "12345",
+        "accountNumber": "1234567"
+    },
+    "CreditCardInformation": {
+        "Number": "1234123412341234",
+        "ExpireMonth": "01",
+        "ExpireYear": "2020",
+        "CVV": "123",
+        "AddressLine1": "123 street",
+        "AddressLine2": "Apartment 123",
+        "AddressPostalCode": "A1A 1A1",
         "AddressCountry": "Canada",
-        "AddressLine1": "user address 122",
-        "AddressLine2": "test222",
-        "AddressPostalCode": "J4V0A3",
-        "AddressState": "QC",
-        "AddressType": "Shipping"
-    }]
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": {
-        "Id": "0bc9894d-b37b-4ae0-af70-f691024aca19",
-        "FirstName": "John",
-        "LastName": "Doe",
-        "CompanyName": null
+        "AddressCity": "Toronto",
+        "AddressState": "ON"
+    },
+    "ShippingSameAsBilling": false,
+    "Addresses":[
+        {
+            "AddressCity": "User City",
+            "AddressCountry": "Canada",
+            "AddressLine1": "user address 122",
+            "AddressLine2": "test222",
+            "AddressPostalCode": "J4V0A3",
+            "AddressState": "QC",
+            "AddressType": "Shipping"
+        }]
     }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": {
+            "Id": "0bc9894d-b37b-4ae0-af70-f691024aca19",
+            "FirstName": "John",
+            "LastName": "Doe",
+            "CompanyName": null
+        }
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -118,24 +132,38 @@ companyName | string | Company name, in case it's a company
 ## Update user
 Use this endpoint if you want to edit the basic information for an existing user. The user id is informed in the url and the body payload contains the user information. This endpoint does not update the bank account information or the credit card information.
 
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-```json
-> Payload example:
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "companyName": null,
-  "email": "johndoe@zumrails.com",
-  "phoneNumber": "5141231234"
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": "0bc9894d-....-f691024aca19"
-}
-```
+  ```json
+    {
+        "firstName": "John",
+        "lastName": "Doe",
+        "companyName": null,
+        "email": "johndoe@zumrails.com",
+        "phoneNumber": "5141231234"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": "0bc9894d-....-f691024aca19"
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PATCH`
 
@@ -161,21 +189,36 @@ id | guid | User id
 ## Update bank account information
 Use this endpoint if you want to edit the bank account information from a user. The user id is informed in the url and the body payload contains the user information.
 
-```json
-> Payload example:
-{
-    "institutionNumber": "111",
-    "transitNumber": "12345",
-    "accountNumber": "1234567"
- }
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": "0bc9894d-....-f691024aca19"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "institutionNumber": "111",
+        "transitNumber": "12345",
+        "accountNumber": "1234567"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": "0bc9894d-....-f691024aca19"
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PATCH`
 
@@ -198,28 +241,43 @@ id | guid | User id
 ## Update credit card information
 Use this endpoint if you want to edit the credit card information from a user. The user id is informed in the url and the body payload contains the user information.
 
-```json
-> Payload example:
-{
-    "Number": "4242424242424242",
-    "ExpireMonth": "01",
-    "ExpireYear": "2025",
-    "CVV": "111",
-    "AddressLine1": "123 street",
-    "AddressLine2": "Apartment 123",
-    "AddressPostalCode": "A1A 1A1",
-    "AddressCountry": "Canada",
-    "AddressCity": "Toronto",
-    "AddressState": "ON"
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": "0bc9894d-....-f691024aca19"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "Number": "4242424242424242",
+        "ExpireMonth": "01",
+        "ExpireYear": "2025",
+        "CVV": "111",
+        "AddressLine1": "123 street",
+        "AddressLine2": "Apartment 123",
+        "AddressPostalCode": "A1A 1A1",
+        "AddressCountry": "Canada",
+        "AddressCity": "Toronto",
+        "AddressState": "ON"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": "0bc9894d-....-f691024aca19"
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PATCH`
 
@@ -249,24 +307,39 @@ id | guid | User id
 ## Update credit card billing address information
 Use this endpoint if you want to edit the credit card billing address information from a user. The user id is informed in the url and the body payload contains the address information
 
-```json
-> Payload example:
-{
-    "AddressLine1": "123 street",
-    "AddressLine2": "Apartment 123",
-    "AddressPostalCode": "A1A 1A1",
-    "AddressCountry": "Canada",
-    "AddressCity": "Toronto",
-    "AddressState": "ON"
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": "0bc9894d-....-f691024aca19"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "AddressLine1": "123 street",
+        "AddressLine2": "Apartment 123",
+        "AddressPostalCode": "A1A 1A1",
+        "AddressCountry": "Canada",
+        "AddressCity": "Toronto",
+        "AddressState": "ON"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": "0bc9894d-....-f691024aca19"
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PATCH`
 
@@ -291,24 +364,39 @@ id | guid | User id
 
 ## Update user shipping address information
 
-```json
-> Payload example:
-{
-    "AddressLine1": "123 street",
-    "AddressLine2": "Apartment 123",
-    "AddressPostalCode": "A1A 1A1",
-    "AddressCountry": "Canada",
-    "AddressCity": "Toronto",
-    "AddressState": "ON"
-}
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": "0bc9894d-....-f691024aca19"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "AddressLine1": "123 street",
+        "AddressLine2": "Apartment 123",
+        "AddressPostalCode": "A1A 1A1",
+        "AddressCountry": "Canada",
+        "AddressCity": "Toronto",
+        "AddressState": "ON"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": "0bc9894d-....-f691024aca19"
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PATCH`
 
@@ -341,57 +429,66 @@ sameAsBilling | boolean | Use the billing address as shipping address if true
 
 ## Get a specific user
 
-```json
-> Response example:
-{
-    "statusCode": 200,
-    "message": "GET Request successful.",
-    "isError": false,
-    "result": {
-        "Id": "03dcefc9-4aad-4184-a93f-dd734a1e9ddc",
-        "CreatedAt": "2020-05-13T14:23:32.809446",
-        "FirstName": "john",
-        "LastName": "Doe",
-        "CompanyName": null,
-        "PhoneNumber": null,
-        "Email": "johndoe@gmail.com",
-        "LastRefresh": "0001-01-01T00:00:00",
-        "BankAccountInformation": {
-            "Institution": "Bank Name",
-            "InstitutionNumber": "123",
-            "TransitNumber": "12345",
-            "AccountNumber": "1234567",
-            "FirstName": null,
-            "LastName": null,
-            "AggregationStatus": "Connected",
-            "LastTimeRefreshed": "2020-05-13T14:24:05.82614",
-            "AggregationFailedReason": "None",
-            "AggregationBalance": 50007.98
-        },
-        "CreditCardInformation": {
-            "Number": "************1234",
-            "ExpireMonth": "01",
-            "ExpireYear": "2020",
-            "AddressLine1": "123 street",
-            "AddressLine2": "Apartment 123",
-            "AddressPostalCode": "A1A 1A1",
-            "AddressCountry": "Canada",
-            "AddressCity": "Toronto",
-            "AddressState": "ON",
-            "BrandName": "Visa",
-            "Institution": "TD",
-            "VerifyCreditCardStatus": "NotVerified"
-        },
-        "TransactionsMethodsAvailable": {
-            "Eft": true,
-            "VisaDirectPull": false,
-            "VisaDirectPush": false,
-            "Interac": true,
-            "CreditCard": true
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "GET Request successful.",
+        "isError": false,
+        "result": {
+            "Id": "03dcefc9-4aad-4184-a93f-dd734a1e9ddc",
+            "CreatedAt": "2020-05-13T14:23:32.809446",
+            "FirstName": "john",
+            "LastName": "Doe",
+            "CompanyName": null,
+            "PhoneNumber": null,
+            "Email": "johndoe@gmail.com",
+            "LastRefresh": "0001-01-01T00:00:00",
+            "BankAccountInformation": {
+                "Institution": "Bank Name",
+                "InstitutionNumber": "123",
+                "TransitNumber": "12345",
+                "AccountNumber": "1234567",
+                "FirstName": null,
+                "LastName": null,
+                "AggregationStatus": "Connected",
+                "LastTimeRefreshed": "2020-05-13T14:24:05.82614",
+                "AggregationFailedReason": "None",
+                "AggregationBalance": 50007.98
+            },
+            "CreditCardInformation": {
+                "Number": "************1234",
+                "ExpireMonth": "01",
+                "ExpireYear": "2020",
+                "AddressLine1": "123 street",
+                "AddressLine2": "Apartment 123",
+                "AddressPostalCode": "A1A 1A1",
+                "AddressCountry": "Canada",
+                "AddressCity": "Toronto",
+                "AddressState": "ON",
+                "BrandName": "Visa",
+                "Institution": "TD",
+                "VerifyCreditCardStatus": "NotVerified"
+            },
+            "TransactionsMethodsAvailable": {
+                "Eft": true,
+                "VisaDirectPull": false,
+                "VisaDirectPush": false,
+                "Interac": true,
+                "CreditCard": true
+            }
         }
     }
-}
-```
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: GET`
 
@@ -463,15 +560,24 @@ Some credit cards do not allow Visa Direct, if they have a credit card informed 
 
 ## Delete a user
 
-```json
-> Response example:
-{
-    "statusCode": 200,
-    "message": "DELETE Request successful.",
-    "isError": false,
-    "result": ""
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "DELETE Request successful.",
+        "isError": false,
+        "result": ""
+    }
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: DEL`
 
@@ -482,46 +588,61 @@ When deleting a user, all transactions already created for the respective user w
 
 ## Search for a user
 
-```json
-> Payload example:
-{
-    "CreatedAtOperator": "isBetween",
-    "CreatedAtFrom":"2020-05-13T04:00:00.000Z",
-    "CreatedAtTo":"2020-05-13T04:00:00.000Z",
-    "FirstName":"john",
-    "LastName":"Doe",
-    "Email":"johndoe@gmail.com",
-    "Pagination": {
-        "PageNumber": 1
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "CreatedAtOperator": "isBetween",
+        "CreatedAtFrom":"2020-05-13T04:00:00.000Z",
+        "CreatedAtTo":"2020-05-13T04:00:00.000Z",
+        "FirstName":"john",
+        "LastName":"Doe",
+        "Email":"johndoe@gmail.com",
+        "Pagination": {
+            "PageNumber": 1
+        }
     }
-}
-> Response example:
-{
-    "statusCode":200,
-    "message":"POST Request successful.",
-    "isError":false,
-    "result": {
-        "CurrentPage": 1,
-        "PageSize": 1,
-        "TotalCount": 1,
-        "Items": [
-        {
-            "Id":"4085e4dc-f4f4-41d2-8bf2-20522aab5e1b",
-            "CreatedAt":"2020-05-12T15:23:24.531531",
-            "FirstName":"John",
-            "LastName":"Doe",
-            "Email":"johndoe@gmail.com",
-            "CompanyName":"",
-            "BankAccountInformation":
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode":200,
+        "message":"POST Request successful.",
+        "isError":false,
+        "result": {
+            "CurrentPage": 1,
+            "PageSize": 1,
+            "TotalCount": 1,
+            "Items": [
             {
-                "LastTimeRefreshed":"2020-05-12T15:23:24.496157",
-                "AggregationStatus":"NotConected",
-                "AggregationBalance":123.45
-            }
-        }]
+                "Id":"4085e4dc-f4f4-41d2-8bf2-20522aab5e1b",
+                "CreatedAt":"2020-05-12T15:23:24.531531",
+                "FirstName":"John",
+                "LastName":"Doe",
+                "Email":"johndoe@gmail.com",
+                "CompanyName":"",
+                "BankAccountInformation":
+                {
+                    "LastTimeRefreshed":"2020-05-12T15:23:24.496157",
+                    "AggregationStatus":"NotConected",
+                    "AggregationBalance":123.45
+                }
+            }]
+        }
     }
-}
-```
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 

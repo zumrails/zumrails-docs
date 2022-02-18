@@ -3,109 +3,125 @@ title: Invoices
 description:
     How to integrate with invoices API
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 #Invoices
 
 ## Creating a new invoice
-```json
-> Payload example for creating a invoice:
-{
-  "DaysToDueDate": 30,
-  "Items": [
-    {
-      "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-      "Quantity": 1,
-      "OneOffProductAmount": null,
-      "OneOffProductName": null
-    },
-    {
-      "ProductPriceId": null,
-      "Quantity": 1,
-      "OneOffProductAmount": 6.75,
-      "OneOffProductName": "Test"
-    }
-  ],
-  "Memo": "",
-  "PaymentType": "NotifyUser",
-  "PaymentGateways": [
-    "Eft",
-    "VisaDirect",
-    "CreditCard"
-  ],
-  "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f"
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-Response example
-{
-  "statusCode": 200,
-  "message": "POST Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "a04012f1-bd54-4ebc-ae03-25236fd6b7e0",
-    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-    "User": {
-      "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-      "FirstName": " p17dyyno5390h97yt798pwe",
-      "LastName": "Doe",
-      "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
-      "IsActive": true
-    },
-    "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-    "Customer": {
-      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-      "CompanyName": "Sam's Gym"
-    },
-    "CreatedAt": "2022-02-14T18:16:50.9248218Z",
-    "Amount": 156.75,
-    "InvoiceStatus": "Open",
-    "Memo": "Thank you",
+  ```json
+  {
     "DaysToDueDate": 30,
-    "DueDate": "2022-03-16T00:00:00",
+    "Items": [
+      {
+        "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+        "Quantity": 1,
+        "OneOffProductAmount": null,
+        "OneOffProductName": null
+      },
+      {
+        "ProductPriceId": null,
+        "Quantity": 1,
+        "OneOffProductAmount": 6.75,
+        "OneOffProductName": "Test"
+      }
+    ],
+    "Memo": "",
     "PaymentType": "NotifyUser",
     "PaymentGateways": [
       "Eft",
       "VisaDirect",
       "CreditCard"
     ],
-    "Items": [
-      {
-        "ProductPrice": {
-          "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-          "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
-          "CreatedAt": "2021-10-27T19:18:12.95601",
-          "ProductPriceType": "Standard",
-          "ProductPriceStatus": "Active",
-          "Price": 150,
-          "PerUnit": 0,
-          "Frequency": "OneTime",
-          "EnableFreeTrial": false,
-          "FreeTrialInDays": 0,
-          "EnableSetupFee": false,
-          "SetupFee": 0,
-          "Currency": "CAD",
-          "Product": {
-            "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
-            "Name": "gym",
-            "ProductStatus": "Active",
-            "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-          }
-        },
-        "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-        "Quantity": 1,
-        "Currency": "CAD",
-        "Price": 150
-      },
-      {
-        "Quantity": 1,
-        "Currency": "CAD",
-        "OneOffProductName": "Test",
-        "OneOffProductAmount": 6.75
-      }
-    ],
-    "Transactions": [],
+    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f"
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "a04012f1-bd54-4ebc-ae03-25236fd6b7e0",
+      "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+      "User": {
+        "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+        "FirstName": " p17dyyno5390h97yt798pwe",
+        "LastName": "Doe",
+        "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
+        "IsActive": true
+      },
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "Customer": {
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym"
+      },
+      "CreatedAt": "2022-02-14T18:16:50.9248218Z",
+      "Amount": 156.75,
+      "InvoiceStatus": "Open",
+      "Memo": "Thank you",
+      "DaysToDueDate": 30,
+      "DueDate": "2022-03-16T00:00:00",
+      "PaymentType": "NotifyUser",
+      "PaymentGateways": [
+        "Eft",
+        "VisaDirect",
+        "CreditCard"
+      ],
+      "Items": [
+        {
+          "ProductPrice": {
+            "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+            "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+            "CreatedAt": "2021-10-27T19:18:12.95601",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 150,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+              "Name": "gym",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          },
+          "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+          "Quantity": 1,
+          "Currency": "CAD",
+          "Price": 150
+        },
+        {
+          "Quantity": 1,
+          "Currency": "CAD",
+          "OneOffProductName": "Test",
+          "OneOffProductAmount": 6.75
+        }
+      ],
+      "Transactions": [],
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -225,104 +241,118 @@ More info about transactions can be found here
 You can only update invoices that have `Draft` status
 :::
 
-```json
-> Payload example for update a invoice:
-{
-  "DaysToDueDate": 30,
-  "Items": [
-    {
-      "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-      "Quantity": 1,
-      "OneOffProductAmount": null,
-      "OneOffProductName": null
-    },
-    {
-      "ProductPriceId": null,
-      "Quantity": 2,
-      "OneOffProductAmount": 10,
-      "OneOffProductName": "Test one-time"
-    }
-  ],
-  "Memo": "Thanks",
-  "PaymentType": "NotifyUser",
-  "PaymentGateways": [
-    "Eft",
-    "Interac",
-    "VisaDirect"
-  ],
-  "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-Response example
-{
-  "statusCode": 200,
-  "message": "PUT Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "5ef8f6f5-9c3e-436a-b018-3dbf4b11d21e",
-    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-    "User": {
-      "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-      "FirstName": " p17dyyno5390h97yt798pwe",
-      "LastName": "Doe",
-      "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
-      "IsActive": true
-    },
-    "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-    "Customer": {
-      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-      "CompanyName": "Sam's Gym"
-    },
-    "CreatedAt": "2022-02-15T12:26:09.299463",
-    "Amount": 170,
-    "InvoiceStatus": "Open",
-    "Memo": "Thanks",
+  ```json
+  {
     "DaysToDueDate": 30,
-    "DueDate": "2022-03-17T00:00:00",
+    "Items": [
+      {
+        "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+        "Quantity": 1,
+        "OneOffProductAmount": null,
+        "OneOffProductName": null
+      },
+      {
+        "ProductPriceId": null,
+        "Quantity": 2,
+        "OneOffProductAmount": 10,
+        "OneOffProductName": "Test one-time"
+      }
+    ],
+    "Memo": "Thanks",
     "PaymentType": "NotifyUser",
     "PaymentGateways": [
       "Eft",
       "Interac",
       "VisaDirect"
     ],
-    "Items": [
-      {
-        "ProductPrice": {
-          "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-          "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
-          "CreatedAt": "2021-10-27T19:18:12.95601",
-          "ProductPriceType": "Standard",
-          "ProductPriceStatus": "Active",
-          "Price": 150,
-          "PerUnit": 0,
-          "Frequency": "OneTime",
-          "EnableFreeTrial": false,
-          "FreeTrialInDays": 0,
-          "EnableSetupFee": false,
-          "SetupFee": 0,
-          "Currency": "CAD",
-          "Product": {
-            "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
-            "Name": "gym",
-            "ProductStatus": "Active",
-            "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-          }
-        },
-        "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-        "Quantity": 1,
-        "Currency": "CAD",
-        "Price": 150
-      },
-      {
-        "Quantity": 2,
-        "Currency": "CAD",
-        "OneOffProductName": "Test one-time",
-        "OneOffProductAmount": 10
-      }
-    ]
+    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "PUT Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "5ef8f6f5-9c3e-436a-b018-3dbf4b11d21e",
+      "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+      "User": {
+        "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+        "FirstName": " p17dyyno5390h97yt798pwe",
+        "LastName": "Doe",
+        "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
+        "IsActive": true
+      },
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "Customer": {
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym"
+      },
+      "CreatedAt": "2022-02-15T12:26:09.299463",
+      "Amount": 170,
+      "InvoiceStatus": "Open",
+      "Memo": "Thanks",
+      "DaysToDueDate": 30,
+      "DueDate": "2022-03-17T00:00:00",
+      "PaymentType": "NotifyUser",
+      "PaymentGateways": [
+        "Eft",
+        "Interac",
+        "VisaDirect"
+      ],
+      "Items": [
+        {
+          "ProductPrice": {
+            "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+            "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+            "CreatedAt": "2021-10-27T19:18:12.95601",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 150,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+              "Name": "gym",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          },
+          "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+          "Quantity": 1,
+          "Currency": "CAD",
+          "Price": 150
+        },
+        {
+          "Quantity": 2,
+          "Currency": "CAD",
+          "OneOffProductName": "Test one-time",
+          "OneOffProductAmount": 10
+        }
+      ]
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: PUT`
 
@@ -418,78 +448,88 @@ TransactionStatus       | string        | Status for the transaction
 ZumRailsType            | string        | ZumRailsType Operator for the transaction
 
 ## Get a specific invoice
-```json
-> Response example:
-{
-  "statusCode": 200,
-  "message": "GET Request successful.",
-  "isError": false,
-  "result": {
-    "Id": "5ef8f6f5-9c3e-436a-b018-3dbf4b11d21e",
-    "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-    "User": {
-      "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
-      "FirstName": " p17dyyno5390h97yt798pwe",
-      "LastName": "Doe",
-      "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
-      "IsActive": true
-    },
-    "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-    "Customer": {
-      "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
-      "CompanyName": "Sam's Gym"
-    },
-    "CreatedAt": "2022-02-15T12:26:09.299463",
-    "Amount": 170,
-    "InvoiceStatus": "Open",
-    "Memo": "Thanks",
-    "DaysToDueDate": 30,
-    "DueDate": "2022-03-17T00:00:00",
-    "PaymentType": "NotifyUser",
-    "PaymentGateways": [
-      "Eft",
-      "Interac",
-      "VisaDirect"
-    ],
-    "Items": [
-      {
-        "Quantity": 2,
-        "Currency": "CAD",
-        "OneOffProductName": "Test one-time",
-        "OneOffProductAmount": 10
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": {
+      "Id": "5ef8f6f5-9c3e-436a-b018-3dbf4b11d21e",
+      "UserId": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+      "User": {
+        "Id": "59fb5f22-bbbf-404a-83f1-f86733afeb2f",
+        "FirstName": " p17dyyno5390h97yt798pwe",
+        "LastName": "Doe",
+        "Email": "p17dyyno5390h97yt798pwe@zumrails.com",
+        "IsActive": true
       },
-      {
-        "ProductPrice": {
-          "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-          "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
-          "CreatedAt": "2021-10-27T19:18:12.95601",
-          "ProductPriceType": "Standard",
-          "ProductPriceStatus": "Active",
-          "Price": 150,
-          "PerUnit": 0,
-          "Frequency": "OneTime",
-          "EnableFreeTrial": false,
-          "FreeTrialInDays": 0,
-          "EnableSetupFee": false,
-          "SetupFee": 0,
+      "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+      "Customer": {
+        "Id": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035",
+        "CompanyName": "Sam's Gym"
+      },
+      "CreatedAt": "2022-02-15T12:26:09.299463",
+      "Amount": 170,
+      "InvoiceStatus": "Open",
+      "Memo": "Thanks",
+      "DaysToDueDate": 30,
+      "DueDate": "2022-03-17T00:00:00",
+      "PaymentType": "NotifyUser",
+      "PaymentGateways": [
+        "Eft",
+        "Interac",
+        "VisaDirect"
+      ],
+      "Items": [
+        {
+          "Quantity": 2,
           "Currency": "CAD",
-          "Product": {
-            "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
-            "Name": "gym",
-            "ProductStatus": "Active",
-            "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
-          }
+          "OneOffProductName": "Test one-time",
+          "OneOffProductAmount": 10
         },
-        "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
-        "Quantity": 1,
-        "Currency": "CAD",
-        "Price": 150
-      }
-    ],
-    "Transactions": []
+        {
+          "ProductPrice": {
+            "Id": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+            "ProductId": "b4518805-b310-448b-8d6c-20a55e22a61d",
+            "CreatedAt": "2021-10-27T19:18:12.95601",
+            "ProductPriceType": "Standard",
+            "ProductPriceStatus": "Active",
+            "Price": 150,
+            "PerUnit": 0,
+            "Frequency": "OneTime",
+            "EnableFreeTrial": false,
+            "FreeTrialInDays": 0,
+            "EnableSetupFee": false,
+            "SetupFee": 0,
+            "Currency": "CAD",
+            "Product": {
+              "Id": "b4518805-b310-448b-8d6c-20a55e22a61d",
+              "Name": "gym",
+              "ProductStatus": "Active",
+              "CustomerId": "e9a6db53-1c9b-491d-9ecb-cfb6c6f3d035"
+            }
+          },
+          "ProductPriceId": "8a306490-21c2-44d9-bb61-4ee6bf4f4e8c",
+          "Quantity": 1,
+          "Currency": "CAD",
+          "Price": 150
+        }
+      ],
+      "Transactions": []
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+
+</Tabs>
 
 `Method: GET`
 
@@ -567,51 +607,65 @@ ZumRailsType            | string        | ZumRailsType Operator for the transact
 ## Search a invoice
 This endpoint will return products based on the filter informed. Products are returned with pagination, which means that if you need to retrieve all products you need to call the same endpoint incrementing the CurrentPage.
 
-```json
-> Payload example:
-{
-  "InvoiceStatus": 1,
-  "UserName": "Test",
-  "UserNameOperator": "contains",
-  "DueDate": "2021-12-17T00:00:00.000Z",
-  "DueDateOperator": "isInTheLast",
-  "CreatedAt": "2021-12-02T03:00:00.000Z",
-  "CreatedAtOperator": "exactlymatches",
-  "GenericSearch": "Test",
-  "Pagination": {
-    "PageNumber": 1,
-    "ItemsPerPage": 10
-  }
-}
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
 
-> Response example:
-{
-  "statusCode": 200,
-  "message": "POST Request successful.",
-  "isError": false,
-  "result": {
-    "CurrentPage": 1,
-    "PageSize": 10,
-    "TotalCount": 1,
-    "Items": [
-      {
-        "Id": "931940ab-0c94-4b52-b59c-9e32322a03a2",
-        "Amount": 170,
-        "InvoiceStatus": "Paid",
-        "DueDate": "2022-01-01T00:00:00",
-        "CreatedAt": "2021-12-02T20:14:04.808022",
-        "User": {
-          "Id": "1c9af9e6-3373-40e1-bfa4-9649ce91d963",
-          "CompanyName": "Test",
-          "Email": "santosanax94@gmail.com",
-          "IsActive": true
-        },
-        "ProductName": "Steam & Sauna"
-      }
-    ]
+  ```json
+  {
+    "InvoiceStatus": 1,
+    "UserName": "Test",
+    "UserNameOperator": "contains",
+    "DueDate": "2021-12-17T00:00:00.000Z",
+    "DueDateOperator": "isInTheLast",
+    "CreatedAt": "2021-12-02T03:00:00.000Z",
+    "CreatedAtOperator": "exactlymatches",
+    "GenericSearch": "Test",
+    "Pagination": {
+      "PageNumber": 1,
+      "ItemsPerPage": 10
+    }
   }
-}
-```
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "POST Request successful.",
+    "isError": false,
+    "result": {
+      "CurrentPage": 1,
+      "PageSize": 10,
+      "TotalCount": 1,
+      "Items": [
+        {
+          "Id": "931940ab-0c94-4b52-b59c-9e32322a03a2",
+          "Amount": 170,
+          "InvoiceStatus": "Paid",
+          "DueDate": "2022-01-01T00:00:00",
+          "CreatedAt": "2021-12-02T20:14:04.808022",
+          "User": {
+            "Id": "1c9af9e6-3373-40e1-bfa4-9649ce91d963",
+            "CompanyName": "Test",
+            "Email": "santosanax94@gmail.com",
+            "IsActive": true
+          },
+          "ProductName": "Steam & Sauna"
+        }
+      ]
+    }
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 Method: POST
 
@@ -662,40 +716,51 @@ If you need to search for a specific invoice, we recommend that you retrieve the
 :::
 
 ## Get invoice events
-```json
-> Response example:
-{
-  "statusCode": 200,
-  "message": "GET Request successful.",
-  "isError": false,
-  "result": [
-    {
-      "CreatedAt": "2021-12-02T20:22:06.801874",
-      "Description": "Invoice status has changed to Paid",
-      "Type": "StatusChanged",
-      "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
-    },
-    {
-      "CreatedAt": "2021-12-02T20:22:06.598206",
-      "Description": "Transaction 724ceda1-f7fc-4832-b9d7-d5f74bc558a3 of 170 for this invoice was Completed",
-      "Type": "TransactionStatusChanged",
-      "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
-    },
-    {
-      "CreatedAt": "2021-12-02T20:21:24.229433",
-      "Description": "Transaction 724ceda1-f7fc-4832-b9d7-d5f74bc558a3 of 170 for this invoice was InProgress",
-      "Type": "TransactionStatusChanged",
-      "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
-    },
-    {
-      "CreatedAt": "2021-12-02T20:14:04.971909",
-      "Description": "Invoice 931940ab-0c94-4b52-b59c-9e32322a03a2 was created",
-      "Type": "Created",
-      "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
-    }
-  ]
-}
-```
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": [
+      {
+        "CreatedAt": "2021-12-02T20:22:06.801874",
+        "Description": "Invoice status has changed to Paid",
+        "Type": "StatusChanged",
+        "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
+      },
+      {
+        "CreatedAt": "2021-12-02T20:22:06.598206",
+        "Description": "Transaction 724ceda1-f7fc-4832-b9d7-d5f74bc558a3 of 170 for this invoice was Completed",
+        "Type": "TransactionStatusChanged",
+        "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
+      },
+      {
+        "CreatedAt": "2021-12-02T20:21:24.229433",
+        "Description": "Transaction 724ceda1-f7fc-4832-b9d7-d5f74bc558a3 of 170 for this invoice was InProgress",
+        "Type": "TransactionStatusChanged",
+        "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
+      },
+      {
+        "CreatedAt": "2021-12-02T20:14:04.971909",
+        "Description": "Invoice 931940ab-0c94-4b52-b59c-9e32322a03a2 was created",
+        "Type": "Created",
+        "InvoiceId": "931940ab-0c94-4b52-b59c-9e32322a03a2"
+      }
+    ]
+  }
+  ```
+
+  </TabItem>
+
+</Tabs>
 
 `Method: GET`
 
@@ -730,12 +795,24 @@ TransactionStatusChanged | Status for a transaction related to the invoice was c
 Only invoices that have status `Draft` or `Open` can be changed through this method
 :::
 
-```json
-{
-  "SecurityPassword": "your_password",
-  "Status": "Paid"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "SecurityPassword": "your_password",
+    "Status": "Paid"
+  }
+  ```
+
+  </TabItem>
+
+</Tabs>
+
 `Method: PATCH`
 
 `Endpoint: {{env}}/api/invoice/changeinvoicestatus/{{invoice_id}}`

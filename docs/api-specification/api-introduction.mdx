@@ -3,6 +3,8 @@ title: API Introduction
 description:
   How the Zūm API integration works.
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Api Introduction
 How to use the API:
@@ -27,14 +29,24 @@ Sandbox:
 
 **API Structure**
 
-```json
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": {}
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'API Return example', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+      "statusCode": 200,
+      "message": "POST Request successful.",
+      "isError": false,
+      "result": {}
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 All API endpoints return the same response, containing 4 important pieces of information:
 

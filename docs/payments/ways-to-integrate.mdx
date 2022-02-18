@@ -3,6 +3,8 @@ title: Ways to integrate
 description:
   Ways to integrate
 ---
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 There are various ways to integrate with Zūm Rails. Check the options below to decide what fits your workflow:
 
@@ -99,28 +101,45 @@ When a new user is added or a request funds is fulfilled, Zūm Connect will trig
 
 To listen to the event in js, your website must refer to Zūm Connect using an iFrame, and then your website should have the script/example.
 
-```html
-> Javascript example:
-<script>
-window.addEventListener('message', function(e) {
-    
-    var data = e.data;
-    if (data && data.origin && data.origin === 'ZUM_RAILS_IFRAME') {
-        console.log(data);
-    }
-});
-</script>
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Javascript example', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
 
-Add user event
+  ```html
+  <script>
+  window.addEventListener('message', function(e) {
+      
+      var data = e.data;
+      if (data && data.origin && data.origin === 'ZUM_RAILS_IFRAME') {
+          console.log(data);
+      }
+  });
+  </script>
+  ```
 
-```json
-> Add user event
-{
-  "origin": "ZUM_RAILS_IFRAME",
-  "userId": "c18dd952-...-9bd6a46eb1c4"
-}
-```
+  </TabItem>
+</Tabs>
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Add user event', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+    "origin": "ZUM_RAILS_IFRAME",
+    "userId": "c18dd952-...-9bd6a46eb1c4"
+  }
+  ```
+
+  </TabItem>
+</Tabs>
+
 
 ## Invoice checkout
 The best way to let the user choose and pay for an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
@@ -131,21 +150,36 @@ When a new invoice is created through checkout, Zūm Connect will trigger an eve
 
 To listen to the js event, your website must refer to Zūm Connect using an iFrame, and then your website should have the script/example as described.
 
-```json
-> Invoice checkout event
-{
-  "origin": "ZUM_RAILS_IFRAME",
-  "InvoiceId": "c18dd952-...-9bd6a46eb1c4",
-  "UserId": "c18dd952-...-9bd6a46eb1c4",
-  "TransactionId": "c18dd952-...-9bd6a46eb1c4"
-}
 
-> Invoice checkout event (only EFT)
-{
-  "origin": "ZUM_RAILS_IFRAME",
-  "UserId": "c18dd952-...-9bd6a46eb1c4",
-}
-```
+<Tabs
+  defaultValue="rails"
+  values={[
+    {label: 'Other Rails', value: 'rails'},
+    {label: 'EFT', value: 'eft'},
+  ]}>
+  <TabItem value="rails">
+
+  ```json
+  {
+    "origin": "ZUM_RAILS_IFRAME",
+    "InvoiceId": "c18dd952-...-9bd6a46eb1c4",
+    "UserId": "c18dd952-...-9bd6a46eb1c4",
+    "TransactionId": "c18dd952-...-9bd6a46eb1c4"
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="eft">
+
+  ```json
+  {
+    "origin": "ZUM_RAILS_IFRAME",
+    "UserId": "c18dd952-...-9bd6a46eb1c4",
+  }
+  ```
+  
+  </TabItem>
+</Tabs>
 
 ## Subscription checkout
 The best way to let the user choose and subscribe to an item is using the checkout. It consists of an iFrame website, hosted by Zūm Rails and referenced in your website.
@@ -164,18 +198,32 @@ When a new subscription is created through checkout, Zūm Connect will trigger a
 
 To listen to the js event, your website must refer to Zūm Connect using an iFrame, and then your website should have the script/example as described.
 
-```json
-> Subscription checkout event
-{
-  "origin": "ZUM_RAILS_IFRAME",
-  "SubscriptionId": "c18dd952-...-9bd6a46eb1c4",
-  "UserId": "c18dd952-...-9bd6a46eb1c4",
-  "TransactionId": "c18dd952-...-9bd6a46eb1c4"
-}
+<Tabs
+  defaultValue="rails"
+  values={[
+    {label: 'Other Rails', value: 'rails'},
+    {label: 'EFT', value: 'eft'},
+  ]}>
+  <TabItem value="rails">
 
-> Subscription checkout event (only EFT)
-{
-  "origin": "ZUM_RAILS_IFRAME",
-  "UserId": "c18dd952-...-9bd6a46eb1c4",
-}
-```
+  ```json
+  {
+    "origin": "ZUM_RAILS_IFRAME",
+    "SubscriptionId": "c18dd952-...-9bd6a46eb1c4",
+    "UserId": "c18dd952-...-9bd6a46eb1c4",
+    "TransactionId": "c18dd952-...-9bd6a46eb1c4"
+  }
+  ```
+
+  </TabItem>
+  <TabItem value="eft">
+
+  ```json
+  {
+    "origin": "ZUM_RAILS_IFRAME",
+    "UserId": "c18dd952-...-9bd6a46eb1c4",
+  }
+  ```
+  
+  </TabItem>
+</Tabs>

@@ -4,6 +4,9 @@ description:
     How to integrate with transactions api.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Transactions
 
 At Zūm Rails, there are 5 ways to create transactions, when using the portal or via API. When creating a transaction via API, the transaction type “ZumRailsType” must be specified.
@@ -60,56 +63,81 @@ There are five transaction types (ZumRailsType):
 
 ## Creating a new transaction
 
+<Tabs
+defaultValue="tab1"
+values={[
+{label: 'EFT', value: 'tab1'},
+{label: 'Visa Direct', value: 'tab2'},
+{label: 'Interac', value: 'tab3'},
+{label: 'Response', value: 'tab4'},
+]}>
+<TabItem value="tab1">
+
 ```json
-> Payload example EFT:
-{
-    "ZumRailsType":"AccountsReceivable",
-    "TransactionMethod": "Eft",
-    "Amount":123.45,
-    "Memo":"Memo description",
-    "Comment":"This transaction is just a test from a user to wallet",
-    "UserId":"1d431e8b-...85452adb4eee",
-    "WalletId":"8ebd932b-...b92633e14297"
-}
-
-> Payload example VisaDirect:
-{
-    "ZumRailsType":"AccountsReceivable",
-    "TransactionMethod": "VisaDirect",
-    "Amount":123.45,
-    "Memo":"Memo description",
-    "Comment":"This transaction is just a test from a user to wallet",
-    "UserId":"1d431e8b-...85452adb4eee",
-    "WalletId":"8ebd932b-...b92633e14297"
-}
-
-> Payload example Interac:
-{
-    "ZumRailsType":"AccountsReceivable",
-    "TransactionMethod": "Interac",
-    "Amount":123.45,
-    "Memo":"Memo description",
-    "Comment":"This transaction is just a test from a user to wallet",
-    "User": {
-        "companyName": "Example Company",
-        "email": "example@company.com"
-    },
-    "WalletId":"8ebd932b-...b92633e14297",
-    "InteracHasSecurityQuestionAndAnswer": true,
-    "InteracSecurityQuestion": "Your question",
-    "InteracSecurityAnswer": "Your answer"
-}
-
-> Response example:
-{
-    "statusCode": 200,
-    "message": "POST Request successful.",
-    "isError": false,
-    "result": {
-        "Id": "0bc9894d-...f691024aca19",
+    {
+        "ZumRailsType":"AccountsReceivable",
+        "TransactionMethod": "Eft",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction is just a test from a user to wallet",
+        "UserId":"1d431e8b-...85452adb4eee",
+        "WalletId":"8ebd932b-...b92633e14297"
     }
-}
 ```
+
+</TabItem>
+<TabItem value="tab2">
+
+```json
+    {
+        "ZumRailsType":"AccountsReceivable",
+        "TransactionMethod": "VisaDirect",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction is just a test from a user to wallet",
+        "UserId":"1d431e8b-...85452adb4eee",
+        "WalletId":"8ebd932b-...b92633e14297"
+    }
+```
+
+</TabItem>
+
+<TabItem value="tab3">
+
+```json
+    {
+        "ZumRailsType":"AccountsReceivable",
+        "TransactionMethod": "Interac",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction is just a test from a user to wallet",
+        "User": {
+            "companyName": "Example Company",
+            "email": "example@company.com"
+        },
+        "WalletId":"8ebd932b-...b92633e14297",
+        "InteracHasSecurityQuestionAndAnswer": true,
+        "InteracSecurityQuestion": "Your question",
+        "InteracSecurityAnswer": "Your answer"
+    }
+```
+
+</TabItem>
+
+<TabItem value="tab4">
+
+```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": {
+            "Id": "0bc9894d-...f691024aca19",
+        }
+    }
+``` 
+</TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -166,28 +194,44 @@ Interac |
 VisaDirect |
 CreditCard |
 
-```json
-> Transaction that will succeed example:
-{
-    "ZumRailsType":"FundZumWallet",
-    "TransactionMethod":"Eft",
-    "Amount":123.45,
-    "Memo":"Memo description",
-    "Comment":"This transaction will succeed because there's no keyword",
-    "FundingSourceId":"1d431e8b-...85452adb4eee",
-    "WalletId":"8ebd932b-...b92633e14297"
-}
-> Transaction that will fail example:
-{
-    "ZumRailsType":"FundZumWallet",
-    "a":"Eft",
-    "Amount":123.45,
-    "Memo":"Memo description",
-    "Comment":"This transaction will fail (EftFailedNoDebitAllowed)",
-    "FundingSourceId":"1d431e8b-...85452adb4eee",
-    "WalletId":"8ebd932b-...b92633e14297"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Succees', value: 'tab1'},
+    {label: 'Fail', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "ZumRailsType":"FundZumWallet",
+        "TransactionMethod":"Eft",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction will succeed because there's no keyword",
+        "FundingSourceId":"1d431e8b-...85452adb4eee",
+        "WalletId":"8ebd932b-...b92633e14297"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "ZumRailsType":"FundZumWallet",
+        "a":"Eft",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction will fail (EftFailedNoDebitAllowed)",
+        "FundingSourceId":"1d431e8b-...85452adb4eee",
+        "WalletId":"8ebd932b-...b92633e14297"
+    }
+  ```
+  
+  </TabItem>
+</Tabs>
+
 :::danger
 In a sandbox environment, real bank operations are not performed. However, there is a way to simulate success, failures and review situations.
 :::
@@ -239,50 +283,59 @@ Not available for all credit card customers
 
 ## Get a specific transaction
 
-```json
-> Response example:
-{
-    "statusCode": 200,
-    "message": "GET Request successful.",
-    "isError": false,
-    "result": {
-        "Id": "b7a8a505...364e8836404e",
-        "CreatedAt": "2020-05-13T17:59:47.039462",
-        "Memo": "Memo test",
-        "Comment": "This is a transaction to test",
-        "Amount": 123.45,
-        "User": null,
-        "Wallet": {
-            "Id": "8ebd932b...b92633e14297",
-            "Type": "Unified"
-        },
-        "FundingSource": {
-            "Id": "1d431e8b...85452adb4eee",
-            "Institution": "Institution",
-            "InstitutionNumber": "123",
-            "TransitNumber": "12345",
-            "AccountNumber": "1234567"
-        },
-        "EventHistory": [
-            {
-                "CreatedAt": "2020-05-13T17:59:47.284943",
-                "Event": "EFTFileUploaded",
-                "EventDescription": "EFT file uploaded to Financial Institution",
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "GET Request successful.",
+        "isError": false,
+        "result": {
+            "Id": "b7a8a505...364e8836404e",
+            "CreatedAt": "2020-05-13T17:59:47.039462",
+            "Memo": "Memo test",
+            "Comment": "This is a transaction to test",
+            "Amount": 123.45,
+            "User": null,
+            "Wallet": {
+                "Id": "8ebd932b...b92633e14297",
+                "Type": "Unified"
             },
-            {
-                "CreatedAt": "2020-05-13T17:59:47.284943",
-                "Event": "Started",
-                "EventDescription": "Transaction with type FundZumWallet started, from Funding Source to Zūm Wallet with amount: $123.45",
-            }
-        ],
-        "ZumRailsType": "FundZumWallet",
-        "TransactionMethod":"Eft",
-        "TransactionStatus": "InProgress",
-        "RecurrentTransactionId": "16d2406f...87d397a8356f",
-        "FailedTransactionEvent": null
+            "FundingSource": {
+                "Id": "1d431e8b...85452adb4eee",
+                "Institution": "Institution",
+                "InstitutionNumber": "123",
+                "TransitNumber": "12345",
+                "AccountNumber": "1234567"
+            },
+            "EventHistory": [
+                {
+                    "CreatedAt": "2020-05-13T17:59:47.284943",
+                    "Event": "EFTFileUploaded",
+                    "EventDescription": "EFT file uploaded to Financial Institution",
+                },
+                {
+                    "CreatedAt": "2020-05-13T17:59:47.284943",
+                    "Event": "Started",
+                    "EventDescription": "Transaction with type FundZumWallet started, from Funding Source to Zūm Wallet with amount: $123.45",
+                }
+            ],
+            "ZumRailsType": "FundZumWallet",
+            "TransactionMethod":"Eft",
+            "TransactionStatus": "InProgress",
+            "RecurrentTransactionId": "16d2406f...87d397a8356f",
+            "FailedTransactionEvent": null
+        }
     }
-}
-```
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: GET`
 
@@ -430,60 +483,75 @@ CreditCard      | CreditCardAmountExceeded                  | The amount exceeds
 
 This endpoint will return transactions based on the filter informed. Transactions are returned with pagination, which means that if you need to retrieve all transactions you need to call the same endpoint incrementing the CurrentPage.
 
-```json
-> Payload example:
-{
-    "Id": "c7a8a909...364e8836409d",
-    "CreatedAtFrom":"2020-05-13T04:00:00.000Z",
-    "CreatedAtTo":"2020-05-13T04:00:00.000Z",
-    "CreatedAtOperator":  "isBetween",
-    "UserId":"4085e4dc...20522aab5e1b",
-    "ZumRailsType":"FundZumWallet",
-    "TransactionMethod":"Eft",
-    "TransactionStatus":"Completed",
-    "FailedTransactionEvent" : "EftFailedValidationRejection",
-    "Pagination": {
-        "PageNumber": 1
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "Id": "c7a8a909...364e8836409d",
+        "CreatedAtFrom":"2020-05-13T04:00:00.000Z",
+        "CreatedAtTo":"2020-05-13T04:00:00.000Z",
+        "CreatedAtOperator":  "isBetween",
+        "UserId":"4085e4dc...20522aab5e1b",
+        "ZumRailsType":"FundZumWallet",
+        "TransactionMethod":"Eft",
+        "TransactionStatus":"Completed",
+        "FailedTransactionEvent" : "EftFailedValidationRejection",
+        "Pagination": {
+            "PageNumber": 1
+        }
     }
-}
-> Response example:
-{
-    "statusCode":200,
-    "message":"POST Request successful.",
-    "isError":false,
-    "result": {
-        "CurrentPage": 1,
-        "PageSize": 1,
-        "TotalCount": 2,
-        "Items": [
-            {
-                "Id": "b7a8a505...364e8836404e",
-                "CreatedAt": "2020-05-13T17:59:47.039462",
-                "Memo": "Memo test",
-                "Comment": "This is a transaction to test the platform",
-                "Amount": 123.45,
-                "ZumRailsType": "FundZumWallet",
-                "TransactionMethod":"Eft",
-                "TransactionStatus": "InProgress",
-                "RecurrentTransactionId": "16d2406f...87d397a8356g",
-                "FailedTransactionEvent" : null
-            },
-            {
-                "Id": "c8a8a505...364e8836405f",
-                "CreatedAt": "2020-05-13T17:59:47.039462",
-                "Memo": "Memo test",
-                "Comment": "This is a transaction to test the platform",
-                "Amount": 123.45,
-                "ZumRailsType": "FundZumWallet",
-                "TransactionMethod":"Eft",
-                "TransactionStatus": "Failed",
-                "RecurrentTransactionId": null,
-                "FailedTransactionEvent" : "EftFailedValidationRejection"
-            }
-        ]
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode":200,
+        "message":"POST Request successful.",
+        "isError":false,
+        "result": {
+            "CurrentPage": 1,
+            "PageSize": 1,
+            "TotalCount": 2,
+            "Items": [
+                {
+                    "Id": "b7a8a505...364e8836404e",
+                    "CreatedAt": "2020-05-13T17:59:47.039462",
+                    "Memo": "Memo test",
+                    "Comment": "This is a transaction to test the platform",
+                    "Amount": 123.45,
+                    "ZumRailsType": "FundZumWallet",
+                    "TransactionMethod":"Eft",
+                    "TransactionStatus": "InProgress",
+                    "RecurrentTransactionId": "16d2406f...87d397a8356g",
+                    "FailedTransactionEvent" : null
+                },
+                {
+                    "Id": "c8a8a505...364e8836405f",
+                    "CreatedAt": "2020-05-13T17:59:47.039462",
+                    "Memo": "Memo test",
+                    "Comment": "This is a transaction to test the platform",
+                    "Amount": 123.45,
+                    "ZumRailsType": "FundZumWallet",
+                    "TransactionMethod":"Eft",
+                    "TransactionStatus": "Failed",
+                    "RecurrentTransactionId": null,
+                    "FailedTransactionEvent" : "EftFailedValidationRejection"
+                }
+            ]
+        }
     }
-}
-```
+  ```
+  
+  </TabItem>
+</Tabs>
 
 `Method: POST`
 
@@ -538,15 +606,24 @@ If you need to search for a specific transaction, we recommend for you to retrie
 
 ## Delete a transaction
 
-```json
-> Response example:
-{
-    "statusCode": 200,
-    "message": "DELETE Request successful.",
-    "isError": false,
-    "result": "Request completed"
-}
-```
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "DELETE Request successful.",
+        "isError": false,
+        "result": "Request completed"
+    }
+  ```
+
+  </TabItem>
+</Tabs>
 
 `Method: DELETE`
 
