@@ -10,6 +10,9 @@ Invoices are statements of amount owed by a user, and are either generated one-t
 
 Standalone invoices contain items which are product prices that have a “one-time” frequency. You can also create a one-off product which will be a temporary product just for the sake of a particular invoice. 
 
+Here’s how you can create an invoice:
+![Invoice creation flow](/img/docs/diagrams/flows/flow20.png)
+
 If your invoice is configured to be charged automatically to the user on the available payment method, Zūm Rails will automatically finalize your invoice and attempt payment. 
 Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same. 
 If your invoice is configured to be billed by sending an email to the user with a link to pay, then Zūm Rails will email the invoice to your user and await payment. These emails will contain a link to a hosted page to pay the invoice. 

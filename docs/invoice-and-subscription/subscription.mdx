@@ -9,6 +9,9 @@ description:
 Subscriptions allow you to charge a user on a recurring basis. 
 Subscription creation requires items which are product prices that have a “recurring plan” frequency. Subscription will generate invoices according to the billing cycle (monthly, weekly, biweekly, annually).
 
+Here’s how you can create a subscription:
+![Subscription creation flow email user](/img/docs/diagrams/flows/flow21.png)
+
 Whenever a subscription is first created, the user will receive an email with the subscription details.
 If your subscription is configured to be charged automatically to the user on the available payment method, Zūm Rails will automatically finalize your invoice and attempt payment according to the billing cycle. 
 Once the transaction for the payment is successful, the user will receive an invoice over their email confirming the same. 
