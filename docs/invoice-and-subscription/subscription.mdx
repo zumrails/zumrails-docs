@@ -3,6 +3,7 @@ title: Subscription
 description:
   How to subscriptions works.
 ---
+import ReactPlayer from 'react-player/youtube'
 
 ## How subscriptions work
 
@@ -29,6 +30,14 @@ Zūm supports changing existing subscriptions without having to cancel and recre
 
 Changes are reflected with the next invoice generated as per the billing cycle of the user. 
 
+<ReactPlayer className='react-player'
+          controls='true'
+          width='100%'
+          url='https://www.youtube.com/watch?v=iJ3ux7l5TZk' />
+
+
+<br/>
+
 Here’s how you can update subscriptions:
 ![Subscription update flow](/img/docs/diagrams/flows/flow8.png)
 
@@ -36,6 +45,13 @@ By default, subscriptions and billing continue until cancellation. You can also 
 
 Here’s how you can cancel subscriptions:
 ![Subscription update flow](/img/docs/diagrams/flows/flow9.png)
+
+<br/>
+<ReactPlayer className='react-player'
+          controls='true'
+          width='100%'
+          url='https://www.youtube.com/watch?v=mxVKZxkc1t4' />
+
 
 
 [Voiding invoices](../invoice-and-subscription/invoice#void) related to subscriptions works the same way as for standalone invoices. 

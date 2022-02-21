@@ -5,6 +5,7 @@ description:
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import ReactPlayer from 'react-player/youtube'
 
 At Zūm, Users represent the payee for accounts payable, or the payer for accounts receivable.
 There are 3 ways of ingesting users, API, Portal, and Zūm Connect.
@@ -15,6 +16,12 @@ Zūm Rails recommends using Zūm Connect for the below reasons:
 - For Credit Card and Visa Direct, it's required that we reduce your PCI scope.
 
 For more information about Zūm Connect, [click here](../ways-to-integrate/zum-connect).
+
+<ReactPlayer className='react-player'
+          controls='true'
+          width='100%'
+          url='https://www.youtube.com/watch?v=a633gth0PPg' />
+
 
 ## Creating a new user
 Use this endpoint if you want to add a new user to your account.
