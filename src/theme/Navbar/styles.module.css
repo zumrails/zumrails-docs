@@ -47,14 +47,6 @@
   margin-right: 2px;
 }
 
-:global(.navbar__item--github:before) {
-  background: url("/img/navbar/github.svg") 0 center / 20px 20px no-repeat !important;
-}
-
-:global(.navbar__item--slack:before) {
-  background: url("/img/navbar/slack.svg") 0 center / 18px 18px no-repeat !important;
-}
-
 /* Remove Algolia shorcuts */
 :global(.DocSearch-Button-Key) {
   display: none !important;

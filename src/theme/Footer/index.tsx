@@ -65,11 +65,11 @@ const Footer = () => {
           )}
         >
           <img
-            alt="QuestDB logo"
+            alt="Zum Rails logo"
             className={footerStyles.footer__logo}
             height={27}
             src="/img/footer/questdb.svg"
-            title="QuestDB - Fastest open source database for time series and analytics"
+            title="Combining sophisticated software, enhanced payment mechanics and data aggregation to enable virtually instant business payments options for accounts receivable or payable."
             width={108}
           />
           <p className={footerStyles.footer__tagline}>{siteConfig.tagline}</p>

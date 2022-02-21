@@ -152,7 +152,7 @@ function Navbar(): JSX.Element {
             href="/"
             onClick={hideSidebar}
           >
-            QuestDB
+            ZumRails
           </a>
 
           {!colorModeToggle.disabled && (

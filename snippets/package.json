@@ -2,7 +2,7 @@
   "name": "snippets",
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "description": "Showcase for integrating QuestDB with your favorite programming language",
+  "description": "Showcase for integrating with your favorite programming language",
   "private": true,
   "repository": {
     "type": "git",
