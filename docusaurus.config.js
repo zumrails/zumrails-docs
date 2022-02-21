@@ -97,7 +97,7 @@ const config = {
     },
     image: "/img/og.gif",
     gtag: {
-      trackingID: "GTM-PVR7M2G",
+      trackingID: "",
       anonymizeIP: true,
     },
     prism: {
