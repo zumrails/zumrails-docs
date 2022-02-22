@@ -9,7 +9,66 @@ To pull a user’s financial data, this user will have to login using Zūm Conne
 
 Zūm will then dispatch the connection to the financial data aggregator.
 
-Code Block for Get a user's bank account information
+```json
+> Response example:
+{
+    "statusCode": 200,
+    "message": "GET Request successful.",
+    "isError": false,
+    "result": {
+        "Id": "2babb324-3a80-4a35-a1cc-b3795d294d18",
+        "HolderName": "John Smith",
+        "HolderCivicAddress": "1234 Street 01",
+        "HolderCity": "Toronto",
+        "HolderProvince": "ON",
+        "HolderPostalCode": "A0A 1A1",
+        "HolderCountry": "CA",
+        "HolderEmail": "email@zumrails.com",
+        "HolderPhoneNumber": "(123) 123-1234",
+        "Institution": "Bank Name",
+        "Accounts": [
+            {
+                "Id": "4e399a3d-7562-4008-b074-16991f14cc72",
+                "ProviderAccountId": "729e24f0-6458-40f2-4afa-08d7a8df7f42",
+                "Transactions": [
+                    {
+                        "Id": "02464c54-9ce4-4912-a426-a8c440b9a996",
+                        "ProviderTransactiontId": "00000000-0000-0000-0000-000000000000",
+                        "Date": "2020-05-09T00:00:00",
+                        "Description": "TrxChe@Cr15.91",
+                        "Debit": null,
+                        "Credit": 15.91,
+                        "Balance": 50007.96
+                    },
+                    {
+                        "Id": "047c6bab-50fe-4420-a46f-beeb32408a06",
+                        "ProviderTransactiontId": "00000000-0000-0000-0000-000000000000",
+                        "Date": "2020-03-09T00:00:00",
+                        "Description": "TrxChe@De15.30",
+                        "Debit": 15.3,
+                        "Credit": null,
+                        "Balance": 49992.35
+                    }
+                ],
+                "TransitNumber": "12345",
+                "InstitutionNumber": "123",
+                "AccountNumber": "1234567",
+                "Title": "Chequing Account",
+                "Balance": 123.45,
+                "Category": "Operations",
+                "Type": "Chequing",
+                "Currency": "CAD",
+                "IsEftEligible": true
+            }
+        ],
+        "LastRefresh": "2020-05-13T14:23:52.323512",
+    }
+}
+```
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/user/getbankaccountinformation/{user_id}`
 
 When a user logs in through the Zūm Connect iframe, his information can be accessed by calling the user/getBankaccountinformation endpoint.
 
