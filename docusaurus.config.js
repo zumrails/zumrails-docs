@@ -96,10 +96,6 @@ const config = {
       respectPrefersColorScheme: false,
     },
     image: "/img/og.gif",
-    gtag: {
-      trackingID: "",
-      anonymizeIP: true,
-    },
     prism: {
       defaultLanguage: "javascript",
       additionalLanguages: ["rust", "csharp", "julia", "cpp", "java"],
