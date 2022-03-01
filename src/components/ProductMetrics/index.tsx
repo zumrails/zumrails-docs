@@ -7,7 +7,6 @@ import SvgImage from "../SvgImage"
 import GithubLogo from "../../assets/img/github.svg"
 import SlackLogo from "../../assets/img/slack.svg"
 import DatabaseLogo from "../../assets/img/database.svg"
-import QuestDBLogo from "../../assets/img/questdb.svg"
 
 type Repository = {
   repo: {
@@ -22,9 +21,6 @@ const numberWithCommas = (x: number) => {
 
 const ProductMetrics = () => {
   const { repo } = usePluginData<Repository>("fetch-repo")
-  const { contributorsCount } = usePluginData<{ contributorsCount: number }>(
-    "fetch-contributors-count",
-  )
 
   return (
     <div className={pmCss["product-metrics"]}>
@@ -62,13 +58,9 @@ const ProductMetrics = () => {
       </div>
       <div className={pmCss["product-metric"]}>
         <div className={pmCss["product-metric__content"]}>
-          <SvgImage
-            image={<QuestDBLogo width="60" height="60" />}
-            title="QuestDB logo"
-          />
           <div className={pmCss["product-metric__content__text"]}>
             <h3 className={pmCss["product-metric__content__text__header"]}>
-              {contributorsCount}
+              0
             </h3>
             <p className={pmCss["product-metric__content__text__description"]}>
               contributors

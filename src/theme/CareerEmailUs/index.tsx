@@ -16,12 +16,6 @@ const CareerEmailUs = ({ title }: Props) => {
         relevant links to your portfolio (LinkedIn, GitHub, personal website,
         etc.)
       </p>
-      <a
-        className={styles.link}
-        href={"mailto:careers@questdb.io?subject=" + title}
-      >
-        careers@questdb.io
-      </a>
     </section>
   )
 }

@@ -68,8 +68,8 @@ const Footer = () => {
             alt="Zum Rails logo"
             className={footerStyles.footer__logo}
             height={27}
-            src="/img/footer/questdb.svg"
-            title="Combining sophisticated software, enhanced payment mechanics and data aggregation to enable virtually instant business payments options for accounts receivable or payable."
+            src="/img/favicon.png"
+            title="Zum Rails"
             width={108}
           />
           <p className={footerStyles.footer__tagline}>{siteConfig.tagline}</p>

@@ -2,14 +2,14 @@
   "name": "snippets",
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "description": "Showcase for integrating with your favorite programming language",
+  "description": "Zumrails documentation",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/questdb/questdb.io.git"
+    "url": "https://github.com/zumrails/zumrails-docs.io.git"
   },
   "author": {
-    "name": "QuestDB"
+    "name": "ZumRails"
   },
   "scripts": {
     "auth:go": "go run authenticate/ilp.go",

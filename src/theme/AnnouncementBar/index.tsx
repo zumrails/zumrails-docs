@@ -17,7 +17,7 @@ const AnnouncementBar = () => {
   return (
     <div className={styles.announcement} role="banner">
       <p className={styles.announcement__content}>
-        If you like QuestDB,&nbsp;
+        If you like ZumRails,&nbsp;
         <a
           className={styles.announcement__link}
           href=""
