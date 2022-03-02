@@ -113,7 +113,7 @@ To listen to the event in js, your website must refer to Zūm Connect using an i
   window.addEventListener('message', function(e) {
       
       var data = e.data;
-      if (data && data.origin && data.origin === 'ZUM_RAILS_IFRAME') {
+      if (data && data.origin && data.origin === 'ZUM_RAILS') {
           console.log(data);
       }
   });
@@ -132,7 +132,7 @@ To listen to the event in js, your website must refer to Zūm Connect using an i
 
   ```json
   {
-    "origin": "ZUM_RAILS_IFRAME",
+    "origin": "ZUM_RAILS",
     "userId": "c18dd952-...-9bd6a46eb1c4"
   }
   ```
@@ -161,7 +161,7 @@ To listen to the js event, your website must refer to Zūm Connect using an iFra
 
   ```json
   {
-    "origin": "ZUM_RAILS_IFRAME",
+    "origin": "ZUM_RAILS",
     "invoiceId": "c18dd952-...-9bd6a46eb1c4",
     "userId": "c18dd952-...-9bd6a46eb1c4",
     "transactionId": "c18dd952-...-9bd6a46eb1c4"
@@ -173,7 +173,7 @@ To listen to the js event, your website must refer to Zūm Connect using an iFra
 
   ```json
   {
-    "origin": "ZUM_RAILS_IFRAME",
+    "origin": "ZUM_RAILS",
     "userId": "c18dd952-...-9bd6a46eb1c4",
   }
   ```
@@ -208,7 +208,7 @@ To listen to the js event, your website must refer to Zūm Connect using an iFra
 
   ```json
   {
-    "origin": "ZUM_RAILS_IFRAME",
+    "origin": "ZUM_RAILS",
     "subscriptionId": "c18dd952-...-9bd6a46eb1c4",
     "userId": "c18dd952-...-9bd6a46eb1c4",
     "transactionId": "c18dd952-...-9bd6a46eb1c4"
@@ -220,7 +220,7 @@ To listen to the js event, your website must refer to Zūm Connect using an iFra
 
   ```json
   {
-    "origin": "ZUM_RAILS_IFRAME",
+    "origin": "ZUM_RAILS",
     "userId": "c18dd952-...-9bd6a46eb1c4",
   }
   ```
