@@ -640,3 +640,30 @@ Name | string | The product name
 Description | string | The product description
 ProducStatus | string | The status for the product
 CreatedAt | date | The creation date for the product
+
+## Delete a product
+Use this endpoint if you want to delete a product. Once delete, the product will not be visible or avaliable to any end user or administrator.
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {
+      "statusCode": 200,
+      "message": "DELETE Request successful.",
+      "isError": false,
+      "result": "Request completed"
+  }
+  ```
+
+  </TabItem>
+
+</Tabs>
+
+`Method: DELETE`
+
+`Endpoint: {{env}}/api/product/{{product_id}}`
