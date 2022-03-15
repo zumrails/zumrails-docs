@@ -249,8 +249,8 @@ This service is executed every 10 minutes.
 :::
 
 :::caution
-To simulate a review situation (only available for interac for now), create a transaction with the keyword "InReview" in the field COMMENT.
-There is a service which runs every minute that will update the transaction status to InReview in the first execution. The next time the service runs, it will Complete the transaction.
+To simulate a review situation (only available for interac for now), create a transaction with the keyword "UnderReview" in the field COMMENT.
+There is a service which runs every minute that will update the transaction status to Under Review in the first execution. The next time the service runs, it will Complete the transaction.
 :::
 
 :::info
@@ -404,7 +404,7 @@ Completed | Indicates the transaction is completed, this is a permanent status f
 Failed | Indicates the transaction has failed, this is a permanent status.
 Cancelled | Indicates the transaction has canceled, this is a permanent status.
 Scheduled | Indicates the transaction is scheduled.
-InReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. A transaction might be under review up to 7 days, after that our system will automatically cancel it.
+UnderReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. A transaction might be under review up to 7 days, after that our system will automatically cancel it.
 
 **Transaction Events**
 
