@@ -69,21 +69,24 @@ Each token is valid only once, for 15 minutes.
 
 ## Install JS SDK 
 
-Refer the js library below into your website.
+Refer the js library below into your website. One url for sandbox, another one for production.
 
 <Tabs
   defaultValue="tab1"
   values={[
-    {label: 'Insert on your website', value: 'tab1'},
+    {label: 'Sandbox', value: 'tab1'},
+    {label: 'Production', value: 'tab2'},
   ]}>
   <TabItem value="tab1">
-
   ```html
-    <script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/connector.js" type="text/javascript" async=""></script>
+    <script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/sandbox/connector.js" type="text/javascript" async=""></script>
   ```
-
   </TabItem>
-
+  <TabItem value="tab2">
+  ```html
+    <script id="zumrailsconnector" src="https://cdn.aggregation.zumrails.com/production/connector.js" type="text/javascript" async=""></script>
+  ```
+  </TabItem>
 </Tabs>
 
 
