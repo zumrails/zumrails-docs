@@ -89,7 +89,7 @@ For Credit Card and Visa Direct, if you want to add a user through API, please c
         }
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -115,11 +115,11 @@ Number                  | string    | no    | no        | yes           | yes   
 ExpireMonth             | number    | no    | no        | yes           | yes           | Card expiry month, 2 digits
 ExpireYear              | number    | no    | no        | yes           | yes           | Card expiry year, 4 digits
 CVV                     | string    | no    | no        | yes           | yes           | Security code, 3 or 4 digits
-AddressLine1            | string    | no    | no        | yes           | no           | Billing address line 1
-AddressLine2            | string    | no    | no        | yes           | no           | Billing address line 2
+AddressLine1            | string    | no    | no        | yes           | no           | Billing address line 1 (maximum 30 characters)
+AddressLine2            | string    | no    | no        | yes           | no           | Billing address line 2 (maximum 30 characters)
 AddressPostalCode       | string    | no    | no        | yes           | no           | Billing address postal code
 AddressCountry          | string    | no    | no        | yes           | no           | Billing address country
-AddressCity             | string    | no    | no        | yes           | no           | Billing address city
+AddressCity             | string    | no    | no        | yes           | no           | Billing address city (maximum 20 characters)
 AddressState            | string    | no    | no        | yes           | no           | Billing address state/province
 
 :::caution
@@ -168,7 +168,7 @@ Use this endpoint if you want to edit the basic information for an existing user
         "result": "0bc9894d-....-f691024aca19"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -223,7 +223,7 @@ Use this endpoint if you want to edit the bank account information from a user. 
         "result": "0bc9894d-....-f691024aca19"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -282,7 +282,7 @@ Use this endpoint if you want to edit the credit card information from a user. T
         "result": "0bc9894d-....-f691024aca19"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -298,11 +298,11 @@ Number                  | string    | yes           | yes           |
 ExpireMonth             | number    | yes           | yes           | Card expiry month, 2 digits
 ExpireYear              | number    | yes           | yes           | Card expiry year, 4 digits
 CVV                     | string    | yes           | yes           | Security code, 3 or 4 digits
-AddressLine1            | string    | no           | yes           | Billing address line 1
-AddressLine2            | string    | no           | yes           | Billing address line 2
+AddressLine1            | string    | no           | yes           | Billing address line 1 (maximum 30 characters)
+AddressLine2            | string    | no           | yes           | Billing address line 2 (maximum 30 characters)
 AddressPostalCode       | string    | no           | yes           | Billing address postal code
 AddressCountry          | string    | no           | yes           | Billing address country (Canada)
-AddressCity             | string    | no           | yes           | Billing address city
+AddressCity             | string    | no           | yes           | Billing address city (maximum 20 characters)
 AddressState            | string    | no           | yes           | Billing address state/province
 
 **Response**
@@ -344,7 +344,7 @@ Use this endpoint if you want to edit the credit card billing address informatio
         "result": "0bc9894d-....-f691024aca19"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -356,11 +356,11 @@ Use this endpoint if you want to edit the credit card billing address informatio
 
 Parameter               | Type      | Credit Card (Mandatory)  | Visa Direct (Mandatory)   | Description
 ---------               | -------   | ----          | ----          | ----
-AddressLine1            | string    | no           | yes           | Billing address line 1
-AddressLine2            | string    | no           | yes           | Billing address line 2
+AddressLine1            | string    | no           | yes           | Billing address line 1 (maximum 30 characters)
+AddressLine2            | string    | no           | yes           | Billing address line 2 (maximum 30 characters)
 AddressPostalCode       | string    | no           | yes           | Billing address postal code
 AddressCountry          | string    | no           | yes           | Billing address country (Canada)
-AddressCity             | string    | no           | yes           | Billing address city
+AddressCity             | string    | no           | yes           | Billing address city (maximum 20 characters)
 AddressState            | string    | no           | yes           | Billing address state/province
 
 **Response**
@@ -401,7 +401,7 @@ id | guid | User id
         "result": "0bc9894d-....-f691024aca19"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -409,7 +409,7 @@ id | guid | User id
 
 `Endpoint: {{env}}/api/user/UpdateShippingAddressInformation/{user_id}/{sameAsBilling}`
 
-Use this endpoint if you want to update the shipping address information from a user. The user id is informed in the url and the body payload contains the address information. 
+Use this endpoint if you want to update the shipping address information from a user. The user id is informed in the url and the body payload contains the address information.
 
 :::info
 The boolean `sameAsBilling` informs us to use the billing address as shipping address.
@@ -419,11 +419,11 @@ The boolean `sameAsBilling` informs us to use the billing address as shipping ad
 
 Parameter               | Type      | Credit Card (Mandatory)  | Visa Direct (Mandatory)   | Description
 ---------               | -------   | ----          | ----          | ----
-AddressLine1            | string    | no           | yes           | shipping address line 1
-AddressLine2            | string    | no           | yes           | shipping address line 2
+AddressLine1            | string    | no           | yes           | shipping address line 1 (maximum 30 characters)
+AddressLine2            | string    | no           | yes           | shipping address line 2 (maximum 30 characters)
 AddressPostalCode       | string    | no           | yes           | shipping address postal code
 AddressCountry          | string    | no           | yes           | shipping address country (Canada)
-AddressCity             | string    | no           | yes           | shipping address city
+AddressCity             | string    | no           | yes           | shipping address city (maximum 20 characters)
 AddressState            | string    | no           | yes           | shipping address state/province
 
 
@@ -531,11 +531,11 @@ Number                  | string    | Last for digits only
 ExpireMonth             | number    | Card expiry month, 2 digits
 ExpireYear              | number    | Card expiry year, 4 digits
 CVV                     | string    | Security code, 3 or 4 digits
-AddressLine1            | string    | Billing address line 1
-AddressLine2            | string    | Billing address line 2
+AddressLine1            | string    | Billing address line 1 (maximum 30 characters)
+AddressLine2            | string    | Billing address line 2 (maximum 30 characters)
 AddressPostalCode       | string    | Billing address postal code
 AddressCountry          | string    | Billing address country
-AddressCity             | string    | Billing address city
+AddressCity             | string    | Billing address city (maximum 20 characters)
 AddressState            | string    | Billing address state/province
 BrandName            | string    | The brand, Visa, Master, etc.
 Institution            | string    | The institution of the card, valid for Visa Direct when using aggregation
@@ -647,7 +647,7 @@ When deleting a user, all transactions already created for the respective user w
         }
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
