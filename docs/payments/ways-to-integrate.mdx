@@ -80,10 +80,34 @@ language| Change the connect language. There are two available options: en (engl
 backgroundColor| Change the background color around the form with a hex code (Only numbers, you don't need to send the hash symbol prefix)
 foregroundColor| Change the foreground color in the form with a hex code (Only numbers, you don't need to send the hash symbol prefix)
 disablePreFilledFields | Disable all fields that received a value by query parameter (Example: firstName, lastName...)
+creditCardAddresLine1|Define the field address line 1 in credit card tab
+creditCardAddresLine2|Define the field address line 2 in credit card tab
+creditCardCity|Define the field city in credit card tab
+creditCardProvince|Define the field province/territory in credit card tab
+creditCardPostalCode|Define the field postal code in credit card tab
+creditCardCountry|Define the field country in credit card tab. NOTE: Currently we only accept "Canada" as the value for this parameter. Any other values, if specified, will be ignored.
 
 :::info
 Hiding a field doesn't mean that it is no longer mandatory, please use the other query params to pre-fill: firstName, lastName, email, etc.
 :::
+
+The field `creditCardProvince` can be defined with this state abbreviations:
+
+Abbreviation | Description
+-------| ----------- 
+AB|Alberta
+BC|British Columbia
+MB|Manitoba
+NB|New Brunswick
+NL|Newfoundland and Labrador
+NS|Nova Scotia
+NT|Northwest Territories
+NU|Nunavut
+ON|Ontario
+PE|Prince Edward Island
+QC|Quebec
+SK|Saskatchewan
+YT|Yukon
 
 Examples:
 
