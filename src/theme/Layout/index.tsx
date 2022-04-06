@@ -5,6 +5,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import useBaseUrl from "@docusaurus/useBaseUrl"
 
 import LayoutProviders from "@theme/LayoutProviders"
+import Footer from "../Footer"
 import Navbar from "@theme/Navbar"
 import { MetadataContextProvider } from "@theme/useMetadataContext"
 
@@ -37,6 +38,7 @@ const Layout = ({
   description,
   flex,
   image,
+  noFooter,
   keywords,
   permalink,
   title,
@@ -112,6 +114,7 @@ const Layout = ({
         >
           {children}
         </div>
+        {noFooter !== true && <Footer />}
       </LayoutProviders>
     </MetadataContextProvider>
   )

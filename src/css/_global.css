@@ -479,13 +479,14 @@ html[data-theme='light'] .react-toggle-track {
   background-color: #ebedf0;
 }
 
+#__docusaurus > footer li,
 html[data-theme='light'] #__docusaurus > footer li,
 html[data-theme='light'] [class^='footer__bottom'] {
-  color: var(--palette-white);
+  color: #00fb7d;
 }
 
 html[data-theme='light'] [class^='footer__tagline'] {
-  color: #979aaf;
+  color: #fff;
 }
 
 /* purposefuly excessive selector to increase specificity */

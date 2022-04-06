@@ -4,9 +4,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React from "react"
 import customFields from "../../config/customFields"
 
-import Button from "@theme/Button"
 import useMetadataContext from "@theme/useMetadataContext"
-
 import sectionCss from "../../css/section.module.css"
 import footerStyles from "./styles.module.css"
 
@@ -64,34 +62,21 @@ const Footer = () => {
             footerStyles["footer__column--left"],
           )}
         >
-          <img
-            alt="Zum Rails logo"
-            className={footerStyles.footer__logo}
-            height={27}
-            src="/img/favicon.png"
-            title="Zum Rails"
-            width={108}
-          />
+          <a href="/">
+            <img
+              alt="Zum Rails logo"
+              className={footerStyles.footer__logo}
+              height={33}
+              src="/img/zum_icon_white.png"
+              title="Zum Rails"
+              width={78}
+            />
+          </a>
           <p className={footerStyles.footer__tagline}>{siteConfig.tagline}</p>
-
-          <Button
-            className={footerStyles.footer__github}
-            href=""
-            icon={
-              <img
-                alt="GitHub logo"
-                height={22}
-                src="/img/github.svg"
-                title="GitHub"
-                width={22}
-              />
-            }
-            size="xsmall"
-            uppercase={false}
-            variant="secondary"
-          >
-            Star us on GitHub
-          </Button>
+          <p className={footerStyles.footer__text}>
+            Zūm puts all the pieces together to solve your payment puzzle
+          </p>
+          <p className={footerStyles.footer__text}>{customFields.copyright}</p>
         </div>
 
         <div
@@ -121,25 +106,6 @@ const Footer = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div className={footerStyles.footer__bottom}>
-        <p className={footerStyles.footer__copyright}>
-          {customFields.copyright}
-          <ul>
-            <li className={footerStyles.footer__item}>
-              <a className={footerStyles.footer__link} href="/privacy-notice/">
-                Privacy
-              </a>
-            </li>
-          </ul>
-          <ul>
-            <li className={footerStyles.footer__item}>
-              <a className={footerStyles.footer__link} href="/terms/">
-                Terms
-              </a>
-            </li>
-          </ul>
-        </p>
       </div>
     </footer>
   )

@@ -1,7 +1,7 @@
 .footer {
   display: flex;
   flex-direction: column;
-  background: var(--palette-rock);
+  background: #000;
 }
 
 .footer--alt {
@@ -35,7 +35,14 @@
   max-width: 380px;
   margin-bottom: 1rem;
   font-size: var(--font-size-large);
-  color: var(--palette-pale-blue);
+  font-weight: 600;
+  color: #fff;
+}
+
+.footer__text {
+  max-width: 380px;
+  margin-bottom: 1rem;
+  color: #797C7F;
 }
 
 .footer__github {
@@ -58,7 +65,7 @@
 .footer__link {
   margin-bottom: 0.6rem;
   flex: 1;
-  color: var(--palette-white);
+  color: #999;
   font-size: var(--font-size-normal);
 }
 
