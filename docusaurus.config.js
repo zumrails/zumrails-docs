@@ -116,10 +116,6 @@ const config = {
       theme: require("./src/internals/prism-github"),
       darkTheme: require("./src/internals/prism-dracula"),
     },
-    algolia: {
-      apiKey: "30ebdc1936d670289449270ace2c677e",
-      indexName: "documentation_index",
-    },
     navbar: {
       title: "Zūm Rails",
       logo: {

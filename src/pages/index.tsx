@@ -1,5 +1,4 @@
 import clsx from "clsx"
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext"
 import React from "react"
 import customFields from "../config/customFields"
 
@@ -11,8 +10,7 @@ import usCss from "../css/index/usp.module.css"
 import seCss from "../css/section.module.css"
 
 const Top = () => {
-  const { siteConfig } = useDocusaurusContext()
-
+  const text = "Welcome to the Zūm Rails Documentation. You will find guides and documentation to help you get started with Zūm Rails as quickly as possible as well as any support if you get stuck."
   return (
     <section
       className={clsx(seCss["section--inner"], seCss["section--slim--accent"])}
@@ -25,7 +23,7 @@ const Top = () => {
             seCss["section__title--accent"],
           )}
         >
-          Fast SQL for time series
+          How can we help?
         </h1>
 
         <p
@@ -35,26 +33,28 @@ const Top = () => {
             seCss["section__subtitle--accent"],
           )}
         >
-          {siteConfig.tagline}
+          {text}
         </p>
 
         <div className={juCss.jumbotron__cta}>
-          <Button className={juCss.jumbotron__link} href={customFields.demoUrl}>
-            Live Demo
+          <Button
+            className={juCss.jumbotron__link}
+            newTab={false}
+            href="/docs/introduction/"
+          >
+            Documentation
           </Button>
           <Button
             className={clsx(
               juCss.jumbotron__link,
               juCss["jumbotron__cta--github"],
             )}
+            href="https://help.zumrails.com/en/"
             variant="secondary"
           >
-            GitHub
+            Help Articles
           </Button>
         </div>
-        <p className={juCss.jumbotron__description}>
-          Query our demo dataset with 1.6 billion rows in milliseconds
-        </p>
       </div>
     </section>
   )
@@ -65,69 +65,32 @@ const Usp = () => (
     <div className={seCss["section--inner"]}>
       <div className={usCss.usp}>
         <div className={usCss.usp__inner}>
-          <img
-            alt="Speedometer"
-            className={usCss.usp__illustration}
-            height={113}
-            src="/img/pages/index/rawPower.svg"
-            width={176}
-          />
-
-          <h2 className={usCss.usp__title}>Built for performance</h2>
-
-          <p className={usCss.usp__description}>SIMD-optimized analytics</p>
-          <p className={usCss.usp__description}>Row- and column-based access</p>
-          <p className={usCss.usp__description}>Vectorized query execution</p>
-          <p className={usCss.usp__description}>Tiny memory footprint</p>
-          <p className={usCss.usp__description}>C++ and zero-GC Java</p>
+          <h2 className={usCss.usp__title}>Getting Started</h2>
+          <p className={usCss.usp__description}>Authentication</p>
+          <p className={usCss.usp__description}>Webhooks</p>
         </div>
       </div>
-
-      <div className={clsx(usCss.usp, usCss["usp--wide"])}>
-        <div className={usCss.usp__inner}>
-          <img
-            alt="A code editor with a chart that shows the result of the query"
-            className={usCss.usp__illustration}
-            height={113}
-            src="/img/pages/index/easyToUse.svg"
-            width={205}
-          />
-
-          <h2 className={usCss.usp__title}>Optimized for time series</h2>
-
-          <p className={usCss.usp__description}>
-            Relational model for time series
-          </p>
-          <p className={usCss.usp__description}>
-            Data stored in chronological order
-          </p>
-          <p className={usCss.usp__description}>Time partitioned</p>
-          <p className={usCss.usp__description}>Immediate consistency</p>
-          <p className={usCss.usp__description}>Fast InfluxDB line protocol</p>
-        </div>
-      </div>
-
       <div className={usCss.usp}>
         <div className={usCss.usp__inner}>
-          <img
-            alt="A code editor containing a SQL statement"
-            className={usCss.usp__illustration}
-            height={113}
-            src="/img/pages/index/featureRich.svg"
-            width={176}
-          />
-
-          <h2 className={usCss.usp__title}>Implemented with SQL</h2>
-
-          <p className={usCss.usp__description}>
-            Time series and relational joins
-          </p>
-          <p className={usCss.usp__description}>Postgres compatibility</p>
-          <p className={usCss.usp__description}>
-            Aggregations and downsampling
-          </p>
-          <p className={usCss.usp__description}>Unlimited sub-queries</p>
-          <p className={usCss.usp__description}>Built-in SQL optimizer</p>
+          <h2 className={usCss.usp__title}>Payments</h2>
+          <p className={usCss.usp__description}>Moving Funds</p>
+          <p className={usCss.usp__description}>Payment Methods</p>
+          <p className={usCss.usp__description}>Ways to integrate</p>
+        </div>
+      </div>
+      <div className={usCss.usp}>
+        <div className={usCss.usp__inner}>
+          <h2 className={usCss.usp__title}>Invoices & Subscriptions</h2>
+          <p className={usCss.usp__description}>Products and Prices</p>
+          <p className={usCss.usp__description}>Invoices</p>
+          <p className={usCss.usp__description}>Subscriptions</p>
+        </div>
+      </div>
+      <div className={usCss.usp}>
+        <div className={usCss.usp__inner}>
+          <h2 className={usCss.usp__title}>Aggregation</h2>
+          <p className={usCss.usp__description}>Configuration</p>
+          <p className={usCss.usp__description}>Connect UI & SDK</p>
         </div>
       </div>
     </div>

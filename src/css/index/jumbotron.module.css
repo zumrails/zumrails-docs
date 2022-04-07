@@ -1,15 +1,17 @@
 .jumbotron {
   display: flex;
   flex-direction: column;
-  flex: 0 1 410px;
-  align-items: self-start;
+  width: 100%;
+  align-items: center;
+  text-align: center;
 }
 
 .jumbotron__cta {
   display: flex;
   margin-top: 2.9rem;
   margin-bottom: 1rem;
-  align-self: stretch;
+  width: 100%;
+  justify-content: center;
 }
 
 .jumbotron__link {
