@@ -6,6 +6,10 @@
   text-align: center;
 }
 
+.text_white{
+  color: white !important;
+}
+
 .jumbotron__cta {
   display: flex;
   margin-top: 2.9rem;
