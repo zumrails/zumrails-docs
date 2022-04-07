@@ -8,9 +8,10 @@ import Layout from "../theme/Layout"
 import juCss from "../css/index/jumbotron.module.css"
 import usCss from "../css/index/usp.module.css"
 import seCss from "../css/section.module.css"
+import StarIcon from "../../static/img/pages/index/star.svg"
+import SvgImage from "../components/SvgImage"
 
 const TopBanner = () => {
-  const text = "Welcome to the Zūm Rails Documentation. You will find guides and documentation to help you get started with Zūm Rails as quickly as possible as well as any support if you get stuck."
   return (
     <section
       className={clsx(
@@ -38,7 +39,7 @@ const TopBanner = () => {
             juCss.text_white,
           )}
         >
-          {text}
+          {customFields.welcomeMessage}
         </p>
 
         <div className={juCss.jumbotron__cta}>
@@ -108,9 +109,24 @@ const ImportantLinks = () => (
       </div>
       <div className={usCss.usp}>
         <div className={usCss.usp__inner}>
-          <h2 className={usCss.usp__title}>
-            Invoices <br />& Subscriptions
-          </h2>
+          <h2 className={usCss.usp__title}>Aggregation</h2>
+          <a
+            href="/docs/data-aggregation/configure"
+            className={usCss.usp__description}
+          >
+            Configuration
+          </a>
+          <a
+            href="/docs/data-aggregation/connector-ui"
+            className={usCss.usp__description}
+          >
+            Connect UI & SDK
+          </a>
+        </div>
+      </div>
+      <div className={usCss.usp}>
+        <div className={usCss.usp__inner}>
+          <h2 className={usCss.usp__title}>Invoices & Subscriptions</h2>
           <a
             href="/docs/invoice-and-subscription/product"
             className={usCss.usp__description}
@@ -131,32 +147,16 @@ const ImportantLinks = () => (
           </a>
         </div>
       </div>
-      <div className={usCss.usp}>
-        <div className={usCss.usp__inner}>
-          <h2 className={usCss.usp__title}>Aggregation</h2>
-          <a
-            href="/docs/data-aggregation/configure"
-            className={usCss.usp__description}
-          >
-            Configuration
-          </a>
-          <a
-            href="/docs/data-aggregation/connector-ui"
-            className={usCss.usp__description}
-          >
-            Connect UI & SDK
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 )
 
 const TopArticles = () => (
   <section className={clsx(seCss.section, seCss["section--slim"])}>
-    <h2 className={clsx(usCss.usp__title, seCss["section--title"])}>
-      Popular Articles
-    </h2>
+    <div className={clsx(seCss.section__container)}>
+      <SvgImage image={<StarIcon width="25" height="25" />} title="Star" />
+      <h2 className={clsx(usCss.usp__title)}>Popular Articles</h2>
+    </div>
     <div className={seCss["section--inner--slim"]}>
       <div className={usCss.usp}>
         <div className={usCss.usp__inner}>

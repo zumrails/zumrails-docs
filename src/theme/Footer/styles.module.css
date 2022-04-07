@@ -39,6 +39,15 @@
   color: #fff;
 }
 
+.footer__social {
+  display: flex;
+}
+
+.footer__social a {
+  margin-right: 1rem;
+  color: #fff;
+}
+
 .footer__text {
   max-width: 380px;
   margin-bottom: 1rem;
