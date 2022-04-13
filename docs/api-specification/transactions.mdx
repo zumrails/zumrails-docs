@@ -276,7 +276,7 @@ EftFailedCurrectAccountMismatch         | VisaDirectReenterTransaction          
 EftFailedPayorPayeeDeceased             | VisaDirectInvalidTransaction                  | InteracFailedReachedCancellationCutOff                        |
 EftFailedFrozenAccount                  | VisaDirectInvalidCardNumber                   | InteracFailedNotificationDeliveryFailure                      |
 EftFailedInvalidErrorAccountNumber      | VisaDirectIssuerOrSwitchInoperative           | InteracFailedAmountGreaterThanMax                             |
-EftFailedErrorPayorPayeeName            |                                               | InteracFailedDebtorRejected                                   |
+EftFailedErrorPayorPayeeName            | VisaDirectUnsupportedCardType                 | InteracFailedDebtorRejected                                   |
 EftFailedRefusedNoAgreement             |                                               | InteracFailedFundsDepositFailed                               |
 EftFailedNotInAccountAgreementP         |                                               | InteracFailedClientEmailedToRequestCancellation               |
 EftFailedNotInAccountAgreementE         |                                               | InteracFailedGenericError                                     |
@@ -451,6 +451,7 @@ VisaDirect      | VisaDirectInvalidCardNumber               | When the card numb
 VisaDirect      | VisaDirectReenterTransaction              | When an error happened while creating the transaction. Try again
 VisaDirect      | VisaDirectInvalidTransaction              | When the transaction was considered invalid by visa direct
 VisaDirect      | VisaDirectIssuerOrSwitchInoperative       | When the issuer or switch is inoperative
+VisaDirect      | VisaDirectUnsupportedCardType             | When a card type is not supported
 -------         | -------                                   | -------
 Interac         | InteracSent                               | When the transaction is sent to interac
 Interac         | InteracAcknowledgedCredit                 | When a credit transaction is received by interac
