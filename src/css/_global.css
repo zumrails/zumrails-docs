@@ -201,8 +201,8 @@ html[data-theme="light"] {
   --theme-button-primary-text-color: var(--palette-white);
   --theme-button-primary-hover-background-color: var(--palette-zum-darker);
 
-  --theme-button-secondary-background-color: var(--palette-dark-10);
-  --theme-button-secondary-text-color: var(--palette-charade);
+  --theme-button-secondary-background-color: var(--palette-zum-darker);
+  --theme-button-secondary-text-color: var(--palette-white);
   --theme-button-secondary-hover-background-color: var(--palette-dark-30);
 
   --theme-button-tertiary-background-color: var(--palette-dark-30);
@@ -479,13 +479,14 @@ html[data-theme='light'] .react-toggle-track {
   background-color: #ebedf0;
 }
 
+#__docusaurus > footer li,
 html[data-theme='light'] #__docusaurus > footer li,
 html[data-theme='light'] [class^='footer__bottom'] {
-  color: var(--palette-white);
+  color: #00fb7d;
 }
 
 html[data-theme='light'] [class^='footer__tagline'] {
-  color: #979aaf;
+  color: #fff;
 }
 
 /* purposefuly excessive selector to increase specificity */
