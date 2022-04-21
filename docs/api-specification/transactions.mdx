@@ -171,6 +171,9 @@ InteracSecurityAnswer | string | yes if InteracHasSecurityQuestionAndAnswer is t
 ScheduledStartDate | date | no | The date when the transaction will be sent to the financial institution. Must be greater than today
 ClientTransactionId | string | no | This field can be used to store the Transaction id created in your system when the Transaction is initiated
 UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user). Read more about Interac ANR [here](https://help.zumrails.com/en/articles/5978993-interac-anr).
+CardEci | string | no | Received from 3D secure, required if using 3D Secure
+CardXid | string | no | Received from 3D secure, required if using 3D Secure
+CardCavv | string | no | Received from 3D secure, required if using 3D Secure
 
 :::info
 Either a memo or comment is mandatory for Interac transactions. If both are specified, the comment will be presented on the Interac request.
