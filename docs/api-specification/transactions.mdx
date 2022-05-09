@@ -142,7 +142,7 @@ values={[
             "Id": "0bc9894d-...f691024aca19",
         }
     }
-``` 
+```
 </TabItem>
 </Tabs>
 
@@ -238,7 +238,7 @@ CreditCard |
         "WalletId":"8ebd932b-...b92633e14297"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -441,6 +441,7 @@ Eft             | EftFailedNotInAccountAgreementP           | Account do not all
 Eft             | EftFailedNotInAccountAgreementE           | Account do not allow EFT
 Eft             | EftFailedAgreementRevoked                 | Account do not allow EFT
 Eft             | EftFailedDefaultByAFinancialInstitution   | Generic error provided by the financial institution
+Eft             | EftFailedCustomerInitiatedReturnCreditOnly    | When the payee has requested the credit to be returned
 -------         | -------                                   | -------
 VisaDirect      | VisaDirectGenericError                    | When a generic error happened in the network
 VisaDirect      | VisaDirectDoNotHonor                      | When the information provided was inconsistent, such as address or name on card
@@ -560,7 +561,7 @@ This endpoint will return transactions based on the filter informed. Transaction
         }
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -583,7 +584,7 @@ FailedTransactionEvent | string | no | [Transaction event](#status-and-events) (
 CreatedAtFrom | datetime | no | Start date (This field is only used when the operator is between)
 CreatedAtTo | datetime | no | End date (This field is only used when the operator is between)
 CreatedAt | datetime | no | Create date
-CreatedAtOperator | string | no | Operator to filter with CreatedAt properties 
+CreatedAtOperator | string | no | Operator to filter with CreatedAt properties
 UserId | string | no | User id
 ClientTransactionId | string | no | The Transaction id you informed in the creation of the transaction
 Memo | string | no | Memo field
