@@ -160,7 +160,7 @@ ZumRailsType | string | yes | Transaction type
 TransactionMethod | string | yes | Transaction method
 Amount | decimal | yes | Transaction amount
 Memo | string | *yes if customer transaction description type is "PerTransaction" | Memo description. If customer transaction description type is "PerTransaction", this will be shown at the bank statements. Maximum of 15 characters. Only letters, numbers, dash, space and underscore are allowed
-Comment | string | no | Internal comment you might want to add
+Comment | string | no | Internal comment you might want to add. Interac transactions will display the comment on the request.
 FundingSourceId | guid | no | Funding Source Id
 WalletId | guid | no | Wallet Id
 UserId | guid | no | User Id
