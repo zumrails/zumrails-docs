@@ -25,7 +25,7 @@ After a new connection is made, if you are using the Connector UI, the data can 
 
 ### Access the data in Zūm Rails portal
 
-For every new connection made for an specific card, a new user will be automatically created in Zūm Rails portal, you can search it under the User page by the user name of email. In this option, zero integration is required, but it's a bit difficult to match the user, since the name in the bank account might be different than the name you have your our file. 
+For every new connection made for a specific card, a new user will automatically be created in the Zūm Rails portal, you can search it under the User page by the user name or email. In this option, zero integration is required, but it's a bit difficult to match the user, since the name on the bank account might be different than the name you have in your file. 
 
 ### Access the data via javascript event listener
 
@@ -76,7 +76,7 @@ SECURITYQUESTIONPROMPTED | When a security question is prompted
 SECURITYQUESTIONANSWERINITIATED | When the security question is answered and we resume the authentication
 AUTHENTICATECOMPLETED | When authentication is completed
 GETINFORMATIONINITIATED | When the get card information process starts
-GETINFORMATIONCOMPLETED | When the get card information process starts
+GETINFORMATIONCOMPLETED | When the get card information process completes
 CONNECTIONSUCCESSFULLYCOMPLETED | **When the process is completed.** The property `data` will contain up to 4 fields that can be used to link the user from your system with the aggregation. Example: `{ requestid: 'asdf...asdf', cardid: 'asdf...asdf', extrafield1: '', extrafield2: '' }`
 GENERICERROR | When an unexpected error occurs
 

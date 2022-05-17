@@ -43,6 +43,21 @@ const config = {
   customFields: customFields,
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
+  themes: [
+    // ... Your other themes.
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        // ... Your options.
+        // `hashed` is recommended as long-term-cache of index file is possible.
+        hashed: true,
+        // For Docs using Chinese, The `language` is recommended to set to:
+        // ```
+        // language: ["en", "zh"],
+        // ```
+      },
+    ],
+  ],
   plugins: [
     require.resolve("./plugins/fetch-latest-release/index"),
     require.resolve("./plugins/fetch-repo/index"),
@@ -101,10 +116,6 @@ const config = {
       theme: require("./src/internals/prism-github"),
       darkTheme: require("./src/internals/prism-dracula"),
     },
-    algolia: {
-      apiKey: "30ebdc1936d670289449270ace2c677e",
-      indexName: "documentation_index",
-    },
     navbar: {
       title: "Zūm Rails",
       logo: {
@@ -112,6 +123,11 @@ const config = {
         src: "/img/favicon.png",
       },
       items: [
+        {
+          label: "Home Page",
+          to: "/",
+          position: "left",
+        },
         {
           label: "Documentation",
           to: "/docs/introduction/",
@@ -140,7 +156,103 @@ const config = {
       ],
     },
     footer: {
-
+      links: [
+        {
+          title: "Company",
+          items: [
+            {
+              label: "Home",
+              to: "https://zumrails.com/",
+            },
+            {
+              label: "Careers",
+              to: "https://zumrails.com/careers/",
+            },
+            {
+              label: "Blog",
+              to: "https://zumrails.com/blog/",
+            },
+            {
+              label: "Security",
+              to: "https://zumrails.com/security/",
+            },
+            {
+              label: "Terms of use",
+              to: "https://zumrails.com/terms-of-use/",
+            },
+            {
+              label: "Privacy Policy",
+              to: "https://zumrails.com/privacy-policy/",
+            },
+          ],
+        },
+        {
+          title: "Payment Solutions",
+          items: [
+            {
+              label: "Interac",
+              to: "https://zumrails.com/interac/",
+            },
+            {
+              label: "EFT & ACH",
+              to: "https://zumrails.com/eft-ach/",
+            },
+            {
+              label: "Visa Direct",
+              to: "https://zumrails.com/visa-direct/",
+            },
+            {
+              label: "Partner Portal",
+              to: "https://zumrails.com/partner-portal/",
+            },
+            {
+              label: "Payment gateway",
+              to: "https://zumrails.com/payment-gateway/",
+            },
+            {
+              label: "Automated Reconciliation",
+              to: "https://zumrails.com/automated-reconciliation/",
+            },
+            {
+              label: "Developer-friendly API",
+              to: "https://zumrails.com/developers/",
+            },
+            {
+              label: "Onboarding & KYC Tool",
+              to: "https://zumrails.com/onboarding-kyc/",
+            },
+            {
+              label: "Invoices & Subscription",
+              to: "https://zumrails.com/invoices-subscription/",
+            },
+          ],
+        },
+        {
+          title: "Resources",
+          items: [
+            {
+              label: "Portal Login",
+              to: "https://app.zumrails.com/",
+            },
+            {
+              label: "Payment API documentation",
+              to: "https://docs.zumrails.com/",
+            },
+            {
+              label: "Status",
+              to: "https://zumrails.statuspage.io/",
+            },
+            {
+              label: "Video Tutorials",
+              to: "https://www.youtube.com/channel/UCNefEZKqPOlM_Lf3fPn6zJw/videos",
+            },
+            {
+              label: "Changelog",
+              to: "https://changelog.zumrails.com/",
+            }
+          ],
+        },
+      ],
     },
   },
   presets: [

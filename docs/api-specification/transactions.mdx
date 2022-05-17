@@ -142,7 +142,7 @@ values={[
             "Id": "0bc9894d-...f691024aca19",
         }
     }
-``` 
+```
 </TabItem>
 </Tabs>
 
@@ -160,7 +160,7 @@ ZumRailsType | string | yes | Transaction type
 TransactionMethod | string | yes | Transaction method
 Amount | decimal | yes | Transaction amount
 Memo | string | *yes if customer transaction description type is "PerTransaction" | Memo description. If customer transaction description type is "PerTransaction", this will be shown at the bank statements. Maximum of 15 characters. Only letters, numbers, dash, space and underscore are allowed
-Comment | string | no | Internal comment you might want to add
+Comment | string | no | Internal comment you might want to add. Interac transactions will display the comment on the request.
 FundingSourceId | guid | no | Funding Source Id
 WalletId | guid | no | Wallet Id
 UserId | guid | no | User Id
@@ -171,6 +171,9 @@ InteracSecurityAnswer | string | yes if InteracHasSecurityQuestionAndAnswer is t
 ScheduledStartDate | date | no | The date when the transaction will be sent to the financial institution. Must be greater than today
 ClientTransactionId | string | no | This field can be used to store the Transaction id created in your system when the Transaction is initiated
 UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user). Read more about Interac ANR [here](https://help.zumrails.com/en/articles/5978993-interac-anr).
+CardEci | string | no | Received from 3D secure, required if using 3D Secure
+CardXid | string | no | Received from 3D secure, required if using 3D Secure
+CardCavv | string | no | Received from 3D secure, required if using 3D Secure
 
 :::info
 Either a memo or comment is mandatory for Interac transactions. If both are specified, the comment will be presented on the Interac request.
@@ -235,7 +238,7 @@ CreditCard |
         "WalletId":"8ebd932b-...b92633e14297"
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -249,8 +252,8 @@ This service is executed every 10 minutes.
 :::
 
 :::caution
-To simulate a review situation (only available for interac for now), create a transaction with the keyword "InReview" in the field COMMENT.
-There is a service which runs every minute that will update the transaction status to InReview in the first execution. The next time the service runs, it will Complete the transaction.
+To simulate a review situation (only available for interac for now), create a transaction with the keyword "UnderReview" in the field COMMENT.
+There is a service which runs every minute that will update the transaction status to Under Review in the first execution. The next time the service runs, it will Complete the transaction.
 :::
 
 :::info
@@ -276,7 +279,7 @@ EftFailedCurrectAccountMismatch         | VisaDirectReenterTransaction          
 EftFailedPayorPayeeDeceased             | VisaDirectInvalidTransaction                  | InteracFailedReachedCancellationCutOff                        |
 EftFailedFrozenAccount                  | VisaDirectInvalidCardNumber                   | InteracFailedNotificationDeliveryFailure                      |
 EftFailedInvalidErrorAccountNumber      | VisaDirectIssuerOrSwitchInoperative           | InteracFailedAmountGreaterThanMax                             |
-EftFailedErrorPayorPayeeName            |                                               | InteracFailedDebtorRejected                                   |
+EftFailedErrorPayorPayeeName            | VisaDirectUnsupportedCardType                 | InteracFailedDebtorRejected                                   |
 EftFailedRefusedNoAgreement             |                                               | InteracFailedFundsDepositFailed                               |
 EftFailedNotInAccountAgreementP         |                                               | InteracFailedClientEmailedToRequestCancellation               |
 EftFailedNotInAccountAgreementE         |                                               | InteracFailedGenericError                                     |
@@ -404,7 +407,7 @@ Completed | Indicates the transaction is completed, this is a permanent status f
 Failed | Indicates the transaction has failed, this is a permanent status.
 Cancelled | Indicates the transaction has canceled, this is a permanent status.
 Scheduled | Indicates the transaction is scheduled.
-InReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. A transaction might be under review up to 7 days, after that our system will automatically cancel it.
+UnderReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. A transaction might be under review up to 7 days, after that our system will automatically cancel it.
 
 **Transaction Events**
 
@@ -438,6 +441,7 @@ Eft             | EftFailedNotInAccountAgreementP           | Account do not all
 Eft             | EftFailedNotInAccountAgreementE           | Account do not allow EFT
 Eft             | EftFailedAgreementRevoked                 | Account do not allow EFT
 Eft             | EftFailedDefaultByAFinancialInstitution   | Generic error provided by the financial institution
+Eft             | EftFailedCustomerInitiatedReturnCreditOnly    | When the payee has requested the credit to be returned
 -------         | -------                                   | -------
 VisaDirect      | VisaDirectGenericError                    | When a generic error happened in the network
 VisaDirect      | VisaDirectDoNotHonor                      | When the information provided was inconsistent, such as address or name on card
@@ -451,6 +455,7 @@ VisaDirect      | VisaDirectInvalidCardNumber               | When the card numb
 VisaDirect      | VisaDirectReenterTransaction              | When an error happened while creating the transaction. Try again
 VisaDirect      | VisaDirectInvalidTransaction              | When the transaction was considered invalid by visa direct
 VisaDirect      | VisaDirectIssuerOrSwitchInoperative       | When the issuer or switch is inoperative
+VisaDirect      | VisaDirectUnsupportedCardType             | When a card type is not supported
 -------         | -------                                   | -------
 Interac         | InteracSent                               | When the transaction is sent to interac
 Interac         | InteracAcknowledgedCredit                 | When a credit transaction is received by interac
@@ -556,7 +561,7 @@ This endpoint will return transactions based on the filter informed. Transaction
         }
     }
   ```
-  
+
   </TabItem>
 </Tabs>
 
@@ -579,7 +584,7 @@ FailedTransactionEvent | string | no | [Transaction event](#status-and-events) (
 CreatedAtFrom | datetime | no | Start date (This field is only used when the operator is between)
 CreatedAtTo | datetime | no | End date (This field is only used when the operator is between)
 CreatedAt | datetime | no | Create date
-CreatedAtOperator | string | no | Operator to filter with CreatedAt properties 
+CreatedAtOperator | string | no | Operator to filter with CreatedAt properties
 UserId | string | no | User id
 ClientTransactionId | string | no | The Transaction id you informed in the creation of the transaction
 Memo | string | no | Memo field

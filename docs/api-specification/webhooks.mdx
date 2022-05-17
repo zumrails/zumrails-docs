@@ -6,14 +6,19 @@ description:
 
 # Webhooks
 
-The goal of the webhooks is to give your organization a real time update on the status of users and transactions so you can automate your next call to action depending of the status of the payments.
+The goal of the webhooks is to give your organization a real time update on the status and events of users, transactions, products, invoices, subscriptions, taxes and shipping rates so you can automate your next call to action depending of the status of the payments or the ocurrence of events.
 
-To enable webhooks you have to open the settings page using the portal. When a URL is defined, Zūm will send a POST request each time there is a status change for:
+To enable webhooks you have to open the settings page using the portal. When a URL is defined, Zūm will send a POST request each time there is a status change or event triggered for:
 
 - Users (only available for customers)
 - Transactions (only available for customers)
 - Customers (only available for partners)
 - Recurrent Transaction (only available for customers)
+- Products (only available for customers)
+- Invoices (only available for customers)
+- Subscriptions (only available for customers)
+- Taxes (only available for customers)
+- Shipping Rates (only available for customers)
 
 <Tabs
   defaultValue="tab1"
@@ -24,7 +29,8 @@ To enable webhooks you have to open the settings page using the portal. When a U
 
   ```json
     {
-        "Type": "User",
+        "Type": "Invoice",
+        "Event": "Created",
         "Data": {
             ...
         }
@@ -34,7 +40,20 @@ To enable webhooks you have to open the settings page using the portal. When a U
   </TabItem>
 </Tabs>
 
-The payload has a property Type to indicate to each entity the webhook status change is coming from.
+The payload has a property Type to indicate to each entity the webhook status change is coming from and also a property called Event that indicates the type of event that trigger the webhook.
+
+**Event**
+
+Event | Description | Avaliable for
+--------- | ------- | ---------
+Created | Entity was created | Invoice, Subscription, Product, Tax Rate, Shipping Rate
+Updated | Entity was updated on some manner | Invoice, Subscription, Product, Tax Rate, Shipping Rate
+Deleted | Entity was deleted | Product
+StatusChange |  Entity had it's status changed | Invoice, Subscription, Product, Tax Rate, Shipping Rate
+
+:::note
+For now, transactions and user entitys does not posses events to be associated with
+:::
 
 **Type**
 
@@ -44,9 +63,17 @@ User | Indicates the webhook call is for a user status change
 Transaction | Indicates the webhook call is for a transaction status change
 Customer | Indicates the webhook call is for a customer account status change
 Recurrent Transaction |  Indicates the webhook call is for a recurrent transaction creation
+Product |  Indicates the webhook call is for a product event
+Invoice |  Indicates the webhook call is for a invoice event
+Subscription |  Indicates the webhook call is for a subscription event
+TaxeRate |  Indicates the webhook call is for a tax rate event
+Shipping |  Indicates the webhook call is for a shipping rate event
 
 
-The payload sent by the webhook has the same JSON format for the get [User](./users/#get-a-specific-user) and [Transaction](./transactions/#get-a-specific-transaction).
+The payload sent by the webhook has the same JSON format for the get [User](./users/#get-a-specific-user),
+[Transaction](./transactions/#get-a-specific-transaction), [Product](./products/#get-a-specific-product),
+[Invoice](./invoices/#get-a-specific-invoice), [Subscription](./subscriptions/#get-a-specific-subscription),
+Tax Rates and Shipping Rates.
 
 :::info
 If you don't want to receive webhook for a specific status, then you can specify the status in the portal settings.
