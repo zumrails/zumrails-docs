@@ -40,14 +40,6 @@ module.exports = {
       ],
     },
     {
-      label: "Connect SDK",
-      type: "category",
-      items: [
-        "connect-sdk/introduction",
-        "connect-sdk/configure",
-      ],
-    },
-    {
       label: "API Specification",
       type: "category",
       collapsed: false,
