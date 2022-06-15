@@ -131,6 +131,9 @@ If you have anything specific in our retry policy, don't hesitate to talk with u
 
 For Interac transactions, you can now receive the end users' financial institution name and financial institution number which was used to complete the Interac requests. To receive this information, make sure you have configured the InteracSettledIntoWallet webhook event. (You can set this event by going to settings > webhook and API settings > Interac status change).
 
+:::note
+In some cases the bank may return the same input provided on Zum Rails and not the name on the user’s account for the parameter "InteracDebtorFullName". This will result in the transaction going through successfully even when the name might not be a match. This is rare and the banks are working to improve on their end. :::
+
 :::info
 This information might not be available for all accounts. For any questions contact our support team
 :::
