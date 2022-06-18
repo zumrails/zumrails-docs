@@ -291,6 +291,78 @@ EftFailedDefaultByAFinancialInstitution |                                       
 Not available for all credit card customers
 :::
 
+## Creating a new transaction - Interac peer-to-peer
+
+:::info
+This endpoint is not available for all Zūm Rails customers, if you need to use it, make sure to talk with our team.
+:::
+
+If you have an environment with Zūm Rails that support Interac peer-to-peer, you will be authorized to create transactions Accounts Receivables (pull) and Accounts Payable (push) only.
+
+The main difference in Interac peer-to-peer is the fact that you have to inform two different users. The payload will be like:
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/transaction`
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Accounts Receivable - pull - payload', value: 'tab1'},
+    {label: 'Accounts Payable - push - payload', value: 'tab2'}
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "ZumRailsType":"AccountsReceivable",
+        "TransactionMethod": "Interac",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction is a test",
+        "UserId": "8ebd932b-...b92633e14290",,
+        "TargetUserId":"8ebd932b-...b92633e14291",
+        "InteracHasSecurityQuestionAndAnswer": true,
+        "InteracSecurityQuestion": "Your question",
+        "InteracSecurityAnswer": "Your answer"
+    }
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "ZumRailsType":"AccountsPayable",
+        "TransactionMethod": "Interac",
+        "Amount":123.45,
+        "Memo":"Memo description",
+        "Comment":"This transaction is a test",
+        "UserId": "8ebd932b-...b92633e14290",,
+        "TargetUserId":"8ebd932b-...b92633e14291",
+        "InteracHasSecurityQuestionAndAnswer": true,
+        "InteracSecurityQuestion": "Your question",
+        "InteracSecurityAnswer": "Your answer"
+    }
+  ```
+
+  </TabItem>
+</Tabs>
+
+In case you are doing an Accounts Payable - push - transction, it's important that you call the endpoint [Interac - Send Funds options](../api-specification/users#interac---send-funds-options) to determine the options available for the target user.
+
+The definition of all input parameters for this endpoint can be found [here](../api-specification/transactions#creating-a-new-transaction). The definition for all output parameters returned in this endpoint, can be found [here](../api-specification/transactions#get-a-specific-transaction).
+
+:::info
+If your Zūm Rails account is configured to user Interac peer-to-peer, you will only be authorized to do Interac transactions. If you need to user other rails, a new Zūm Rails environment will be needed.
+:::
+
+:::info
+When using Interac peer-to-peer, the email the TargetUserId will receive from Interac will be coming from UserId and not from your Zūm Rails environment. For example, when you do Accounts Payable from a user John, to another user Mary, the email will say: `John is sending funds to Mary`. This setup provides a lot of flexibility.
+
+Without peer-to-peer, the email would say: `<Your company name> is sending funds to Mary`
+:::
+
 ## Get a specific transaction
 
 <Tabs

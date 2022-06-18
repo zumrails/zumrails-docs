@@ -565,6 +565,164 @@ When a new user is added using Zūm Connect, with financial data aggregation, it
 Some credit cards do not allow Visa Direct, if they have a credit card informed and it allows Visa Direct, the field CreditCardInformation.VisaDirect will be true.
 :::
 
+## Interac - Send Funds options
+
+:::info
+This endpoint is not available for all Zūm Rails customers, if you need to use it, make sure to talk with our team.
+:::
+
+Use this endpoint if you want to know if the user is registered for automatic deposits, or if it's account rounter number eligible. The user id is informed in the url.
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "GET Request successful.",
+        "isError": false,
+        "result": {
+            "RequireSecurityQuestionAndAnswer": true,
+            "AutomaticDepositAvailable": false,
+            "AccountNumberRoutingAvailable": false,
+            "Limit": 5000.0,
+            "RecipientType": "INDIVIDUAL"
+        }
+    }
+  ```
+
+  </TabItem>
+</Tabs>
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/user/GetInteracSendFundsOptions/{user_id}`
+
+**Response**
+
+Parameter | Type | Description
+--------- | ------- | -----------
+RequireSecurityQuestionAndAnswer | boolean | Indicate if security questions are required for the informed user in order to create an Interac Send Funds
+AutomaticDepositAvailable | boolean | If true, means this user email is registered for Interac automatic deposit
+AccountNumberRoutingAvailable | boolean | If true, means this user can accept Interac Account Routing ANR. The user needs to have the bank account information on file.
+Limit | decimal | The maximum amount that can be sen't using Interac to this user
+RecipientType | string | Indicate if this user is registered with Interac as INDIVIDUAL, SMALL_BUSINESS or CORPORATION
+
+## Interac - Register auto deposit
+
+:::info
+This endpoint is not available for all Zūm Rails customers, if you need to use it, make sure to talk with our team.
+:::
+
+Use this endpoint if you want to register a user for automatic deposits into your Zūm Rails wallet.
+
+For example, if you register a user with the email john@smith.com, then any Interac Send Funds initiated to john@smith.com will be automatically deposited into your Zūm Rails wallet.
+
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {}
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode":200,
+        "message":"PATCH Request successful.",
+        "isError":false,
+        "result": { }
+    }
+  ```
+
+  </TabItem>
+</Tabs>
+
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/user/RegisterInteracAutoDeposit/{user_id}`
+
+:::note
+After the request for registration is intiated, the user will receive an email from Interac to accept. Only after accepted, the auto deposit will be enabled.
+:::
+
+## Interac - Get auto deposit information
+
+:::info
+This endpoint is not available for all Zūm Rails customers, if you need to use it, make sure to talk with our team.
+:::
+
+Use this endpoint if you have a user that was previosly registered for automatic deposit and you want to know the status of the registration.
+
+This endpoint can be used to get to know if the user has accepted or declined the email received from Interac right after the registration, for example.
+
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {}
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode":200,
+        "message":"PATCH Request successful.",
+        "isError":false,
+        "result": { 
+          "AliasReferenceId": "<interac id of the user alias registration>",
+          "AliasEmail": "john@smith.com",
+          "ExpiryDate": "2023-05-13T14:23:32.809446",
+          "Status": "PENDING"
+        }
+    }
+  ```
+
+  </TabItem>
+</Tabs>
+
+
+`Method: GET`
+
+`Endpoint: {{env}}/api/user/GetInteracAutoDepositInformation/{user_id}`
+
+:::note
+After you registered a user for automatic deposit, and the user has accept, at any moment the same user can go to another bank and register the same email there, when this is done, the status will change from ACTIVE to NOT_ACTIVE 
+:::
+
+**Auto Deposit Status**
+
+Status | Description
+--------- | -------
+PENDING | Pending user to confirm the email received from Interac
+ACTIVE | Auto deposit active with Zūm Rails
+IN_REVIEW | The request is being reviwed by Interac
+NOT_ACTIVE | The request is not active anymore
+EXPIRED | The request is expired
+DECLINED | The request declined the email received from Interac
+REPORTED | The user or Interac reported this request as not valid
+
 ## Delete a user
 
 <Tabs
@@ -586,7 +744,7 @@ Some credit cards do not allow Visa Direct, if they have a credit card informed 
   </TabItem>
 </Tabs>
 
-`Method: DEL`
+`Method: DELETE`
 
 `Endpoint: {{env}}/api/user/{user_id}`
 

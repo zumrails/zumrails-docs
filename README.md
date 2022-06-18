@@ -12,6 +12,7 @@ installation. On Ubuntu it should be enough to run
 ## Local development
 
 ```script
+yarn install
 yarn start
 ```
 
