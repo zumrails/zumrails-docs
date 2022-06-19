@@ -659,6 +659,46 @@ For example, if you register a user with the email john@smith.com, then any Inte
 After the request for registration is intiated, the user will receive an email from Interac to accept. Only after accepted, the auto deposit will be enabled.
 :::
 
+## Interac - Cancel auto deposit
+
+:::info
+This endpoint is not available for all Zūm Rails customers, if you need to use it, make sure to talk with our team.
+:::
+
+Use this endpoint if you have previosly registered a user for automatic deposit with Zūm Rails. This will send a request to unregister the user with Interac rails.
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Payload', value: 'tab1'},
+    {label: 'Response', value: 'tab2'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+  {}
+  ```
+
+  </TabItem>
+  <TabItem value="tab2">
+
+  ```json
+    {
+        "statusCode":200,
+        "message":"PATCH Request successful.",
+        "isError":false,
+        "result": { }
+    }
+  ```
+
+  </TabItem>
+</Tabs>
+
+
+`Method: PATCH`
+
+`Endpoint: {{env}}/api/user/RegisterInteracAutoDepositCancellation/{user_id}`
+
 ## Interac - Get auto deposit information
 
 :::info
