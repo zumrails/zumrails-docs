@@ -212,7 +212,7 @@ CreditCard |
   defaultValue="tab1"
   values={[
     {label: 'Succees', value: 'tab1'},
-    {label: 'Fail', value: 'tab2'},
+    {label: 'Failure', value: 'tab2'},
   ]}>
   <TabItem value="tab1">
 
@@ -290,10 +290,7 @@ EftFailedNotInAccountAgreementE         |                                       
 EftFailedAgreementRevoked               |                                               | InteracFailedNameMismatch                                     |
 EftFailedDefaultByAFinancialInstitution |                                               |                                                               |
 
-
-:::caution
-Not available for all credit card customers
-:::
+* Not available for all credit card customers
 
 ## Creating a new transaction - Interac peer-to-peer
 
@@ -303,7 +300,7 @@ This endpoint is not available for all Zūm Rails customers, if you need to use 
 
 If you have an environment with Zūm Rails that support Interac peer-to-peer, you will be authorized to create transactions Accounts Receivables (pull) and Accounts Payable (push) only.
 
-The main difference in Interac peer-to-peer is the fact that you have to inform two different users. The payload will be like:
+The main difference in Interac peer-to-peer is the fact that you have to inform two different users. **UserId** (from) and **TargetUserId** (to), the payload will be like:
 
 `Method: POST`
 
@@ -324,11 +321,8 @@ The main difference in Interac peer-to-peer is the fact that you have to inform 
         "Amount":123.45,
         "Memo":"Memo description",
         "Comment":"This transaction is a test",
-        "UserId": "8ebd932b-...b92633e14290",,
-        "TargetUserId":"8ebd932b-...b92633e14291",
-        "InteracHasSecurityQuestionAndAnswer": true,
-        "InteracSecurityQuestion": "Your question",
-        "InteracSecurityAnswer": "Your answer"
+        "UserId": "8ebd932b-...b92633e14290",
+        "TargetUserId":"8ebd932b-...b92633e14291"
     }
   ```
 
@@ -342,7 +336,7 @@ The main difference in Interac peer-to-peer is the fact that you have to inform 
         "Amount":123.45,
         "Memo":"Memo description",
         "Comment":"This transaction is a test",
-        "UserId": "8ebd932b-...b92633e14290",,
+        "UserId": "8ebd932b-...b92633e14290",
         "TargetUserId":"8ebd932b-...b92633e14291",
 
         // If using Security Question
@@ -362,12 +356,12 @@ The main difference in Interac peer-to-peer is the fact that you have to inform 
   </TabItem>
 </Tabs>
 
-In case you are doing an Accounts Payable - push - transction, it's important that you call the endpoint [Interac - Send Funds options](../api-specification/users#interac---send-funds-options) to determine the options available for the target user.
+In case you are doing an Accounts Payable - push - transction, it's important that you call the endpoint [Interac - Send Funds options](../api-specification/users#interac---send-funds-options) to determine the options available for the target user. This endpoint will return if the user needs security question or not, as well tell if the user is eligible for Account Routing Number - [ANR deposits](https://help.zumrails.com/en/articles/5978993-interac-anr).
 
 The definition of all input parameters for this endpoint can be found [here](../api-specification/transactions#creating-a-new-transaction). The definition for all output parameters returned in this endpoint, can be found [here](../api-specification/transactions#get-a-specific-transaction).
 
 :::info
-If your Zūm Rails account is configured to user Interac peer-to-peer, you will only be authorized to do Interac transactions. If you need to user other rails, a new Zūm Rails environment will be needed.
+If your Zūm Rails account is configured to user Interac peer-to-peer, you will only be authorized to do Interac transactions. If you need to use other rails, a new Zūm Rails environment will be needed.
 :::
 
 :::info
