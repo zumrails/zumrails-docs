@@ -8,8 +8,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ReactPlayer from 'react-player/youtube'
 
-# Transactions
-
 At Zūm Rails, there are 5 ways to create transactions, when using the portal or via API. When creating a transaction via API, the transaction type “ZumRailsType” must be specified.
 
 There are five transaction types (ZumRailsType):
@@ -247,17 +245,20 @@ CreditCard |
 </Tabs>
 
 :::danger
-In a sandbox environment, real bank operations are not performed. However, there is a way to simulate success, failures and review situations.
+In a sandbox environment, real bank operations are not performed. It provides a way to simulate success, failures and review situations.
 :::
 
 :::caution
-To simulate a failure, use one of the keywords in the field COMMENT while creating a transaction. If no keyword is informed, or something else, the transaction will be considered as a success.
-This service is executed every 10 minutes.
+To simulate a failure, use one of the keywords to simulate failure (shown below) in the field COMMENT while creating a transaction. If no keyword is informed, or something else is informed, the transaction will eventually change status to "Completed".
+This service is executed every minute.
 :::
 
 :::caution
-To simulate a review situation (only available for interac for now), create a transaction with the keyword "UnderReview" in the field COMMENT.
-There is a service which runs every minute that will update the transaction status to Under Review in the first execution. The next time the service runs, it will Complete the transaction.
+Occasionally, Interac flags transactions believed to be possible fraud cases. When Zum Rails is notified, the status of the transaction is changed to "Under Review".To simulate this situation (only available for interac for now), create a transaction with the keyword "UnderReview" in the COMMENT field. Transactions can be flagged "Under Review" for two other scenarios:
+Scenario 1: It could happen that a transaction was flagged as in "Under Review" but before an action was taken it "Completed". Simulate such transactions using the keyword "stopatunderreview" in the COMMENT field. 
+Scenario 2: It could also happen that the transaction was "completed" and then later a fraud alert email was received and hence was flagged as in "Under Review". Simulate such transactions using the keyword "latefraudalert" in the COMMENT field. 
+There is a service which runs every minute that will update the transaction status to Under Review in the first execution. The next time the service runs, it will Complete the transaction. 
+These fraud alerts only apply to certain accounts*
 :::
 
 :::info
@@ -265,7 +266,7 @@ Transaction between users (UserTransfer) is only available for EFT and Visa Dire
 :::
 
 :::info
-When a transaction is created with a scheduled start date, it won't be dispatched right away. This transaction will be prepared to be sent to the financial institution according to its scheduled start date.
+When a transaction is created with a scheduled start date (delay transaction initiation), it won't be dispatched right away. This transaction will be prepared to be sent to the financial institution according to its scheduled start date.
 :::
 
 **Keywords to simulate a transaction failure**
@@ -291,6 +292,10 @@ EftFailedAgreementRevoked               |                                       
 EftFailedDefaultByAFinancialInstitution |                                               |                                                               |
 
 * Not available for all credit card customers
+
+:::note
+You can simulate late failures (Failure after transaction completion) by using a comment: (event name), Latefailure. This feature is only avalible for EFT transaction error. If the string is incorrect, the transaction will fail with the event specified within it.
+:::
 
 ## Creating a new transaction - Interac peer-to-peer
 
@@ -368,7 +373,6 @@ If your Zūm Rails account is configured to user Interac peer-to-peer, you will 
 When using Interac peer-to-peer, the email the TargetUserId will receive from Interac will be coming from UserId and not from your Zūm Rails environment. For example, when you do Accounts Payable from a user John, to another user Mary, the email will say: `John is sending funds to Mary`. This setup provides a lot of flexibility.
 
 Without peer-to-peer, the email would say: `<Your company name> is sending funds to Mary`
-:::
 
 ## Get a specific transaction
 
