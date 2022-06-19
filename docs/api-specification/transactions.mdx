@@ -159,21 +159,25 @@ Parameter | Type | Mandatory | Description
 ZumRailsType | string | yes | Transaction type
 TransactionMethod | string | yes | Transaction method
 Amount | decimal | yes | Transaction amount
-Memo | string | *yes if customer transaction description type is "PerTransaction" | Memo description. If customer transaction description type is "PerTransaction", this will be shown at the bank statements. Maximum of 15 characters. Only letters, numbers, dash, space and underscore are allowed
+Memo | string | yes | Memo description. If customer transaction description type is "PerTransaction", this will be shown at the bank statements. Maximum of 15 characters. Only letters, numbers, dash, space and underscore are allowed
 Comment | string | no | Internal comment you might want to add. Interac transactions will display the comment on the request.
 FundingSourceId | guid | no | Funding Source Id
 WalletId | guid | no | Wallet Id
 UserId | guid | no | User Id
 User | [User input](./users.mdx) | no | It's possible to create a transaction without adding a user first. Simply pass the user object (instead of the UserId) into the transaction body. For reference, check the payload example of the user object [here](#creating-a-new-user) and pass this when you create a transaction (check interac transaction payload example). Only available for EFT and interac transaction methods
-InteracHasSecurityQuestionAndAnswer | boolean | no | Indicate if there will be a question and answer for Interac
-InteracSecurityQuestion | string | yes if InteracHasSecurityQuestionAndAnswer is true | The question for the user to process the interac request
-InteracSecurityAnswer | string | yes if InteracHasSecurityQuestionAndAnswer is true | The answer for the user to process the interac request
 ScheduledStartDate | date | no | The date when the transaction will be sent to the financial institution. Must be greater than today
 ClientTransactionId | string | no | This field can be used to store the Transaction id created in your system when the Transaction is initiated
-UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user). Read more about Interac ANR [here](https://help.zumrails.com/en/articles/5978993-interac-anr).
+**3D Secure** | - | - | Only needed for 3D secure - Visa Direct and Credit Card
 CardEci | string | no | Received from 3D secure, required if using 3D Secure
 CardXid | string | no | Received from 3D secure, required if using 3D Secure
 CardCavv | string | no | Received from 3D secure, required if using 3D Secure
+**Interac Fields** | - | - | Only needed for Interac transactions
+UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for Interac account payable). Read more about Interac ANR [here](https://help.zumrails.com/en/articles/5978993-interac-anr).
+InteracHasSecurityQuestionAndAnswer | boolean | no | Indicate if there will be a question and answer for Interac
+InteracSecurityQuestion | string | yes | The question for the user to process the interac request. Required if InteracHasSecurityQuestionAndAnswer is true
+InteracSecurityAnswer | string | yes | The answer for the user to process the interac request. Required if InteracHasSecurityQuestionAndAnswer is true
+SessionFingerprint | string | yes | A unique identifier for this sender, we recommend using [fingerprintjs](https://github.com/fingerprintjs/fingerprintjs). Required if Accounts Payable with Interac, and peer-to-peer enabled.
+SessionIpAddress | string | yes | The IP address of the UserId, the sender, of the funds. Required if Accounts Payable with Interac, and peer-to-peer enabled.
 
 :::info
 Either a memo or comment is mandatory for Interac transactions. If both are specified, the comment will be presented on the Interac request.
@@ -340,9 +344,18 @@ The main difference in Interac peer-to-peer is the fact that you have to inform 
         "Comment":"This transaction is a test",
         "UserId": "8ebd932b-...b92633e14290",,
         "TargetUserId":"8ebd932b-...b92633e14291",
+
+        // If using Security Question
         "InteracHasSecurityQuestionAndAnswer": true,
         "InteracSecurityQuestion": "Your question",
         "InteracSecurityAnswer": "Your answer"
+
+        // If using Account Routing number
+        "UseInteracANR": true
+
+        // Specific field required for peer-to-peer accounts payable
+        "SessionFingerprint":"JASDFKLJ8324HK...AIJPASDFN23478",
+        "SessionIpAddress": "127.0.0.1"
     }
   ```
 
