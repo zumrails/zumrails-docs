@@ -256,6 +256,10 @@ This service is executed every minute.
 :::
 
 :::caution
+Interac transactions in sandbox will be simulated like the real flow. Hence, emails will be sent out to the user email mentioned when the transaction is created. Make sure to use a real email address to be able to simulate this flow and complete the transaction.
+:::
+
+:::caution
 Occasionally, Interac flags transactions believed to be possible fraud cases. When Zum Rails is notified, the status of the transaction is changed to "Under Review".To simulate this situation (only available for interac for now), create a transaction with the keyword "UnderReview" in the COMMENT field. Transactions can be flagged "Under Review" for two other scenarios:
 Scenario 1: It could happen that a transaction was flagged as in "Under Review" but before an action was taken it "Completed". Simulate such transactions using the keyword "stopatunderreview" in the COMMENT field. 
 Scenario 2: It could also happen that the transaction was "completed" and then later a fraud alert email was received and hence was flagged as in "Under Review". Simulate such transactions using the keyword "latefraudalert" in the COMMENT field. 
