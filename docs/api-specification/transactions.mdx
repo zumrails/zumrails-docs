@@ -486,7 +486,7 @@ EventDescription | string | The event description
 
 ## Status and events
 
-Zūm Rails offers 6 main states for transactions:
+Zūm Rails offers 6 main statuses for transactions:
 
 **Transaction Status**
 
@@ -497,7 +497,7 @@ Completed | Indicates the transaction is completed, this is a permanent status f
 Failed | Indicates the transaction has failed, this is a permanent status.
 Cancelled | Indicates the transaction has canceled, this is a permanent status.
 Scheduled | Indicates the transaction is scheduled.
-UnderReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. A transaction might be under review up to 7 days, after that our system will automatically cancel it.
+UnderReview | Indicates the transaction is under review. As of now, only Interac transactions uses this status. Once a transaction is "Under Review" you need to "Take Action" on the transaction from within the portal to guide Interac on how you want to treat this transaction. It could also happen that "Completed" transactions are flagged as "Under Review". This is when Interac requires a response from the Merchant stating if the transactions is legit/fraud/scam Click here to read more. A transaction might be under review up to 7 days, after that our system will automatically cancel it. 
 
 **Transaction Events**
 
