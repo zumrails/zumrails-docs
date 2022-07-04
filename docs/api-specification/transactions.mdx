@@ -174,8 +174,8 @@ CardCavv | string | no | Received from 3D secure, required if using 3D Secure
 **Interac Fields** | - | - | Only needed for Interac transactions
 UseInteracANR | boolean | no | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for Interac account payable). Read more about Interac ANR [here](https://help.zumrails.com/en/articles/5978993-interac-anr).
 InteracHasSecurityQuestionAndAnswer | boolean | no | Indicate if there will be a question and answer for Interac
-InteracSecurityQuestion | string | yes | The question for the user to process the interac request. Required if InteracHasSecurityQuestionAndAnswer is true
-InteracSecurityAnswer | string | yes | The answer for the user to process the interac request. Required if InteracHasSecurityQuestionAndAnswer is true
+InteracSecurityQuestion | string | yes | The question for the user to process the interac request. Required if InteracHasSecurityQuestionAndAnswer is true. Pattern accepted: String [ 5 .. 40 ] characters ^[^\s]([a-zA-Z0-9àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ \-\.\?\!,#]+)[^\s]$
+InteracSecurityAnswer | string | yes | The answer for the user to process the interac request. Required if InteracHasSecurityQuestionAndAnswer is true. Pattern accepted: String [ 3 .. 25 ] characters [a-zA-Z0-9àâäèéêëîïôœùûüÿçÀ ÄÈÉÊËÎÏÔŒÙÛÜŸÇ]+$... 
 SessionFingerprint | string | yes | A unique identifier for this sender, we recommend using [fingerprintjs](https://github.com/fingerprintjs/fingerprintjs). Required if Accounts Payable with Interac, and peer-to-peer enabled.
 SessionIpAddress | string | yes | The IP address of the UserId, the sender, of the funds. Required if Accounts Payable with Interac, and peer-to-peer enabled.
 
