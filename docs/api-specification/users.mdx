@@ -101,9 +101,9 @@ For Credit Card and Visa Direct, if you want to add a user through API, please c
 
 Parameter               | Type      | EFT (Mandatory)  | Interac (Mandatory)   | Credit Card (Mandatory)   | Visa Direct (Mandatory)   | Description
 ---------               | -------   | ----  | -------   | ----          | ----          | ----
-FirstName               | string    | yes   | yes       | yes           | yes           | User first name
-LastName                | string    | yes   | yes       | yes           | yes           | User last name
-CompanyName             | string    | no    | yes       | yes           | yes           | Company name, in case it's a company
+FirstName               | string    | yes   | yes       | yes           | yes           | User first name. Pattern accepted: ^[^\s]([a-zA-Z0-9àâäèéêëîïôœùûüÿçÀ ÄÈÉÊËÎÏÔŒÙÛÜŸÇ '\-\.,]+)[^\s]$
+LastName                | string    | yes   | yes       | yes           | yes           | User last name. Pattern accepted: ^[^\s]([a-zA-Z0-9àâäèéêëîïôœùûüÿçÀ ÄÈÉÊËÎÏÔŒÙÛÜŸÇ '\-\.,]+)[^\s]$
+CompanyName             | string    | no    | yes       | yes           | yes           | Company name, in case it's a company. Pattern accepted: ^[^\s]([a-zA-Z0-9àâäèéêëîïôœùûüÿçÀ ÄÈÉÊËÎÏÔŒÙÛÜŸÇ '\-\.,]+)[^\s]$
 Email                   | string    | yes   | yes       | yes           | yes           | User e-mail
 PhoneNumber             | string    | no    | no       | no            | no            | Phone number (maximum 10 characters, no special characters accepted)
 **BankAccountInformation**  |       | yes   |           |               |               |
