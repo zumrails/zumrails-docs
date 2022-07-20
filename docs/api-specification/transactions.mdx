@@ -401,7 +401,17 @@ Without peer-to-peer, the email would say: `<Your company name> is sending funds
             "Memo": "Memo test",
             "Comment": "This is a transaction to test",
             "Amount": 123.45,
-            "User": null,
+            "Customer": {
+                "Id": "e15bbe9b...dc256ba3a247",
+                "CompanyName": "Sam's Gym"
+            },
+            "User": {
+                "Id": "c11cc378...8f34ac8173be",
+                "FirstName": "John",
+                "LastName": "111",
+                "Email": "lxtkzblpk12wurb4tczfy@gmail.com",
+                "IsActive": true
+            },
             "Wallet": {
                 "Id": "8ebd932b...b92633e14297",
                 "Type": "Unified"
@@ -429,7 +439,11 @@ Without peer-to-peer, the email would say: `<Your company name> is sending funds
             "TransactionMethod":"Eft",
             "TransactionStatus": "InProgress",
             "RecurrentTransactionId": "16d2406f...87d397a8356f",
-            "FailedTransactionEvent": null
+            "FailedTransactionEvent": null,
+            "From": "Zūm Wallet",
+            "To": "User john 111",
+            "FailedAt": null,
+            "IsRefundable": false
         }
     }
   ```
@@ -462,11 +476,19 @@ InteracUrl | string | The interac URL to complete the transaction, if available
 InteracDebtorInstitutionNumber | string | The Financial Institution used to complete the Interac Request money.
 InteracDebtorFullName | string | The Full Name used to complete the Interac Request money. This information not yet 100% accurate, often is the same name sent. Gradually each Institution is improving and sending this information for Zūm Rails.
 UseInteracANR | boolean | Indicates whether a transaction will be deposited directly to the user's saved account. (This works only for account payable transactions from wallet to user)
+From | string | From description for the transaction
+To | string | To description for the transaction
+IsRefundable | boolean | Indicates if the transaction is IsRefundable
+FailedAt | datetime | When the transaction was failed (null otherwise)
+**Customer** | | Basic Customer data
+CompanyName | string | Company Name
+Id | guid | Id for the related customer
 **User** | | If transaction has a user - * Not all information from a user is returned in this endpoint
 Id | guid | The user id
 First Name | string | User first name
 Last Name | string | User last name
 Company Name | string | User company name
+IsActive | boolean | Indicates if the user is active or not
 **Wallet** | | If transaction has a wallet * Not all information from a user is returned in this endpoint
 Id | guid | The wallet id
 Type | string | The wallet type
@@ -479,7 +501,7 @@ AccountNumber | string | The account number
 **TargetWallet** | | If transaction has a target wallet
 Id | guid | The target wallet id
 Type | string | The target wallet type
-**EventHistory** | | The transaction history events
+**TransactionHistory** | | List of transaction history events
 CreatedAt | datetime | When the transaction event happened
 Event | string | The event happened
 EventDescription | string | The event description
@@ -740,3 +762,84 @@ Use this endpoint if you want to delete or cancel a specific transaction
 - For Interac, transactions can only be deleted and cancelled if the end-user has not yet initiated the payment by opening the email/sms.
 - For Visa Direct / Credit card, transactions cannot be deleted/cancelled. If needed you can call the endpoint to Reverse a Transaction
 :::
+
+## Refund a Transaction
+
+With Zūm Rails, it is easy to refund Credit Card transactions. Currently we only support whole refunds of initial transactions. When you create a new refund, you must specify the transaction ID that you wish to refund.
+Creating a new refund will refund a transaction that has previously been created but not yet refunded. Funds will be refunded to the credit card that was originally charged. Read more about refunds [here](https://help.zumrails.com/en/articles/5650178-credit-card-refund-process).
+
+<Tabs
+  defaultValue="tab1"
+  values={[
+    {label: 'Response', value: 'tab1'},
+  ]}>
+  <TabItem value="tab1">
+
+  ```json
+    {
+        "statusCode": 200,
+        "message": "POST Request successful.",
+        "isError": false,
+        "result": {
+            "Id": "82536c13...5f1cbb98c6c3",
+            "CreatedAt": "2022-07-19T16:57:48.505577Z",
+            "Memo": "Refund",
+            "Comment": "78f8f734...d7f8408596c9",
+            "Amount": 2.74,
+            "Customer": {
+                "Id": "e15bbe9b...dc256ba3a247",
+                "CompanyName": "Sam's Gym"
+            },
+            "User": {
+                "Id": "c11cc378...8f34ac8173be",
+                "FirstName": "John",
+                "LastName": "111",
+                "Email": "lxtkzblpk12wurb4tczfy@gmail.com",
+                "IsActive": true
+            },
+            "Wallet": {
+                "Id": "1790e62a...fda052b74341",
+                "Type": "Unified"
+            },
+            "ZumRailsType": "Refund",
+            "TransactionMethod": "CreditCard",
+            "TransactionHistory": [
+                {
+                    "Id": "152ab24d...9b936225368a",
+                    "CreatedAt": "2022-07-19T16:57:48.5981359Z",
+                    "Event": "Started",
+                    "EventDescription": "Transaction with type Refund started, from Zūm Wallet to User John 111 - (************2446) with amount: $2.74"
+                },
+                {
+                    "Id": "c45a7cb5...b0cc3db894fb",
+                    "CreatedAt": "2022-07-19T16:57:50.2792507Z",
+                    "Event": "Succeeded",
+                    "EventDescription": "Transaction completed"
+                }
+            ],
+            "TransactionStatus": "Completed",
+            "From": "Zūm Wallet",
+            "To": "User John 111 - (************2446)",
+            "CompletedAt": "2022-07-19T16:57:50.2889607Z",
+            "IsRefundable": false
+        }
+    }
+  ```
+  </TabItem>
+</Tabs>
+
+`Method: POST`
+
+`Endpoint: {{env}}/api/transaction/{transaction_id}/Refund`
+
+**Response**
+
+Same response details of [get transaction API](../api-specification/transactions#get-a-specific-transaction). 
+
+### Retrieve a refund
+
+To retrieve the details of an existing refund, use the [get transaction API](../api-specification/transactions#get-a-specific-transaction). 
+
+### List all refunds
+
+Returns a list of all refunds you’ve previously created. The refunds are returned in sorted order, with the most recent refunds appearing first. For convenience, the 10 most recent refunds will be returned by default. To get a list of all refunds, use the [filter transaction API](../api-specification/transactions#search-a-transaction).
