@@ -38,7 +38,7 @@ To start using the library you will need to do the following:
 ![URL add user flow](/img/docs/diagrams/flows/flow1.png)
 
 1. **Authorize** using the endpoint `{{env}}/api/authorize`. More information on how to authorize can be found [here](../api-specification/authentication).
-2. **Create a token** which has to be informed in the SDK. Use the endpoint `{{env}}/api/connect/createtokensdk` to generate the token. The token is valid for **15 minutes**, and it will be automatically expired after a user uses it.
+2. **Create a token** which has to be informed in the SDK. Use the endpoint `{{env}}/api/connect/createtoken` to generate the token. The token is valid for **15 minutes**, and it will be automatically expired after a user uses it.
 
     <Tabs
       defaultValue="Payload"
@@ -50,7 +50,13 @@ To start using the library you will need to do the following:
 
       ```json
         {
-            "RequestType": "AddPaymentProfile"
+          "ConnectTokenType": "AddPaymentProfile",
+          "Configuration" :{
+              "allowEft" : true,
+              "allowInterac" : true,
+              "allowVisaDirect" : true,
+              "allowCreditCard" : true
+          }
         }
       ```
 
@@ -68,7 +74,7 @@ To start using the library you will need to do the following:
               "CustomerId": "85dedfcd-f8de-45e4-851a-5a8b79b75e15",
               "CompanyName": "Company To Test",
               "Environment": "production",
-              "RequestType": " "
+              "ConnectTokenType": " "
           }
       }
       ```
@@ -76,7 +82,7 @@ To start using the library you will need to do the following:
       </TabItem>
     </Tabs>
 
-    RequestType | Description 
+    ConnectTokenType | Description 
     ----- | ----
     CheckoutProduct | Define a request to go to the Connect checkout product
     CheckoutProductPrice | Define a request to go to the Connect checkout product price
@@ -87,11 +93,17 @@ To start using the library you will need to do the following:
     SubscriptionDetails | Define a request to go to the Connect Subscription details
     ManageUserPortal | Define a request to go to the Connect Manage user profile
     RequestFunds | Define a request to go to the Connect Request funds
+
+    :::info
+    You can also define configurations that will change the behavior of the forms for the requested process. For that you can used the parameters defined [here](./ways-to-integrate#pre-filling-the-form).
+    :::
+
+
 3. Refer the javascript sdk library into your website, build your configuration options and init the sdk. Inform the token (result.Token) in any request you want to execute.
 
-:::note
-To get the URL/SDK navigate to the settings menu option > Integration codes
-:::
+  :::note
+  To get the URL/SDK navigate to the settings menu option > Integration codes
+  :::
 
 ## Install JS SDK 
 
@@ -119,7 +131,7 @@ Refer the js library bellow into your website.
 
 Parameter | Description 
 ----- | ----
-token | The token received in the endpoint `{{env}}/api/connect/createtokensdk`
+token | The token received in the endpoint `{{env}}/api/connect/createtoken`
 
 Bellow you can find an example of the code needed to init the JS SDK.
 
@@ -195,7 +207,7 @@ This callback is triggered when the connection is completed
 
 _Parameters_
 
-- data: The information returned will depend on the `RequestType` defined. 
+- data: The information returned will depend on the `ConnectTokenType` defined. 
 
 For example, when you use `AddPaymentProfile` will return something like this below:
 
@@ -347,18 +359,49 @@ To listen to the event in js, your website must refer to Zūm Connect using an i
 
 ![URL add user flow](/img/docs/diagrams/flows/flow12.png)
 
-Once authorized, the next step is to create a token. You will need to create a token with the payload as below.
+Once authorized, the next step is to create a token. You will need to create a token with the payload as below. For this specific type of request the parameters for the allowment of rails are mandatory.
 
 <Tabs
   defaultValue="tab1"
   values={[
-    {label: 'Add a payment profile', value: 'tab1'},
+    {label: 'Add a payment profile without name matching', value: 'tab1'},
+    {label: 'Add a payment profile with name matching', value: 'tab2'},
   ]}>
   <TabItem value="tab1">
 
   ```json
   {
-      "RequestType": "AddPaymentProfile"
+      "ConnectTokenType": "AddPaymentProfile",
+      "Configuration" :{
+        "allowEft" : true,
+        "allowInterac" : true,
+        "allowVisaDirect" : true,
+        "allowCreditCard" : true
+    }
+  }
+  ```
+
+  </TabItem>
+    <TabItem value="tab2">
+
+  ```json
+  {
+      "ConnectTokenType": "AddPaymentProfile",
+      "User" :{
+        "firstName" : "John",
+        "lastName" : "Doe",
+        "email" : "test@zumrails.com",
+        "addressCity" : "Montréal",
+        "addressLine1" : "4975 Rue de Sorel",
+        "addressProvince" : "QC",
+        "addressPostalCode" : "H4P1G3"
+      },
+      "Configuration" :{
+        "allowEft" : true,
+        "allowInterac" : true,
+        "allowVisaDirect" : true,
+        "allowCreditCard" : true
+      }
   }
   ```
 
@@ -444,7 +487,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "CheckoutProduct",
+      "ConnectTokenType": "CheckoutProduct",
       "ProductId": "01cd838e-9f07-47e9-8581-ecc324b0529b"
   }
   ```
@@ -454,7 +497,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "CheckoutProductPrice",
+      "ConnectTokenType": "CheckoutProductPrice",
       "ProductId": "01cd838e-9f07-47e9-8581-ecc324b0529b"  
   }
   ```
@@ -546,7 +589,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "CheckoutProduct",
+      "ConnectTokenType": "CheckoutProduct",
       "ProductId": "01cd838e-9f07-47e9-8581-ecc324b0529b"
   }
   ```
@@ -556,7 +599,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "CheckoutProductPrice",
+      "ConnectTokenType": "CheckoutProductPrice",
       "ProductId": "01cd838e-9f07-47e9-8581-ecc324b0529b"  
   }
   ```
@@ -605,7 +648,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "UpdateSubscription",
+      "ConnectTokenType": "UpdateSubscription",
       "SubscriptionId": "01cd838e-9f07-47e9-8581-ecc324b0529b"
   }
   ```
@@ -615,7 +658,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "SubscriptionDetails",
+      "ConnectTokenType": "SubscriptionDetails",
       "SubscriptionId": "01cd838e-9f07-47e9-8581-ecc324b0529b"  
   }
   ```
@@ -637,7 +680,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "CancelSubscription",
+      "ConnectTokenType": "CancelSubscription",
       "SubscriptionId": "01cd838e-9f07-47e9-8581-ecc324b0529b"
   }
   ```
@@ -685,7 +728,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "ManageUserPortal",
+      "ConnectTokenType": "ManageUserPortal",
       "Email": "customer@zumrails.com"
   }
   ```
@@ -710,7 +753,7 @@ Once authorized, the next step is to create a token. You will need to create a t
 
   ```json
   {
-      "RequestType": "RequestFunds",
+      "ConnectTokenType": "RequestFunds",
       "RequestFundsId": "e212a298-4f39-4ac0-b9d6-60fc1c215176"
   }
   ```
